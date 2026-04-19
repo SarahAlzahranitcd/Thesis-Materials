@@ -36,7 +36,7 @@ Each study folder includes:
 
 The **Mapping Metadata Vocabulary (MMV)** is available online:
 
-🔗 https://sarahalzahranitcd.github.io/MMV-Ontology2/
+https://sarahalzahranitcd.github.io/MMV-Ontology2/
 
 The ontology captures lifecycle-based metadata for declarative mappings, supporting improved documentation, evaluation, and reuse.
 
@@ -46,7 +46,7 @@ The ontology captures lifecycle-based metadata for declarative mappings, support
 
 The **MetaSEMAP tool** is available at:
 
-🔗 https://metasemap-1-sarah-alzahrani.replit.app/
+https://metasemap-1-sarah-alzahrani.replit.app/
 
 MetaSEMAP supports the annotation of mapping artefacts using the MMV ontology across different lifecycle phases.
 
