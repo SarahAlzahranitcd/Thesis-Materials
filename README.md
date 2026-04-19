@@ -1,8 +1,7 @@
 # Thesis-Materials
 
 Supplementary materials for the PhD thesis:
-"A Lifecycle-Based Metadata Model for Improving
-Documentation, Reuse, and Generation of Declarative Mappings"
+"A Lifecycle-Based Metadata Model for Improving Documentation, Reuse, and Generation of Declarative Mappings"
 
 Sarah Alzahrani
 Trinity College Dublin, 2026
@@ -19,8 +18,7 @@ Supervised by Prof. Declan O'Sullivan
 - `MetaSEMAP-Tool/` - tool source code, screenshots, sample outputs
 
 ## Ethics
-All human participant studies were approved by the TCD Research
-Ethics Committee (Ethics Application No. 20211203).
+All human participant studies were approved by the TCD Research Ethics Committee 
 
 ## Ontology
 MMV is published at:
@@ -32,4 +30,3 @@ https://metasemap-1-sarah-alzahrani.replit.app/
 
 ## Citation
 Alzahrani, S. & O'Sullivan, D. (2026). A Lifecycle-Based Metadata Model for Improving Documentation, Reuse, and Generation of Declarative Mappings. PhD Thesis, Trinity College Dublin.
-<img width="468" height="430" alt="image" src="https://github.com/user-attachments/assets/8ece9f89-5002-4ee0-9dd9-5889bee2544c" />
