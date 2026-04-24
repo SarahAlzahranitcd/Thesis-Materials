@@ -1,0 +1,48 @@
+@prefix align: <http://knowledgeweb.semanticweb.org/heterogeneity/alignment#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://kb.virtualtreasury.ie/alignment> a align:Alignment ;
+    align:map [ a align:Cell ;
+            align:entity1 <http://erlangen-crm.org/current/E21_Person> ;
+            align:entity2 foaf:Person ;
+            align:measure "1.0"^^xsd:float ;
+            align:relation "=" ] ;
+    align:onto1 <https://kb.virtualtreasury.ie/ontology> ;
+    align:onto2 foaf: .
+
+
+
+# Metadata annotations for the ontology alignment operation
+<< <https://kb.virtualtreasury.ie/alignment> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://knowledgeweb.semanticweb.org/heterogeneity/alignment#Alignment> >>
+    <http://xmlns.com/foaf/0.1/givenName> "" ;
+    <http://xmlns.com/foaf/0.1/familyName> "" ;
+    <http://xmlns.com/foaf/0.1/background> "" ;
+    <http://xmlns.com/foaf/0.1/role> "" ;
+    <http://xmlns.com/foaf/0.1/organization> "" ;
+    <http://example.com/metag/purpose> " focuses on matching individuals—such as historical figures and citizens from archival records" ;
+    <http://example.com/metag/mappingType> "Ontologies Alignment" ;
+    <http://example.com/metag/mappingDomain> " Historical/Archival" ;
+    <http://example.com/metag/mappingAssumptions> "" ;
+    <http://example.com/metag/technicalRequirement> "" ;
+    <http://example.com/metag/risksIssues> "" ;
+    <http://purl.org/dc/terms/source> "person_alignment.rdf" ;
+    <http://purl.org/dc/terms/creator> "" ;
+    <http://example.com/metag/startDate> "2024-03-01" ;
+    <http://example.com/metag/endDate> "2024-03-30" ;
+    <http://example.com/metag/tool> "" ;
+    <http://example.com/metag/mappingMethod> "Automatic" ;
+    <http://example.com/metag/mappingURI> " http://virtualrecordtreasury.ie/person_alignment_v1.0." ;
+    <http://example.com/metag/mappingName> "" ;
+    <http://example.com/metag/mappingAlgorithm> "" ;
+    <http://example.com/metag/mappingFormat> "" ;
+    <http://example.com/metag/testingURI> "" ;
+    <http://example.com/metag/testingName> "" ;
+    <http://example.com/metag/testingType> "Validation" ;
+    <http://example.com/metag/testingDate> "2024-03-30" ;
+    <http://example.com/metag/testingResult> "successful" ;
+    <http://example.com/metag/publisherName> " VRTI team" ;
+    <http://example.com/metag/publisherSource> " http://virtualrecordtreasury.ie" ;
+    <http://example.com/metag/versionNumber> "1.0" ;
+    <http://example.com/metag/versionDateTime> "2024-03-30" .
+

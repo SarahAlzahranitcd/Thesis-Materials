@@ -1,0 +1,45 @@
+<http://example.com/interlink/interlinking.rq> a <http://example.com/ontology#SPARQLQuery> ;
+    <http://example.com/queryContent> """<http://www.w3.org/2002/07/owl#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+
+INSERT {
+  ?vrtEntity owl:sameAs ?wikidataEntity .
+}
+WHERE {
+  # VRTI knowledge graph part
+  ?vrtEntity rdf:type <http://erlangen-crm.org/current/E21_Person> ;
+             foaf:name ?name .
+
+  # Wikidata knowledge graph part
+  ?wikidataEntity wdt:P31 wd:Q5 ; # Q5 represents humans in Wikidata
+                 rdfs:label ?name .
+  
+  # Filter to ensure name match
+  FILTER(LANG(?name) = "en")  # Ensures the label is in English
+}""" .
+
+# Metadata annotations for the SPARQL query interlinking operation
+<< <http://example.com/interlink/interlinking.rq> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ontology#InterlinkingOperation> >>
+    <http://purl.org/dc/terms/creator> " " ;
+    <http://purl.org/dc/terms/purpose> "Provide additional biographical and contextual information from Wikidata" ;
+    <http://example.com/toolUsed> "" ;
+    <http://purl.org/dc/terms/created> "2024-04-01"^^xsd:date ;
+    <http://example.com/endDate> "2024-04-20"^^xsd:date ;
+    <http://example.com/mappingMethod> "Automatic" ;
+    <http://example.com/mappingDomain> "Educational" ;
+    <http://example.com/mappingURI> " http://virtualrecordtreasury.ie/interlinking_v1.0." ;
+    <http://example.com/mappingName> "" ;
+    <http://example.com/mappingAlgorithm> "" ;
+    <http://example.com/mappingFormat> "" ;
+    <http://example.com/testingURI> "" ;
+    <http://example.com/testingName> "" ;
+    <http://example.com/testingType> "Quality testing " ;
+    <http://example.com/testingDate> "2024-04-01"^^xsd:date ;
+    <http://example.com/testingResult> "successful" ;
+    <http://example.com/publisherName> "VRTI team" ;
+    <http://example.com/versionNumber> "1.0" ;
+    <http://example.com/versionDateTime> "2024-04-20"^^xsd:dateTime .
+

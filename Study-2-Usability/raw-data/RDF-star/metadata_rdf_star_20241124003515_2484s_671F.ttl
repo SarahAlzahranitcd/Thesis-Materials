@@ -1,0 +1,50 @@
+<http://example.com/interlink/interlinking.rq> a <http://example.com/ontology#SPARQLQuery> ;
+    <http://example.com/queryContent> """@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix align: <http://knowledgeweb.semanticweb.org/heterogeneity/alignment#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+
+<https://kb.virtualtreasury.ie/alignment>
+    a align:Alignment ;
+    align:onto1 <https://kb.virtualtreasury.ie/ontology> ;
+    align:onto2 <http://xmlns.com/foaf/0.1/> ;
+    align:map [
+        a align:Cell ;
+        align:entity1 <http://erlangen-crm.org/current/E21_Person> ;
+        align:entity2 <http://xmlns.com/foaf/0.1/Person> ;
+        align:relation "=" ;
+        align:measure "1.0"^^<http://www.w3.org/2001/XMLSchema#float>
+    ] .""" .
+
+# Metadata annotations for the SPARQL query interlinking operation
+<< <http://example.com/interlink/interlinking.rq> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.com/ontology#InterlinkingOperation> >>
+    <http://purl.org/dc/terms/creator> " " ;
+    <http://xmlns.com/foaf/0.1/background> "" ;
+    <http://xmlns.com/foaf/0.1/role> "" ;
+    <http://xmlns.com/foaf/0.1/organization> "" ;
+    <http://purl.org/dc/terms/purpose> "Enhancing historical dataset records by connecting Irish historical figures with corresponding Wikidata entries." ;
+    <http://example.com/mappingAssumptions> "" ;
+    <http://example.com/technicalRequirement> "" ;
+    <http://example.com/risksIssues> "" ;
+    <http://example.com/toolUsed> "" ;
+    <http://purl.org/dc/terms/created> "2024-04-01"^^xsd:date ;
+    <http://example.com/endDate> "2024-04-20"^^xsd:date ;
+    <http://example.com/mappingMethod> "Manual" ;
+    <http://example.com/mappingDomain> "Historical" ;
+    <http://example.com/mappingURI> "http://virtualrecordtreasury.ie/interlinking_v1.0" ;
+    <http://example.com/mappingName> "" ;
+    <http://example.com/mappingAlgorithm> "" ;
+    <http://example.com/mappingFormat> "" ;
+    <http://example.com/testingURI> "" ;
+    <http://example.com/testingName> "" ;
+    <http://example.com/testingType> "Validation" ;
+    <http://example.com/testingDate> "2024-04-20"^^xsd:date ;
+    <http://example.com/testingResult> "Successful" ;
+    <http://example.com/publisherName> "Virtual Record Treasury of Ireland (VRTI)" ;
+    <http://example.com/publisherSource> "http://virtualrecordtreasury.ie" ;
+    <http://example.com/versionNumber> "1.0" ;
+    <http://example.com/versionDateTime> "2024-04-20"^^xsd:dateTime ;
+    <http://example.com/finalDesignDecisions> "create new mapping" ;
+    <http://example.com/designDecisionJustification> "" ;
+    <http://example.com/qualityMetrics> "Completeness, accuracy, validation checks." ;
+    <http://example.com/stakeholderURI> "" .
+

@@ -1,0 +1,62 @@
+@prefix align: <http://knowledgeweb.semanticweb.org/heterogeneity/alignment#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://kb.virtualtreasury.ie/alignment> a align:Alignment ;
+    align:map [ a align:Cell ;
+            align:entity1 <http://erlangen-crm.org/current/E21_Person> ;
+            align:entity2 foaf:Person ;
+            align:measure "1.0"^^xsd:float ;
+            align:relation "=" ] ;
+    align:onto1 <https://kb.virtualtreasury.ie/ontology> ;
+    align:onto2 foaf: .
+
+<http://virtualrecordtreasury.ie/person_alignment_v1.0> a void:Dataset ;
+    dct:created "2024-03-30"^^xsd:date ;
+    dct:creator "VRTI team" ;
+    dct:description "Aligns the Person class between the VRTI Knowledge Graph and external datasets, enriching historical data integration." ;
+    dct:identifier <http://virtualrecordtreasury.ie/person_alignment_v1.0> ;
+    dct:title "Person Class Alignment in VRTI" ;
+    dct:version "1.0" ;
+    prov:wasGeneratedBy [ prov:activity "Ontology alignment project for historical data" ;
+            prov:endedAtTime "2024-03-30"^^xsd:date ;
+            prov:startedAtTime "2024-03-01"^^xsd:date ] .
+
+
+
+# Metadata annotations for the ontology alignment operation
+<< <https://kb.virtualtreasury.ie/alignment> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://knowledgeweb.semanticweb.org/heterogeneity/alignment#Alignment> >>
+    <http://xmlns.com/foaf/0.1/givenName> "" ;
+    <http://xmlns.com/foaf/0.1/familyName> "" ;
+    <http://xmlns.com/foaf/0.1/background> "" ;
+    <http://xmlns.com/foaf/0.1/role> "" ;
+    <http://xmlns.com/foaf/0.1/organization> "" ;
+    <http://example.com/metag/purpose> "Aligns the Person class between the Virtual Record Treasury of Ireland (VRTI) Knowledge Graph and external datasets to enable integrated historical data searches." ;
+    <http://example.com/metag/mappingType> "Ontologies Alignment" ;
+    <http://example.com/metag/mappingDomain> "Historical records and archival data." ;
+    <http://example.com/metag/mappingAssumptions> "" ;
+    <http://example.com/metag/technicalRequirement> "" ;
+    <http://example.com/metag/risksIssues> "" ;
+    <http://purl.org/dc/terms/source> "http://virtualrecordtreasury.ie/person_alignment.rdf" ;
+    <http://purl.org/dc/terms/creator> "" ;
+    <http://example.com/metag/startDate> "2024-11-04" ;
+    <http://example.com/metag/endDate> "2024-11-20" ;
+    <http://example.com/metag/tool> "" ;
+    <http://example.com/metag/mappingMethod> "Automatic" ;
+    <http://example.com/metag/mappingURI> "http://virtualrecordtreasury.ie/person_alignment_v1.0" ;
+    <http://example.com/metag/mappingName> "" ;
+    <http://example.com/metag/mappingAlgorithm> "" ;
+    <http://example.com/metag/mappingFormat> "" ;
+    <http://example.com/metag/testingURI> "" ;
+    <http://example.com/metag/testingName> "" ;
+    <http://example.com/metag/testingType> "Validation" ;
+    <http://example.com/metag/testingDate> "2024-11-21" ;
+    <http://example.com/metag/testingResult> "Successful" ;
+    <http://example.com/metag/publisherName> "Virtual Record Treasury of Ireland (VRTI)." ;
+    <http://example.com/metag/publisherSource> "http://virtualrecordtreasury.ie" ;
+    <http://example.com/metag/versionNumber> "1.0" ;
+    <http://example.com/metag/versionDateTime> "2024-11-21" .
+

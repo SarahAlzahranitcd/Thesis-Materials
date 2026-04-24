@@ -1,0 +1,80 @@
+@prefix b2022: <https://ont.virtualtreasury.ie/ontology#> .
+@prefix cidoc: <http://erlangen-crm.org/current/> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.com/ns##COUNTY> a rr:TriplesMap ;
+    rml:logicalSource [ rml:query """
+                      SELECT VRTI_ID, OSM_ID, T_IE_URL, NAME_TAG, 
+					  NAME_EN, NAME_GA, ALT_NAME, ALT_NAME_G,
+                       UNNEST(STRING_SPLIT(LOGAINM_RE, ';'))
+                       AS LOGAINM_RE FROM 'data_county.csv'
+                """ ;
+            rml:referenceFormulation ql:CSV ;
+            rml:source "data_county.csv" ] ;
+    rr:predicateObjectMap [ rr:objectMap [ rr:template "https://kg.virtualtreasury.ie/place/present-day/county/centroid/{NAME_TAG}/{VRTI_ID}" ] ;
+            rr:predicate geo:hasCentroid ],
+        [ rr:objectMap [ rr:template "https://kg.virtualtreasury.ie/place/present-day/county/boundary/{NAME_TAG}/{VRTI_ID}" ] ;
+            rr:predicate geo:hasBoundingBox ],
+        [ rr:objectMap [ rml:reference "AREA" ;
+                    rr:datatype xsd:float ] ;
+            rr:predicate geo:hasMetricArea ],
+        [ rr:object b2022:PresentDayCounty ;
+            rr:predicate cidoc:P2_has_type ],
+        [ rr:objectMap [ rml:reference "VRTI_ID" ] ;
+            rr:predicate b2022:VrtiIdentifier ],
+        [ rr:objectMap [ rr:template "https://kg.virtualtreasury.ie/place/present-day/province/{PROVINCE}/{PROV_IDS}" ] ;
+            rr:predicate cidoc:P89_falls_within ],
+        [ rr:objectMap [ rr:language "en" ;
+                    rr:template "{NAME_EN}" ;
+                    rr:termType rr:Literal ],
+                [ rr:language "en" ;
+                    rr:template "{ALT_NAME}" ;
+                    rr:termType rr:Literal ],
+                [ rr:language "en" ;
+                    rr:template "{NAME_TAG}" ;
+                    rr:termType rr:Literal ] ;
+            rr:predicate rdfs:label ] ;
+    rr:subjectMap [ rr:class cidoc:E53_Place,
+                geo:Feature ;
+            rr:template "https://kg.virtualtreasury.ie/place/present-day/county/{NAME_TAG}/{VRTI_ID}" ] .
+
+
+
+# Metadata annotations for the uplift mapping operation
+<< <http://example.com/ns##COUNTY> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/r2rml#TriplesMap> >>
+    <http://xmlns.com/foaf/0.1/givenName> "" ;
+    <http://xmlns.com/foaf/0.1/familyName> "" ;
+    <http://xmlns.com/foaf/0.1/background> "" ;
+    <http://xmlns.com/foaf/0.1/role> "" ;
+    <http://xmlns.com/foaf/0.1/organization> "" ;
+    <http://example.com/metag/purpose> "To uplift data about present-day counties from a CSV file into RDF, ensuring the data adheres to semantic web standards and integrates with CIDOC CRM and GeoSPARQL ontologies." ;
+    <http://example.com/metag/mappingType> "Uplift Mapping" ;
+    <http://example.com/metag/mappingDomain> "Geospatial and Administrative Data" ;
+    <http://example.com/metag/mappingAssumptions> "" ;
+    <http://example.com/metag/technicalRequirement> "" ;
+    <http://example.com/metag/risksIssues> "" ;
+    <http://purl.org/dc/terms/source> "Not applicable" ;
+    <http://purl.org/dc/terms/creator> "" ;
+    <http://example.com/metag/startDate> "2024-12-01" ;
+    <http://example.com/metag/endDate> "2024-12-10" ;
+    <http://example.com/metag/tool> "" ;
+    <http://example.com/metag/mappingMethod> "Automatic" ;
+    <http://example.com/metag/mappingURI> "http://example.com/mappings/county_mapping" ;
+    <http://example.com/metag/mappingName> "" ;
+    <http://example.com/metag/mappingAlgorithm> "" ;
+    <http://example.com/metag/mappingFormat> "" ;
+    <http://example.com/metag/testingURI> "" ;
+    <http://example.com/metag/testingName> "" ;
+    <http://example.com/metag/testingType> "Validation" ;
+    <http://example.com/metag/testingDate> "2024-12-11" ;
+    <http://example.com/metag/testingResult> "passed" ;
+    <http://example.com/metag/publisherName> "Example Organization" ;
+    <http://example.com/metag/publisherSource> "http://example.com" ;
+    <http://example.com/metag/versionNumber> "1.0.0" ;
+    <http://example.com/metag/versionDateTime> "2024-12-12" .
+
