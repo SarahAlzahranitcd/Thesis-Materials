@@ -1,0 +1,35 @@
+@prefix dcmi: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix metag: <http://example.com/metag/> .
+
+metag:subject metag:endDate "2024-11-21" ;
+    metag:mappingAlgorithm "" ;
+    metag:mappingAssumptions "" ;
+    metag:mappingDomain "Historical" ;
+    metag:mappingFormat "" ;
+    metag:mappingMethod "Automatic" ;
+    metag:mappingName "" ;
+    metag:mappingType "Uplift Mapping" ;
+    metag:mappingURI "http://virtualrecordtreasury.ie/uplift_mapping_v1.0" ;
+    metag:publisherName "VRTI team" ;
+    metag:publisherSource "https://virtualtreasury.ie" ;
+    metag:purpose "to convert county information from csv format to RDF triples" ;
+    metag:risksIssues "" ;
+    metag:startDate "2024-11-21" ;
+    metag:technicalRequirement "" ;
+    metag:testingDate "2024-11-21" ;
+    metag:testingName "" ;
+    metag:testingResult "Sucessful" ;
+    metag:testingType "Validation" ;
+    metag:testingURI "" ;
+    metag:tool "" ;
+    metag:versionDateTime "2024-11-21" ;
+    metag:versionNumber "1.0" ;
+    dcmi:creator "" ;
+    dcmi:source "http://virtualrecordtreasury.ie/data_county.csv" ;
+    foaf:background "" ;
+    foaf:familyName "" ;
+    foaf:givenName "" ;
+    foaf:organization "" ;
+    foaf:role "" .
+

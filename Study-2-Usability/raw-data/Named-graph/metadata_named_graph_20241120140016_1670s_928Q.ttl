@@ -1,0 +1,35 @@
+@prefix dcmi: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix metag: <http://example.com/metag/> .
+
+metag:subject metag:endDate "2024-03-30" ;
+    metag:mappingAlgorithm "" ;
+    metag:mappingAssumptions "" ;
+    metag:mappingDomain "Historical Records" ;
+    metag:mappingFormat "" ;
+    metag:mappingMethod "Automatic" ;
+    metag:mappingName "" ;
+    metag:mappingType "Ontologies Alignment" ;
+    metag:mappingURI "http://virtualrecordtreasury.ie/person_alignment_v1.0" ;
+    metag:publisherName "Virtual Record Treasury of Ireland" ;
+    metag:publisherSource "http://virtualrecordtreasury.ie" ;
+    metag:purpose "Ontology Alignment for Person Class in the Virtual Record Treasury of Ireland" ;
+    metag:risksIssues "" ;
+    metag:startDate "2024-03-01" ;
+    metag:technicalRequirement "" ;
+    metag:testingDate "2024-03-30" ;
+    metag:testingName "" ;
+    metag:testingResult "Successful" ;
+    metag:testingType "Validation" ;
+    metag:testingURI "" ;
+    metag:tool "" ;
+    metag:versionDateTime "2024-03-30" ;
+    metag:versionNumber "1.0" ;
+    dcmi:creator "" ;
+    dcmi:source "http://virtualrecordtreasury.ie/person_alignment.rdf" ;
+    foaf:background "" ;
+    foaf:familyName "" ;
+    foaf:givenName "" ;
+    foaf:organization "" ;
+    foaf:role "" .
+

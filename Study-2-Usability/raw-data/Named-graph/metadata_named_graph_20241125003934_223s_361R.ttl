@@ -1,0 +1,43 @@
+@prefix dcmi: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix metag: <http://example.com/metag/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+metag:subject metag:designDecisionJustification "" ;
+    metag:endDate "2024-11-20"^^xsd:date ;
+    metag:fileFormat "CSV" ;
+    metag:fileName "" ;
+    metag:fileSource "" ;
+    metag:fileType "" ;
+    metag:finalDesignDecisions "Ontologies Alignment" ;
+    metag:mappingAlgorithm "" ;
+    metag:mappingAssumptions "" ;
+    metag:mappingDomain "Geospatial / Administrative Data" ;
+    metag:mappingFormat "" ;
+    metag:mappingMethod "Automatic" ;
+    metag:mappingName "" ;
+    metag:mappingType "Uplift Mapping" ;
+    metag:mappingURI "http://example.com/ns#mapping-county" ;
+    metag:publisherName "Example Publisher" ;
+    metag:publisherSource "http://example.com/publisher" ;
+    metag:purpose "To transform county-related data from a CSV source into RDF triples that adhere to a geospatial ontology, ensuring compatibility with CIDOC-CRM and GeoSPARQL standards." ;
+    metag:qualityMetrics "Accuracy" ;
+    metag:risksIssues "" ;
+    metag:startDate "2024-11-15"^^xsd:date ;
+    metag:technicalRequirement "" ;
+    metag:testingDate "2024-11-21"^^xsd:date ;
+    metag:testingName "" ;
+    metag:testingResult "PASSED" ;
+    metag:testingType "Validation" ;
+    metag:testingURI "" ;
+    metag:tool "" ;
+    metag:versionDateTime "2024-11-25"^^xsd:date ;
+    metag:versionNumber "1.0" ;
+    dcmi:creator "" ;
+    dcmi:source "Not applicable" ;
+    foaf:background "" ;
+    foaf:familyName "" ;
+    foaf:givenName "" ;
+    foaf:organization "" ;
+    foaf:role "" .
+

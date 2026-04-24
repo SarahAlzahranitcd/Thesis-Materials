@@ -1,0 +1,35 @@
+@prefix dcmi: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix metag: <http://example.com/metag/> .
+
+metag:subject metag:endDate "2024-04-20" ;
+    metag:mappingAlgorithm "" ;
+    metag:mappingAssumptions "" ;
+    metag:mappingDomain "Historical" ;
+    metag:mappingFormat "" ;
+    metag:mappingMethod "Manual" ;
+    metag:mappingName "" ;
+    metag:mappingType "Interlinking" ;
+    metag:mappingURI "http://virtualrecordtreasury.ie/interlinking_v1.0" ;
+    metag:publisherName "VRTI team" ;
+    metag:publisherSource "http://virtualrecordtreasury.ie" ;
+    metag:purpose "Interlinking of persons in the vrti-graph with humans in Wikidata using the names of the person/human." ;
+    metag:risksIssues "" ;
+    metag:startDate "2024-04-01" ;
+    metag:technicalRequirement "" ;
+    metag:testingDate "2024-04-20" ;
+    metag:testingName "" ;
+    metag:testingResult "successful" ;
+    metag:testingType "Quality testing " ;
+    metag:testingURI "" ;
+    metag:tool "" ;
+    metag:versionDateTime "2024-04-20" ;
+    metag:versionNumber "1.0" ;
+    dcmi:creator "" ;
+    dcmi:source "interlinking.rdf" ;
+    foaf:background "" ;
+    foaf:familyName "" ;
+    foaf:givenName "" ;
+    foaf:organization "" ;
+    foaf:role "" .
+

@@ -1,0 +1,43 @@
+@prefix dcmi: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix metag: <http://example.com/metag/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+metag:subject metag:designDecisionJustification "" ;
+    metag:endDate "2024-11-23"^^xsd:date ;
+    metag:fileFormat "CSV" ;
+    metag:fileName "" ;
+    metag:fileSource "" ;
+    metag:fileType "" ;
+    metag:finalDesignDecisions "Ontologies Alignment" ;
+    metag:mappingAlgorithm "" ;
+    metag:mappingAssumptions "" ;
+    metag:mappingDomain "Geographic Information Systems (GIS)" ;
+    metag:mappingFormat "" ;
+    metag:mappingMethod "Automatic" ;
+    metag:mappingName "" ;
+    metag:mappingType "Uplift Mapping" ;
+    metag:mappingURI "https://example.com/uplift_mapping.ttl" ;
+    metag:publisherName "Abhishikt" ;
+    metag:publisherSource "https://example.com/abhishikt" ;
+    metag:purpose "To uplift geospatial data about present day counties into a structured RDF format for Integration with KG " ;
+    metag:qualityMetrics " Accuracy of triples generated, semantic correctness, and adherence to ontological standards" ;
+    metag:risksIssues "" ;
+    metag:startDate "2024-11-22"^^xsd:date ;
+    metag:technicalRequirement "" ;
+    metag:testingDate "2025-05-25"^^xsd:date ;
+    metag:testingName "" ;
+    metag:testingResult "Successful, with all expected triples generated correctly" ;
+    metag:testingType "Validation" ;
+    metag:testingURI "" ;
+    metag:tool "" ;
+    metag:versionDateTime "2024-11-25"^^xsd:date ;
+    metag:versionNumber "1.0" ;
+    dcmi:creator "" ;
+    dcmi:source "https://example.com/data_county.csv" ;
+    foaf:background "" ;
+    foaf:familyName "" ;
+    foaf:givenName "" ;
+    foaf:organization "" ;
+    foaf:role "" .
+

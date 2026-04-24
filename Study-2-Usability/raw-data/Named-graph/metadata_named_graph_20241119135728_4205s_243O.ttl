@@ -1,0 +1,35 @@
+@prefix dcmi: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix metag: <http://example.com/metag/> .
+
+metag:subject metag:endDate "2024-04-20" ;
+    metag:mappingAlgorithm "" ;
+    metag:mappingAssumptions "" ;
+    metag:mappingDomain "Educational" ;
+    metag:mappingFormat "" ;
+    metag:mappingMethod "Automatic" ;
+    metag:mappingName "" ;
+    metag:mappingType "Interlinking" ;
+    metag:mappingURI " http://virtualrecordtreasury.ie/interlinking_v1.0." ;
+    metag:publisherName "VRTI team" ;
+    metag:publisherSource "http://virtualrecordtreasury.ie. " ;
+    metag:purpose "Provide additional biographical and contextual information from Wikidata" ;
+    metag:risksIssues "" ;
+    metag:startDate "2024-04-01" ;
+    metag:technicalRequirement "" ;
+    metag:testingDate "2024-04-01" ;
+    metag:testingName "" ;
+    metag:testingResult "successful" ;
+    metag:testingType "Quality testing " ;
+    metag:testingURI "" ;
+    metag:tool "" ;
+    metag:versionDateTime "2024-04-20" ;
+    metag:versionNumber "1.0" ;
+    dcmi:creator "" ;
+    dcmi:source "http://virtualrecordtreasury.ie/interlinking_v1.0." ;
+    foaf:background "" ;
+    foaf:familyName "" ;
+    foaf:givenName "" ;
+    foaf:organization "" ;
+    foaf:role "" .
+

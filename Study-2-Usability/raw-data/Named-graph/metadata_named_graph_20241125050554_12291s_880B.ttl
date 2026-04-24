@@ -1,0 +1,43 @@
+@prefix dcmi: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix metag: <http://example.com/metag/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+metag:subject metag:designDecisionJustification "" ;
+    metag:endDate "2024-02-28"^^xsd:date ;
+    metag:fileFormat "csv" ;
+    metag:fileName "" ;
+    metag:fileSource "" ;
+    metag:fileType "" ;
+    metag:finalDesignDecisions "create new mapping" ;
+    metag:mappingAlgorithm "" ;
+    metag:mappingAssumptions "" ;
+    metag:mappingDomain "Geospatial historical data" ;
+    metag:mappingFormat "" ;
+    metag:mappingMethod "Automatic" ;
+    metag:mappingName "" ;
+    metag:mappingType "Uplift Mapping" ;
+    metag:mappingURI "http://virtualrecordtreasury.ie/uplift_mapping_v1.0" ;
+    metag:publisherName "VRTI team" ;
+    metag:publisherSource "https://virtualtreasury.ie" ;
+    metag:purpose "The Uplift Mapping project converts historical Irish county data from a CSV file into a machine-readable format using RDF triples, allowing the data to be added to the VRTI Knowledge Graph." ;
+    metag:qualityMetrics "Quality metrics should be the following: 1. Scalability: Mapping can be expanded to cover additional data or other geographic regions. 2. Validation: Automated checks for missing data, incorrect relationships, or misformatted URIs should be part of the validation process. 3. Data Integrity: Mapping process should preserve the integrity of the source data, especially geographic and historical information. 4. Correctness: Verify that the RDF mappings accurately reflect the data from the external data source." ;
+    metag:risksIssues "" ;
+    metag:startDate "2024-01-01"^^xsd:date ;
+    metag:technicalRequirement "" ;
+    metag:testingDate "2024-02-28"^^xsd:date ;
+    metag:testingName "" ;
+    metag:testingResult "Successful" ;
+    metag:testingType "Validation" ;
+    metag:testingURI "" ;
+    metag:tool "" ;
+    metag:versionDateTime "2024-02-28"^^xsd:date ;
+    metag:versionNumber "1.0" ;
+    dcmi:creator "" ;
+    dcmi:source "data_county" ;
+    foaf:background "" ;
+    foaf:familyName "" ;
+    foaf:givenName "" ;
+    foaf:organization "" ;
+    foaf:role "" .
+

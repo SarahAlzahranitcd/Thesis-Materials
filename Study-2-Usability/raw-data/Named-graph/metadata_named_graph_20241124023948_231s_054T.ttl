@@ -1,0 +1,43 @@
+@prefix dcmi: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix metag: <http://example.com/metag/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+metag:subject metag:designDecisionJustification "" ;
+    metag:endDate "2024-11-19"^^xsd:date ;
+    metag:fileFormat "RDF/XML" ;
+    metag:fileName "" ;
+    metag:fileSource "" ;
+    metag:fileType "" ;
+    metag:finalDesignDecisions "create new mapping" ;
+    metag:mappingAlgorithm "" ;
+    metag:mappingAssumptions "" ;
+    metag:mappingDomain "Educational" ;
+    metag:mappingFormat "" ;
+    metag:mappingMethod "Automatic" ;
+    metag:mappingName "" ;
+    metag:mappingType "Interlinking" ;
+    metag:mappingURI "https://mapping.example.org" ;
+    metag:publisherName "NAVEEN" ;
+    metag:publisherSource "https://mapping.example.org" ;
+    metag:purpose "To align educational datasets for a unified learning ontology" ;
+    metag:qualityMetrics "Scallable" ;
+    metag:risksIssues "" ;
+    metag:startDate "2024-11-20"^^xsd:date ;
+    metag:technicalRequirement "" ;
+    metag:testingDate "2024-11-05"^^xsd:date ;
+    metag:testingName "" ;
+    metag:testingResult "PASS" ;
+    metag:testingType "Verification" ;
+    metag:testingURI "" ;
+    metag:tool "" ;
+    metag:versionDateTime "2024-10-29"^^xsd:date ;
+    metag:versionNumber "1.1.1" ;
+    dcmi:creator "" ;
+    dcmi:source "http://example.org/dataset1.rdf" ;
+    foaf:background "" ;
+    foaf:familyName "" ;
+    foaf:givenName "" ;
+    foaf:organization "" ;
+    foaf:role "" .
+

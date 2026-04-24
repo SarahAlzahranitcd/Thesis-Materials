@@ -1,0 +1,43 @@
+@prefix dcmi: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix metag: <http://example.com/metag/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+metag:subject metag:designDecisionJustification "" ;
+    metag:endDate "2024-02-28"^^xsd:date ;
+    metag:fileFormat "CSV (Input), RDF (Mapped File)" ;
+    metag:fileName "" ;
+    metag:fileSource "" ;
+    metag:fileType "" ;
+    metag:finalDesignDecisions "create new mapping" ;
+    metag:mappingAlgorithm "" ;
+    metag:mappingAssumptions "" ;
+    metag:mappingDomain "(historical records and geographic information" ;
+    metag:mappingFormat "" ;
+    metag:mappingMethod "Manual" ;
+    metag:mappingName "" ;
+    metag:mappingType "Uplift Mapping" ;
+    metag:mappingURI "http://virtualrecordtreasury.ie/uplift_mapping_v1.0" ;
+    metag:publisherName "Virtual Record Treasury of Ireland (VRTI)" ;
+    metag:publisherSource "https://virtualtreasury.ie" ;
+    metag:purpose "The main purpose and type of mapping are explicitly stated in the scenario as Uplift Mapping for Irish Counties." ;
+    metag:qualityMetrics "ata Completeness: Ensuring all county attributes (e.g., ID, name, geographic information) are accurately mapped. Validation: Running checks to confirm successful transformation of data into RDF format." ;
+    metag:risksIssues "" ;
+    metag:startDate "2024-01-01"^^xsd:date ;
+    metag:technicalRequirement "" ;
+    metag:testingDate "2024-02-28"^^xsd:date ;
+    metag:testingName "" ;
+    metag:testingResult "Successful validation with no issues found" ;
+    metag:testingType "Verification" ;
+    metag:testingURI "" ;
+    metag:tool "" ;
+    metag:versionDateTime "2024-02-28"^^xsd:date ;
+    metag:versionNumber "1.0" ;
+    dcmi:creator "" ;
+    dcmi:source "http://virtualrecordtreasury.ie/uplift_mapping_v1.0" ;
+    foaf:background "" ;
+    foaf:familyName "" ;
+    foaf:givenName "" ;
+    foaf:organization "" ;
+    foaf:role "" .
+

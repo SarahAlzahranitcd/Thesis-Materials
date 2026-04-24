@@ -1,0 +1,35 @@
+@prefix dcmi: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix metag: <http://example.com/metag/> .
+
+metag:subject metag:endDate "2024-03-30" ;
+    metag:mappingAlgorithm "" ;
+    metag:mappingAssumptions "" ;
+    metag:mappingDomain "Historical" ;
+    metag:mappingFormat "" ;
+    metag:mappingMethod "Automatic" ;
+    metag:mappingName "" ;
+    metag:mappingType "Ontologies Alignment" ;
+    metag:mappingURI "http://virtualrecordtreasury.ie/person_alignment_v1.0" ;
+    metag:publisherName "VRTI team" ;
+    metag:publisherSource "http://virtualrecordtreasury.ie" ;
+    metag:purpose "To ensure compatibility between the VRTI Knowledge Graph and external datasets in the historical domain" ;
+    metag:risksIssues "" ;
+    metag:startDate "2024-03-01" ;
+    metag:technicalRequirement "" ;
+    metag:testingDate "2024-03-30" ;
+    metag:testingName "" ;
+    metag:testingResult "successful" ;
+    metag:testingType "Validation" ;
+    metag:testingURI "" ;
+    metag:tool "" ;
+    metag:versionDateTime "2024-03-30" ;
+    metag:versionNumber "1.0" ;
+    dcmi:creator "" ;
+    dcmi:source "https://metasemap-1-sarah-alzahrani.replit.app/static/ontology_alignment.ttl" ;
+    foaf:background "" ;
+    foaf:familyName "" ;
+    foaf:givenName "" ;
+    foaf:organization "" ;
+    foaf:role "" .
+

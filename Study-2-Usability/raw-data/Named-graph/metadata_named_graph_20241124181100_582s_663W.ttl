@@ -1,0 +1,43 @@
+@prefix dcmi: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix metag: <http://example.com/metag/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+metag:subject metag:designDecisionJustification "" ;
+    metag:endDate "2024-03-30"^^xsd:date ;
+    metag:fileFormat "RDF" ;
+    metag:fileName "" ;
+    metag:fileSource "" ;
+    metag:fileType "" ;
+    metag:finalDesignDecisions "reuse existing mapping" ;
+    metag:mappingAlgorithm "" ;
+    metag:mappingAssumptions "" ;
+    metag:mappingDomain "Historical" ;
+    metag:mappingFormat "" ;
+    metag:mappingMethod "Automatic" ;
+    metag:mappingName "" ;
+    metag:mappingType "Ontologies Alignment" ;
+    metag:mappingURI "http://virtualrecordtreasury.ie/person_alignment_v1.0" ;
+    metag:publisherName "The Virtual Record Treasury of Ireland (VRTI)" ;
+    metag:publisherSource "http://virtualrecordtreasury.ie/" ;
+    metag:purpose "align the VRTI ontology with the FOAF ontology to ensure compatibility and enable integrated searches across datasets" ;
+    metag:qualityMetrics "Accuracy, completeness" ;
+    metag:risksIssues "" ;
+    metag:startDate "2024-03-01"^^xsd:date ;
+    metag:technicalRequirement "" ;
+    metag:testingDate "2024-03-30"^^xsd:date ;
+    metag:testingName "" ;
+    metag:testingResult "Successful" ;
+    metag:testingType "Validation" ;
+    metag:testingURI "" ;
+    metag:tool "" ;
+    metag:versionDateTime "2024-03-30"^^xsd:date ;
+    metag:versionNumber "1.0" ;
+    dcmi:creator "" ;
+    dcmi:source "http://virtualrecordtreasury.ie" ;
+    foaf:background "" ;
+    foaf:familyName "" ;
+    foaf:givenName "" ;
+    foaf:organization "" ;
+    foaf:role "" .
+
