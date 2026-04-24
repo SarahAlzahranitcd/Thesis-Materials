@@ -15,14 +15,14 @@ This repository provides the supplementary materials for the PhD thesis:
 
 This repository is organised according to the five studies presented in the thesis:
 
-* `publications/` – Associated papers and publications
+* `MMV-Ontology/` – Versions of the MMV ontology (TTL files and documentation)
+* `MetaSEMAP-Tool/` – Source code, screenshots, and example outputs of the MetaSEMAP tool
 * `Study-1-Community-Survey/` – Materials and data for Study 1 (Community Survey)
 * `Study-2-Usability/` – Materials and data for Study 2 (Usability Evaluation)
 * `Study-3-Ontology-Evaluation/` – Materials and data for Study 3 (Ontology Evaluation)
 * `Study-4-Reuse-Experiment/` – Materials and data for Study 4 (Reuse Experiment)
 * `Study-5-LLM-Generation/` – Materials and data for Study 5 (LLM-Based Mapping Generation)
-* `MMV-Ontology/` – Versions of the MMV ontology (TTL files and documentation)
-* `MetaSEMAP-Tool/` – Source code, screenshots, and example outputs of the MetaSEMAP tool
+* `publications/` – Associated papers and publications
 
 Each study folder includes:
 
