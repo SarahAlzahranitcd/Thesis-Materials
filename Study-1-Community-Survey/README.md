@@ -14,6 +14,6 @@ and knowledge engineering community.
 
 ## Contents
 
-- `questionnaire/` — The survey instrument as deployed via Google Forms.
-- `raw-data/` — Anonymised participant responses.
-- `results/` — Processed tables corresponding to thesis Tables 5.2–5.7.  
+- `questionnaire/` - The survey instrument as deployed via Google Forms.
+- `raw-data/` - Anonymised participant responses.
+- `results/`- Processed tables corresponding to thesis Tables 5.2–5.7.  
