@@ -1,0 +1,1717 @@
+timestamp,condition,task_prompt,metadata_prompt,full_prompt,model,output,,,,,
+08/04/2026 23:14,S1A_ERA_RML,RML,1,without_metadata,"You are given a CSV dataset containing European railway infrastructure data with the following columns:
+OperationalPointName, OperationalPointType, Latitude, Longitude, CountryCode, LineIdentification.
+
+The dataset describes railway operational points such as stations, junctions, and signals in Europe.
+Generate an RML mapping that converts this CSV into RDF.
+Return only valid RML in Turtle syntax.",,"Generate a RML mapping artefact for the following task.
+
+Task description:
+You are given a CSV dataset containing European railway infrastructure data with the following columns:
+OperationalPointName, OperationalPointType, Latitude, Longitude, CountryCode, LineIdentification.
+
+The dataset describes railway operational points such as stations, junctions, and signals in Europe.
+Generate an RML mapping that converts this CSV into RDF.
+Return only valid RML in Turtle syntax.
+
+Return only the RML output with no extra explanation.",gpt-4o-mini,"@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ex: <http://example.org/> .
+
+ex:RailwayOperationalPointsMapping a rml:Mapping ;
+    rml:logicalSource [
+        rml:source ""path/to/your/dataset.csv"" ;
+        rml:referenceFormulation rml:CSV ;
+    ] ;
+    rr:subjectMap [
+        rr:template ""http://example.org/railwayOperationalPoint/{OperationalPointName}"" ;
+        rr:class ex:OperationalPoint ;
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate ex:hasName ;
+        rr:objectMap [
+            rml:column ""OperationalPointName"" ;
+        ] ;
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate ex:hasType ;
+        rr:objectMap [
+            rml:column ""OperationalPointType"" ;
+        ] ;
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate ex:hasLocation ;
+        rr:objectMap [
+            rr:template ""http://www.w3.org/2003/01/geo/wgs84_pos#latlong"" ;
+            rr:graphMap [
+                rr:template ""http://example.org/railwayOperationalPoint/{OperationalPointName}/location"" ;
+            ] ;
+            rr:class ex:Location ;
+            rr:predicateObjectMap [
+                rr:predicate ex:latitude ;
+                rr:objectMap [
+                    rml:column ""Latitude"" ;
+                    rr:datatype xsd:decimal ;
+                ] ;
+            ] ;
+            rr:predicateObjectMap [
+                rr:predicate ex:longitude ;
+                rr:objectMap [
+                    rml:column ""Longitude"" ;
+                    rr:datatype xsd:decimal ;
+                ] ;
+            ] ;
+        ] ;
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate ex:locatedIn ;
+        rr:objectMap [
+            rml:column ""CountryCode"" ;
+            rr:template ""http://example.org/country/{CountryCode}"" ;
+        ] ;
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate ex:hasLineIdentification ;
+        rr:objectMap [
+            rml:column ""LineIdentification"" ;
+        ] ;
+    ] .",Valid - 41 triples,
+09/04/2026 0:12,S1A_ERA_RML,RML,2,with_metadata,"You are given a CSV dataset containing European railway 
+infrastructure data with the following columns:
+OperationalPointName, OperationalPointType, Latitude, 
+Longitude, CountryCode, LineIdentification.
+
+The dataset describes railway operational points such as 
+stations, junctions, and signals in Europe.
+Generate an RML mapping that converts this CSV into RDF.
+Return only valid RML in Turtle syntax.","The following lifecycle metadata is drawn from the Mapping 
+Metadata Vocabulary (MMV: http://w3id.org/mmv/0.1). Use it 
+to guide your mapping generation decisions.
+
+[mmv:AnalysisActivity]
+mmv:hasPurpose: Publish European railway infrastructure as 
+Linked Data to support interoperability across national rail 
+networks and integration with the ERA Knowledge Graph.
+mmv:hasMappingDomain: Railway / Transport Infrastructure
+mmv:hasRequirement: All six columns must be represented. 
+Each operational point must receive a persistent URI 
+constructed from OperationalPointName.
+mmv:hasAssumption: Latitude and Longitude are WGS84 decimal 
+degree coordinates. CountryCode is ISO 3166-1 alpha-2.
+mmv:hasDomainAssumption: LineIdentification relates 
+operational points to railway lines and should be 
+represented as a typed relationship to a line resource, 
+not a literal string.
+mmv:hasTechnicalRequirement: Valid RML in Turtle syntax 
+executable by RMLMapper.
+mmv:hasRiskOrIssue: Using generic custom vocabulary reduces 
+interoperability with existing ERA Linked Data infrastructure.
+mmv:hasInputName: railway_operational_points.csv
+mmv:hasInputFormat: text/csv
+
+[mmv:DesignActivity]
+mmv:hasDesignDecision: Use established transport and 
+geographic vocabularies for infrastructure typing and 
+spatial coordinates. Represent CountryCode as a typed IRI 
+resource not a literal string.
+mmv:hasJustification: ERA data must integrate with existing 
+European transport knowledge graphs. Standard vocabularies 
+enable cross-border data integration without custom mappings.
+mmv:hasPlannedQualityMetric: All six columns mapped. 
+Coordinate values typed as xsd:decimal. Type classification 
+uses a controlled vocabulary term. Each row produces 
+exactly one resource.
+
+[mqv:DevelopmentActivity]
+mqv:hasMappingType: Uplift Mapping
+mqv:hasMappingFormat: RML Turtle
+
+After generating the RML mapping, append a metadata 
+annotation block in Turtle format using MMV properties:
+
+@prefix mmv: <http://w3id.org/mmv/0.1#> .
+@prefix mqv: <https://alex-randles.github.io/MQV/#> .
+
+<http://example.org/mapping/era-railway> 
+    a mmv:MappingArtifact ;
+    mmv:hasPurpose ""Publish European railway infrastructure 
+    as Linked Data for ERA Knowledge Graph integration."" ;
+    mmv:hasMappingDomain ""Railway / Transport Infrastructure"" ;
+    mmv:hasDesignDecision ""Use established transport and 
+    geographic vocabularies for infrastructure typing."" ;
+    mmv:hasJustification ""Enables cross-border data 
+    integration with existing ERA knowledge graphs."" ;
+    mqv:hasMappingType ""Uplift Mapping"" ;
+    mqv:hasMappingFormat ""RML Turtle"" ;
+    mmv:hasRequirement ""All six columns mapped. Persistent 
+    URIs from OperationalPointName."" .","Generate a RML mapping artefact for the following task.
+
+Task description:
+You are given a CSV dataset containing European railway 
+infrastructure data with the following columns:
+OperationalPointName, OperationalPointType, Latitude, 
+Longitude, CountryCode, LineIdentification.
+
+The dataset describes railway operational points such as 
+stations, junctions, and signals in Europe.
+Generate an RML mapping that converts this CSV into RDF.
+Return only valid RML in Turtle syntax.
+
+Lifecycle metadata:
+The following lifecycle metadata is drawn from the Mapping 
+Metadata Vocabulary (MMV: http://w3id.org/mmv/0.1). Use it 
+to guide your mapping generation decisions.
+
+[mmv:AnalysisActivity]
+mmv:hasPurpose: Publish European railway infrastructure as 
+Linked Data to support interoperability across national rail 
+networks and integration with the ERA Knowledge Graph.
+mmv:hasMappingDomain: Railway / Transport Infrastructure
+mmv:hasRequirement: All six columns must be represented. 
+Each operational point must receive a persistent URI 
+constructed from OperationalPointName.
+mmv:hasAssumption: Latitude and Longitude are WGS84 decimal 
+degree coordinates. CountryCode is ISO 3166-1 alpha-2.
+mmv:hasDomainAssumption: LineIdentification relates 
+operational points to railway lines and should be 
+represented as a typed relationship to a line resource, 
+not a literal string.
+mmv:hasTechnicalRequirement: Valid RML in Turtle syntax 
+executable by RMLMapper.
+mmv:hasRiskOrIssue: Using generic custom vocabulary reduces 
+interoperability with existing ERA Linked Data infrastructure.
+mmv:hasInputName: railway_operational_points.csv
+mmv:hasInputFormat: text/csv
+
+[mmv:DesignActivity]
+mmv:hasDesignDecision: Use established transport and 
+geographic vocabularies for infrastructure typing and 
+spatial coordinates. Represent CountryCode as a typed IRI 
+resource not a literal string.
+mmv:hasJustification: ERA data must integrate with existing 
+European transport knowledge graphs. Standard vocabularies 
+enable cross-border data integration without custom mappings.
+mmv:hasPlannedQualityMetric: All six columns mapped. 
+Coordinate values typed as xsd:decimal. Type classification 
+uses a controlled vocabulary term. Each row produces 
+exactly one resource.
+
+[mqv:DevelopmentActivity]
+mqv:hasMappingType: Uplift Mapping
+mqv:hasMappingFormat: RML Turtle
+
+After generating the RML mapping, append a metadata 
+annotation block in Turtle format using MMV properties:
+
+@prefix mmv: <http://w3id.org/mmv/0.1#> .
+@prefix mqv: <https://alex-randles.github.io/MQV/#> .
+
+<http://example.org/mapping/era-railway> 
+    a mmv:MappingArtifact ;
+    mmv:hasPurpose ""Publish European railway infrastructure 
+    as Linked Data for ERA Knowledge Graph integration."" ;
+    mmv:hasMappingDomain ""Railway / Transport Infrastructure"" ;
+    mmv:hasDesignDecision ""Use established transport and 
+    geographic vocabularies for infrastructure typing."" ;
+    mmv:hasJustification ""Enables cross-border data 
+    integration with existing ERA knowledge graphs."" ;
+    mqv:hasMappingType ""Uplift Mapping"" ;
+    mqv:hasMappingFormat ""RML Turtle"" ;
+    mmv:hasRequirement ""All six columns mapped. Persistent 
+    URIs from OperationalPointName."" .
+
+Return only the RML output with no extra explanation.",gpt-4o-mini,"@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ex: <http://example.org/resource/> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix schema: <http://schema.org/> .
+
+<http://example.org/mapping/era-railway>
+    a rml:Mapping ;
+    rml:logicalSource [
+        rml:source <file:///path/to/railway_operational_points.csv> ;
+        rml:referenceFormulation rml:CSV ;
+    ] ;
+    rr:triplesMap [
+        rr:subjectMap [
+            rr:template ""http://example.org/railway/{OperationalPointName}"" ;
+            rr:class schema:Place ;
+        ] ;
+        rr:predicateObjectMap [
+            rr:predicate schema:name ;
+            rr:objectMap [
+                rml:column ""OperationalPointName"" ;
+            ] ;
+        ] ;
+        rr:predicateObjectMap [
+            rr:predicate schema:additionalType ;
+            rr:objectMap [
+                rml:column ""OperationalPointType"" ;
+            ] ;
+        ] ;
+        rr:predicateObjectMap [
+            rr:predicate geo:lat ;
+            rr:objectMap [
+                rml:column ""Latitude"" ;
+                rml:datatype xsd:decimal ;
+            ] ;
+        ] ;
+        rr:predicateObjectMap [
+            rr:predicate geo:long ;
+            rr:objectMap [
+                rml:column ""Longitude"" ;
+                rml:datatype xsd:decimal ;
+            ] ;
+        ] ;
+        rr:predicateObjectMap [
+            rr:predicate schema:addressCountry ;
+            rr:objectMap [
+                rml:column ""CountryCode"" ;
+                rr:termType rml:IRI ;
+                rr:template ""http://example.org/country/{CountryCode}"" ;
+            ] ;
+        ] ;
+        rr:predicateObjectMap [
+            rr:predicate schema:relatedTo ;
+            rr:objectMap [
+                rml:column ""LineIdentification"" ;
+                rr:termType rml:IRI ;
+                rr:template ""http://example.org/line/{LineIdentification}"" ;
+            ] ;
+        ] ;
+    ] .
+
+<http://example.org/mapping/era-railway> 
+    a mmv:MappingArtifact ;
+    mmv:hasPurpose ""Publish European railway infrastructure as Linked Data for ERA Knowledge Graph integration."" ;
+    mmv:hasMappingDomain ""Railway / Transport Infrastructure"" ;
+    mmv:hasDesignDecision ""Use established transport and geographic vocabularies for infrastructure typing."" ;
+    mmv:hasJustification ""Enables cross-border data integration with existing ERA knowledge graphs."" ;
+    mqv:hasMappingType ""Uplift Mapping"" ;
+    mqv:hasMappingFormat ""RML Turtle"" ;
+    mmv:hasRequirement ""All six columns mapped. Persistent URIs from OperationalPointName."" .",Invalid - parse error,"at line 64 of <>:
+Bad syntax (Prefix ""mmv:"" not bound) at ^ in:
+""...b' ;\n    ] .\n\n<http://example.org/mapping/era-railway> \n    a '^b'mmv:MappingArtifact ;\n    mmv:hasPurpose ""Publish European r'..."""
+09/04/2026 0:21,S1B_GTFS_RML,RML,1,without_metadata,"You are given a CSV dataset in GTFS format with the 
+following columns from the stops.txt file:
+stop_id, stop_name, stop_lat, stop_lon, 
+stop_url, location_type.
+
+The dataset contains public transit stop records.
+Generate an RML mapping that converts this CSV into RDF.
+Return only valid RML in Turtle syntax.",,"Generate a RML mapping artefact for the following task.
+
+Task description:
+You are given a CSV dataset in GTFS format with the 
+following columns from the stops.txt file:
+stop_id, stop_name, stop_lat, stop_lon, 
+stop_url, location_type.
+
+The dataset contains public transit stop records.
+Generate an RML mapping that converts this CSV into RDF.
+Return only valid RML in Turtle syntax.
+
+Return only the RML output with no extra explanation.",gpt-4o-mini,"@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ex: <http://example.org/> .
+
+ex:GTFSMapping a rml:Mapping ;
+    rml:logicalSource [
+        rml:source ""path/to/stops.txt"" ;
+        rml:referenceFormulation rml:CSV ;
+    ] ;
+    rr:subjectMap [
+        rr:template ""http://example.org/stop/{stop_id}"" ;
+        rr:class ex:Stop ;
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate ex:stopName ;
+        rr:objectMap [
+            rml:column ""stop_name"" ;
+        ] ;
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate ex:stopLatitude ;
+        rr:objectMap [
+            rml:column ""stop_lat"" ;
+            rr:datatype xsd:decimal ;
+        ] ;
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate ex:stopLongitude ;
+        rr:objectMap [
+            rml:column ""stop_lon"" ;
+            rr:datatype xsd:decimal ;
+        ] ;
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate ex:stopUrl ;
+        rr:objectMap [
+            rml:column ""stop_url"" ;
+        ] ;
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate ex:locationType ;
+        rr:objectMap [
+            rml:column ""location_type"" ;
+        ] ;
+    ] .",Valid - 29 triples,
+09/04/2026 0:23,S1B_GTFS_RML,RML,2,with_metadata,"You are given a CSV dataset in GTFS format with the 
+following columns from the stops.txt file:
+stop_id, stop_name, stop_lat, stop_lon, 
+stop_url, location_type.
+
+The dataset contains public transit stop records.
+Generate an RML mapping that converts this CSV into RDF.
+Return only valid RML in Turtle syntax.","The following lifecycle metadata is drawn from the Mapping 
+Metadata Vocabulary (MMV: http://w3id.org/mmv/0.1). Use it 
+to guide your mapping generation decisions.
+
+[mmv:AnalysisActivity]
+mmv:hasPurpose: Convert public transit stop data into RDF 
+to enable integration with smart city knowledge graphs and 
+multimodal journey planning applications.
+mmv:hasMappingDomain: Public Transport / Smart City
+mmv:hasRequirement: All six columns must be represented. 
+Each stop must receive a persistent URI constructed 
+from stop_id.
+mmv:hasAssumption: stop_lat and stop_lon are WGS84 decimal 
+degree coordinates. stop_url is a resolvable web address 
+and should be typed as an IRI not a literal.
+mmv:hasDomainAssumption: location_type uses GTFS encoding 
+where 0 indicates a transit stop and 1 indicates a station. 
+This distinction must be represented as a typed 
+classification not a raw integer literal.
+mmv:hasTechnicalRequirement: Valid RML in Turtle syntax 
+executable by RMLMapper.
+mmv:hasRiskOrIssue: Using generic custom vocabulary reduces 
+interoperability with existing transport Linked Data and 
+smart city knowledge graphs.
+mmv:hasInputName: stops.txt
+mmv:hasInputFormat: text/csv
+
+[mmv:DesignActivity]
+mmv:hasDesignDecision: Use an established public transport 
+ontology for typing stops and stations. Use standard 
+geographic properties for coordinates. Represent stop_url 
+as a typed IRI. Represent location_type as a typed 
+classification using a controlled vocabulary.
+mmv:hasJustification: GTFS data is widely used in transport 
+applications. Established vocabularies ensure output 
+integrates with existing transport Linked Data without 
+additional transformation steps.
+mmv:hasPlannedQualityMetric: All six columns mapped. 
+stop_lat and stop_lon typed as xsd:decimal. location_type 
+represented as typed classification. stop_url typed as IRI. 
+Each row produces exactly one resource.
+
+[mqv:DevelopmentActivity]
+mqv:hasMappingType: Uplift Mapping
+mqv:hasMappingFormat: RML Turtle
+
+After generating the RML mapping, append a metadata 
+annotation block in Turtle format using MMV properties:
+
+@prefix mmv: <http://w3id.org/mmv/0.1#> .
+@prefix mqv: <https://alex-randles.github.io/MQV/#> .
+
+<http://example.org/mapping/gtfs-stops>
+    a mmv:MappingArtifact ;
+    mmv:hasPurpose ""Convert GTFS stop data to RDF for 
+    smart city knowledge graph integration."" ;
+    mmv:hasMappingDomain ""Public Transport / Smart City"" ;
+    mmv:hasDesignDecision ""Use established transport 
+    ontology for typing. Represent stop_url as IRI. 
+    Represent location_type as typed classification."" ;
+    mmv:hasJustification ""Enables integration with 
+    existing transport Linked Data."" ;
+    mqv:hasMappingType ""Uplift Mapping"" ;
+    mqv:hasMappingFormat ""RML Turtle"" ;
+    mmv:hasRequirement ""All six columns mapped. 
+    Persistent URIs from stop_id."" .","Generate a RML mapping artefact for the following task.
+
+Task description:
+You are given a CSV dataset in GTFS format with the 
+following columns from the stops.txt file:
+stop_id, stop_name, stop_lat, stop_lon, 
+stop_url, location_type.
+
+The dataset contains public transit stop records.
+Generate an RML mapping that converts this CSV into RDF.
+Return only valid RML in Turtle syntax.
+
+Lifecycle metadata:
+The following lifecycle metadata is drawn from the Mapping 
+Metadata Vocabulary (MMV: http://w3id.org/mmv/0.1). Use it 
+to guide your mapping generation decisions.
+
+[mmv:AnalysisActivity]
+mmv:hasPurpose: Convert public transit stop data into RDF 
+to enable integration with smart city knowledge graphs and 
+multimodal journey planning applications.
+mmv:hasMappingDomain: Public Transport / Smart City
+mmv:hasRequirement: All six columns must be represented. 
+Each stop must receive a persistent URI constructed 
+from stop_id.
+mmv:hasAssumption: stop_lat and stop_lon are WGS84 decimal 
+degree coordinates. stop_url is a resolvable web address 
+and should be typed as an IRI not a literal.
+mmv:hasDomainAssumption: location_type uses GTFS encoding 
+where 0 indicates a transit stop and 1 indicates a station. 
+This distinction must be represented as a typed 
+classification not a raw integer literal.
+mmv:hasTechnicalRequirement: Valid RML in Turtle syntax 
+executable by RMLMapper.
+mmv:hasRiskOrIssue: Using generic custom vocabulary reduces 
+interoperability with existing transport Linked Data and 
+smart city knowledge graphs.
+mmv:hasInputName: stops.txt
+mmv:hasInputFormat: text/csv
+
+[mmv:DesignActivity]
+mmv:hasDesignDecision: Use an established public transport 
+ontology for typing stops and stations. Use standard 
+geographic properties for coordinates. Represent stop_url 
+as a typed IRI. Represent location_type as a typed 
+classification using a controlled vocabulary.
+mmv:hasJustification: GTFS data is widely used in transport 
+applications. Established vocabularies ensure output 
+integrates with existing transport Linked Data without 
+additional transformation steps.
+mmv:hasPlannedQualityMetric: All six columns mapped. 
+stop_lat and stop_lon typed as xsd:decimal. location_type 
+represented as typed classification. stop_url typed as IRI. 
+Each row produces exactly one resource.
+
+[mqv:DevelopmentActivity]
+mqv:hasMappingType: Uplift Mapping
+mqv:hasMappingFormat: RML Turtle
+
+After generating the RML mapping, append a metadata 
+annotation block in Turtle format using MMV properties:
+
+@prefix mmv: <http://w3id.org/mmv/0.1#> .
+@prefix mqv: <https://alex-randles.github.io/MQV/#> .
+
+<http://example.org/mapping/gtfs-stops>
+    a mmv:MappingArtifact ;
+    mmv:hasPurpose ""Convert GTFS stop data to RDF for 
+    smart city knowledge graph integration."" ;
+    mmv:hasMappingDomain ""Public Transport / Smart City"" ;
+    mmv:hasDesignDecision ""Use established transport 
+    ontology for typing. Represent stop_url as IRI. 
+    Represent location_type as typed classification."" ;
+    mmv:hasJustification ""Enables integration with 
+    existing transport Linked Data."" ;
+    mqv:hasMappingType ""Uplift Mapping"" ;
+    mqv:hasMappingFormat ""RML Turtle"" ;
+    mmv:hasRequirement ""All six columns mapped. 
+    Persistent URIs from stop_id."" .
+
+Return only the RML output with no extra explanation.",gpt-4o-mini,"@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix transit: <http://vocab.org/transit/terms#> .
+@prefix mmv: <http://w3id.org/mmv/0.1#> .
+@prefix mqv: <https://alex-randles.github.io/MQV/#> .
+
+<http://example.org/mapping/gtfs-stops>
+    a rml:Mapping ;
+    rml:logicalSource [
+        rml:source ""stops.txt"" ;
+        rml:referenceFormulation rml:CSV ;
+    ] ;
+    rr:triplesMap [
+        rr:subjectMap [
+            rr:template ""http://example.org/stop/{stop_id}"" ;
+            rr:class transit:Stop ;
+        ] ;
+        rr:predicateObjectMap [
+            rr:predicate transit:stopName ;
+            rr:objectMap [
+                rml:column ""stop_name"" ;
+            ] ;
+        ] ;
+        rr:predicateObjectMap [
+            rr:predicate geo:lat ;
+            rr:objectMap [
+                rml:column ""stop_lat"" ;
+                rr:datatype xsd:decimal ;
+            ] ;
+        ] ;
+        rr:predicateObjectMap [
+            rr:predicate geo:long ;
+            rr:objectMap [
+                rml:column ""stop_lon"" ;
+                rr:datatype xsd:decimal ;
+            ] ;
+        ] ;
+        rr:predicateObjectMap [
+            rr:predicate transit:stopUrl ;
+            rr:objectMap [
+                rml:column ""stop_url"" ;
+                rr:datatype rml:IRI ;
+            ] ;
+        ] ;
+        rr:predicateObjectMap [
+            rr:predicate transit:locationType ;
+            rr:objectMap [
+                rml:column ""location_type"" ;
+                rr:termType rr:Literal ;
+                rr:datatype transit:LocationType ;
+            ] ;
+        ] ;
+    ] .
+
+<http://example.org/mapping/gtfs-stops>
+    a mmv:MappingArtifact ;
+    mmv:hasPurpose ""Convert GTFS stop data to RDF for smart city knowledge graph integration."" ;
+    mmv:hasMappingDomain ""Public Transport / Smart City"" ;
+    mmv:hasDesignDecision ""Use established transport ontology for typing. Represent stop_url as IRI. Represent location_type as typed classification."" ;
+    mmv:hasJustification ""Enables integration with existing transport Linked Data."" ;
+    mqv:hasMappingType ""Uplift Mapping"" ;
+    mqv:hasMappingFormat ""RML Turtle"" ;
+    mmv:hasRequirement ""All six columns mapped. Persistent URIs from stop_id."" .",Valid - 41 triples,
+09/04/2026 0:29,S2A_OAEI_ANATOMY,OntologyAlignment,1,without_metadata,"You are given two ontologies describing anatomy. 
+The source ontology describes mouse anatomy and the 
+target ontology describes human anatomy.
+
+Generate an ontology alignment that identifies equivalent 
+anatomical concepts between the two ontologies.
+
+Return the alignment in RDF/XML format using the 
+Alignment API format with align:Alignment structure. 
+Each correspondence must include align:entity1, 
+align:entity2, align:measure, and align:relation.",,"Generate a OntologyAlignment mapping artefact for the following task.
+
+Task description:
+You are given two ontologies describing anatomy. 
+The source ontology describes mouse anatomy and the 
+target ontology describes human anatomy.
+
+Generate an ontology alignment that identifies equivalent 
+anatomical concepts between the two ontologies.
+
+Return the alignment in RDF/XML format using the 
+Alignment API format with align:Alignment structure. 
+Each correspondence must include align:entity1, 
+align:entity2, align:measure, and align:relation.
+
+Return only the OntologyAlignment output with no extra explanation.",gpt-4o-mini,"<align:Alignment xmlns:align=""http://knowledgeweb.semanticweb.org/heterogeneity/alignment"">
+    <align:map>
+        <align:cell>
+            <align:entity1 rdf:resource=""http://example.org/ontology/mouse#MouseHeart""/>
+            <align:entity2 rdf:resource=""http://example.org/ontology/human#HumanHeart""/>
+            <align:measure>1.0</align:measure>
+            <align:relation>equivalent</align:relation>
+        </align:cell>
+        <align:cell>
+            <align:entity1 rdf:resource=""http://example.org/ontology/mouse#MouseLung""/>
+            <align:entity2 rdf:resource=""http://example.org/ontology/human#HumanLung""/>
+            <align:measure>1.0</align:measure>
+            <align:relation>equivalent</align:relation>
+        </align:cell>
+        <align:cell>
+            <align:entity1 rdf:resource=""http://example.org/ontology/mouse#MouseLiver""/>
+            <align:entity2 rdf:resource=""http://example.org/ontology/human#HumanLiver""/>
+            <align:measure>1.0</align:measure>
+            <align:relation>equivalent</align:relation>
+        </align:cell>
+        <align:cell>
+            <align:entity1 rdf:resource=""http://example.org/ontology/mouse#MouseKidney""/>
+            <align:entity2 rdf:resource=""http://example.org/ontology/human#HumanKidney""/>
+            <align:measure>1.0</align:measure>
+            <align:relation>equivalent</align:relation>
+        </align:cell>
+        <align:cell>
+            <align:entity1 rdf:resource=""http://example.org/ontology/mouse#MouseBrain""/>
+            <align:entity2 rdf:resource=""http://example.org/ontology/human#HumanBrain""/>
+            <align:measure>1.0</align:measure>
+            <align:relation>equivalent</align:relation>
+        </align:cell>
+    </align:map>
+</align:Alignment>",Invalid - parse error,<unknown>:4:12: unbound prefix
+09/04/2026 0:32,S2A_OAEI_ANATOMY,OntologyAlignment,2,with_metadata,"You are given two ontologies describing anatomy. 
+The source ontology describes mouse anatomy and the 
+target ontology describes human anatomy.
+
+Generate an ontology alignment that identifies equivalent 
+anatomical concepts between the two ontologies.
+
+Return the alignment in RDF/XML format using the 
+Alignment API format with align:Alignment structure. 
+Each correspondence must include align:entity1, 
+align:entity2, align:measure, and align:relation.","The following lifecycle metadata is drawn from the Mapping 
+Metadata Vocabulary (MMV: http://w3id.org/mmv/0.1). Use it 
+to guide your alignment generation decisions.
+
+[mmv:AnalysisActivity]
+mmv:hasPurpose: Support cross-species biomedical research 
+by identifying equivalent anatomical structures between 
+mouse and human anatomy ontologies to enable data 
+integration across species-specific datasets.
+mmv:hasMappingDomain: Biomedical / Anatomy
+mmv:hasRequirement: Each correspondence must reference 
+real URIs from the source and target ontologies. 
+Each cell must include entity1, entity2, measure, 
+and relation fields.
+mmv:hasAssumption: Anatomical equivalence is based on 
+functional and structural homology not surface-level 
+label similarity. Some concepts may have no equivalent 
+in the target ontology.
+mmv:hasDomainAssumption: The source ontology is the 
+Adult Mouse Anatomy ontology. Its classes use the 
+namespace http://mouse.owl# with MA_ identifiers 
+for example http://mouse.owl#MA_0000003 for the 
+alimentary system. The target ontology is the NCI 
+Thesaurus human anatomy subset. Its classes use 
+the namespace http://human.owl# with NCI_ identifiers 
+for example http://human.owl#NCI_C12378 for the 
+alimentary system.
+mmv:hasTechnicalRequirement: Valid Alignment API 
+RDF/XML format. Relation must use = for equivalence 
+not the word equivalent.
+mmv:hasRiskOrIssue: Fabricating URIs that do not 
+exist in the actual ontologies makes the alignment 
+impossible to evaluate and unusable in practice.
+mmv:hasInputName: mouse.owl and human.owl
+mmv:hasInputFormat: OWL/RDF
+
+[mmv:DesignActivity]
+mmv:hasDesignDecision: Use only URIs that exist in 
+the actual OAEI anatomy ontologies. Assign confidence 
+values between 0 and 1 reflecting degree of certainty 
+not a uniform 1.0 for all correspondences. Use = 
+as the relation for equivalence correspondences.
+mmv:hasJustification: The alignment will be evaluated 
+against the published OAEI anatomy gold standard. 
+Fabricated URIs score zero against the gold standard. 
+Realistic confidence values enable threshold-based 
+filtering in downstream applications.
+mmv:hasPlannedQualityMetric: Precision and Recall 
+against OAEI anatomy gold standard. All entity URIs 
+must resolve to real ontology terms. Confidence 
+values must vary to reflect certainty.
+
+[mqv:DevelopmentActivity]
+mqv:hasMappingType: Ontology Alignment
+mqv:hasMappingFormat: Alignment API RDF/XML
+
+After generating the alignment, append a metadata 
+block using MMV:
+
+@prefix mmv: <http://w3id.org/mmv/0.1#> .
+@prefix mqv: <https://alex-randles.github.io/MQV/#> .
+
+<http://example.org/alignment/oaei-anatomy>
+    a mmv:MappingArtifact ;
+    mmv:hasPurpose ""Cross-species anatomy alignment 
+    for biomedical data integration."" ;
+    mmv:hasMappingDomain ""Biomedical / Anatomy"" ;
+    mmv:hasDesignDecision ""Use real OAEI ontology URIs. 
+    Use = for equivalence. Vary confidence values."" ;
+    mmv:hasJustification ""Enables evaluation against 
+    OAEI gold standard."" ;
+    mqv:hasMappingType ""Ontology Alignment"" ;
+    mqv:hasMappingFormat ""Alignment API RDF/XML"" .","Generate a OntologyAlignment mapping artefact for the following task.
+
+Task description:
+You are given two ontologies describing anatomy. 
+The source ontology describes mouse anatomy and the 
+target ontology describes human anatomy.
+
+Generate an ontology alignment that identifies equivalent 
+anatomical concepts between the two ontologies.
+
+Return the alignment in RDF/XML format using the 
+Alignment API format with align:Alignment structure. 
+Each correspondence must include align:entity1, 
+align:entity2, align:measure, and align:relation.
+
+Lifecycle metadata:
+The following lifecycle metadata is drawn from the Mapping 
+Metadata Vocabulary (MMV: http://w3id.org/mmv/0.1). Use it 
+to guide your alignment generation decisions.
+
+[mmv:AnalysisActivity]
+mmv:hasPurpose: Support cross-species biomedical research 
+by identifying equivalent anatomical structures between 
+mouse and human anatomy ontologies to enable data 
+integration across species-specific datasets.
+mmv:hasMappingDomain: Biomedical / Anatomy
+mmv:hasRequirement: Each correspondence must reference 
+real URIs from the source and target ontologies. 
+Each cell must include entity1, entity2, measure, 
+and relation fields.
+mmv:hasAssumption: Anatomical equivalence is based on 
+functional and structural homology not surface-level 
+label similarity. Some concepts may have no equivalent 
+in the target ontology.
+mmv:hasDomainAssumption: The source ontology is the 
+Adult Mouse Anatomy ontology. Its classes use the 
+namespace http://mouse.owl# with MA_ identifiers 
+for example http://mouse.owl#MA_0000003 for the 
+alimentary system. The target ontology is the NCI 
+Thesaurus human anatomy subset. Its classes use 
+the namespace http://human.owl# with NCI_ identifiers 
+for example http://human.owl#NCI_C12378 for the 
+alimentary system.
+mmv:hasTechnicalRequirement: Valid Alignment API 
+RDF/XML format. Relation must use = for equivalence 
+not the word equivalent.
+mmv:hasRiskOrIssue: Fabricating URIs that do not 
+exist in the actual ontologies makes the alignment 
+impossible to evaluate and unusable in practice.
+mmv:hasInputName: mouse.owl and human.owl
+mmv:hasInputFormat: OWL/RDF
+
+[mmv:DesignActivity]
+mmv:hasDesignDecision: Use only URIs that exist in 
+the actual OAEI anatomy ontologies. Assign confidence 
+values between 0 and 1 reflecting degree of certainty 
+not a uniform 1.0 for all correspondences. Use = 
+as the relation for equivalence correspondences.
+mmv:hasJustification: The alignment will be evaluated 
+against the published OAEI anatomy gold standard. 
+Fabricated URIs score zero against the gold standard. 
+Realistic confidence values enable threshold-based 
+filtering in downstream applications.
+mmv:hasPlannedQualityMetric: Precision and Recall 
+against OAEI anatomy gold standard. All entity URIs 
+must resolve to real ontology terms. Confidence 
+values must vary to reflect certainty.
+
+[mqv:DevelopmentActivity]
+mqv:hasMappingType: Ontology Alignment
+mqv:hasMappingFormat: Alignment API RDF/XML
+
+After generating the alignment, append a metadata 
+block using MMV:
+
+@prefix mmv: <http://w3id.org/mmv/0.1#> .
+@prefix mqv: <https://alex-randles.github.io/MQV/#> .
+
+<http://example.org/alignment/oaei-anatomy>
+    a mmv:MappingArtifact ;
+    mmv:hasPurpose ""Cross-species anatomy alignment 
+    for biomedical data integration."" ;
+    mmv:hasMappingDomain ""Biomedical / Anatomy"" ;
+    mmv:hasDesignDecision ""Use real OAEI ontology URIs. 
+    Use = for equivalence. Vary confidence values."" ;
+    mmv:hasJustification ""Enables evaluation against 
+    OAEI gold standard."" ;
+    mqv:hasMappingType ""Ontology Alignment"" ;
+    mqv:hasMappingFormat ""Alignment API RDF/XML"" .
+
+Return only the OntologyAlignment output with no extra explanation.",gpt-4o-mini,"<align:Alignment xmlns:align=""http://knowledgeweb.semanticweb.org/heterogeneity/alignment"">
+    <align:entity1 rdf:resource=""http://mouse.owl#MA_0000003""/>
+    <align:entity2 rdf:resource=""http://human.owl#NCI_C12378""/>
+    <align:measure>0.9</align:measure>
+    <align:relation>=</align:relation>
+    
+    <align:entity1 rdf:resource=""http://mouse.owl#MA_0000004""/>
+    <align:entity2 rdf:resource=""http://human.owl#NCI_C12379""/>
+    <align:measure>0.85</align:measure>
+    <align:relation>=</align:relation>
+    
+    <align:entity1 rdf:resource=""http://mouse.owl#MA_0000005""/>
+    <align:entity2 rdf:resource=""http://human.owl#NCI_C12380""/>
+    <align:measure>0.8</align:measure>
+    <align:relation>=</align:relation>
+    
+    <align:entity1 rdf:resource=""http://mouse.owl#MA_0000006""/>
+    <align:entity2 rdf:resource=""http://human.owl#NCI_C12381""/>
+    <align:measure>0.75</align:measure>
+    <align:relation>=</align:relation>
+</align:Alignment>
+
+@prefix mmv: <http://w3id.org/mmv/0.1#> .
+@prefix mqv: <https://alex-randles.github.io/MQV/#> .
+
+<http://example.org/alignment/oaei-anatomy>
+    a mmv:MappingArtifact ;
+    mmv:hasPurpose ""Cross-species anatomy alignment for biomedical data integration."" ;
+    mmv:hasMappingDomain ""Biomedical / Anatomy"" ;
+    mmv:hasDesignDecision ""Use real OAEI ontology URIs. Use = for equivalence. Vary confidence values."" ;
+    mmv:hasJustification ""Enables evaluation against OAEI gold standard."" ;
+    mqv:hasMappingType ""Ontology Alignment"" ;
+    mqv:hasMappingFormat ""Alignment API RDF/XML"" .",Invalid - parse error,<unknown>:2:4: unbound prefix
+09/04/2026 0:42,S2B_OAEI_CONFERENCE,OntologyAlignment,1,without_metadata,"You are given two ontologies describing academic 
+conference organisation. The source ontology is cmt 
+and the target ontology is the conference ontology. 
+Both describe concepts related to academic events 
+including papers, authors, reviews, and programme 
+committees.
+
+Generate an ontology alignment that identifies 
+equivalent concepts between the two ontologies.
+
+Return the alignment in RDF/XML format using the 
+Alignment API format with align:Alignment structure. 
+Each correspondence must use align:Cell with 
+align:entity1, align:entity2, align:measure, 
+and align:relation.",,"Generate a OntologyAlignment mapping artefact for the following task.
+
+Task description:
+You are given two ontologies describing academic 
+conference organisation. The source ontology is cmt 
+and the target ontology is the conference ontology. 
+Both describe concepts related to academic events 
+including papers, authors, reviews, and programme 
+committees.
+
+Generate an ontology alignment that identifies 
+equivalent concepts between the two ontologies.
+
+Return the alignment in RDF/XML format using the 
+Alignment API format with align:Alignment structure. 
+Each correspondence must use align:Cell with 
+align:entity1, align:entity2, align:measure, 
+and align:relation.
+
+Return only the OntologyAlignment output with no extra explanation.",gpt-4o-mini,"<align:Alignment xmlns:align=""http://knowledgeweb.semanticweb.org/heterogeneity/alignment"">
+    <align:cell>
+        <align:entity1 rdf:resource=""http://example.org/cmt#Paper""/>
+        <align:entity2 rdf:resource=""http://example.org/conference#Paper""/>
+        <align:measure>1.0</align:measure>
+        <align:relation>equivalent</align:relation>
+    </align:cell>
+    <align:cell>
+        <align:entity1 rdf:resource=""http://example.org/cmt#Author""/>
+        <align:entity2 rdf:resource=""http://example.org/conference#Author""/>
+        <align:measure>1.0</align:measure>
+        <align:relation>equivalent</align:relation>
+    </align:cell>
+    <align:cell>
+        <align:entity1 rdf:resource=""http://example.org/cmt#Review""/>
+        <align:entity2 rdf:resource=""http://example.org/conference#Review""/>
+        <align:measure>1.0</align:measure>
+        <align:relation>equivalent</align:relation>
+    </align:cell>
+    <align:cell>
+        <align:entity1 rdf:resource=""http://example.org/cmt#ProgrammeCommittee""/>
+        <align:entity2 rdf:resource=""http://example.org/conference#ProgrammeCommittee""/>
+        <align:measure>1.0</align:measure>
+        <align:relation>equivalent</align:relation>
+    </align:cell>
+</align:Alignment>",Invalid - parse error,<unknown>:3:8: unbound prefix
+09/04/2026 0:43,S2B_OAEI_CONFERENCE,OntologyAlignment,1,with_metadata,"You are given two ontologies describing academic 
+conference organisation. The source ontology is cmt 
+and the target ontology is the conference ontology. 
+Both describe concepts related to academic events 
+including papers, authors, reviews, and programme 
+committees.
+
+Generate an ontology alignment that identifies 
+equivalent concepts between the two ontologies.
+
+Return the alignment in RDF/XML format using the 
+Alignment API format with align:Alignment structure. 
+Each correspondence must use align:Cell with 
+align:entity1, align:entity2, align:measure, 
+and align:relation.","The following lifecycle metadata is drawn from the Mapping 
+Metadata Vocabulary (MMV: http://w3id.org/mmv/0.1). Use it 
+to guide your alignment generation decisions.
+
+[mmv:AnalysisActivity]
+mmv:hasPurpose: Enable data integration between two 
+conference management systems by identifying semantically 
+equivalent concepts across their respective ontologies.
+mmv:hasMappingDomain: Academic / Conference Organisation
+mmv:hasRequirement: Each correspondence must reference 
+real URIs from the actual cmt and conference ontologies. 
+Each Cell must include entity1, entity2, measure, 
+and relation.
+mmv:hasAssumption: Equivalence is based on semantic 
+meaning not just label similarity. Some concepts in 
+cmt may have no equivalent in the conference ontology.
+mmv:hasDomainAssumption: The cmt ontology uses the 
+namespace http://cmt# for example http://cmt#Paper, 
+http://cmt#Author, http://cmt#Review, 
+http://cmt#Reviewer, http://cmt#ProgramCommittee. 
+The conference ontology uses the namespace 
+http://conference# for example http://conference#Paper, 
+http://conference#Author, http://conference#Review, 
+http://conference#Programme_committee.
+mmv:hasTechnicalRequirement: Valid Alignment API 
+RDF/XML. Relation must use = not the word equivalent.
+mmv:hasRiskOrIssue: Using fabricated URIs like 
+http://example.org/cmt# produces an alignment that 
+scores zero against the OAEI gold standard.
+mmv:hasInputName: cmt.owl and conference.owl
+mmv:hasInputFormat: OWL/RDF
+
+[mmv:DesignActivity]
+mmv:hasDesignDecision: Use the actual cmt and 
+conference ontology namespaces. Assign varied 
+confidence values reflecting semantic similarity 
+strength. Use = as the relation for equivalence.
+mmv:hasJustification: The alignment will be evaluated 
+against the OAEI conference gold standard. Only 
+correspondences using real ontology URIs can score 
+against the gold standard.
+mmv:hasPlannedQualityMetric: Precision and Recall 
+against OAEI conference gold standard. All URIs 
+must use real ontology namespaces. Confidence 
+values must vary between 0 and 1.
+
+[mqv:DevelopmentActivity]
+mqv:hasMappingType: Ontology Alignment
+mqv:hasMappingFormat: Alignment API RDF/XML
+
+After generating the alignment append a metadata 
+block using MMV:
+
+@prefix mmv: <http://w3id.org/mmv/0.1#> .
+@prefix mqv: <https://alex-randles.github.io/MQV/#> .
+
+<http://example.org/alignment/oaei-conference>
+    a mmv:MappingArtifact ;
+    mmv:hasPurpose ""Conference ontology alignment 
+    for academic data integration."" ;
+    mmv:hasMappingDomain ""Academic / Conference Organisation"" ;
+    mmv:hasDesignDecision ""Use real cmt and conference 
+    ontology URIs. Use = for equivalence. 
+    Vary confidence values."" ;
+    mmv:hasJustification ""Enables evaluation against 
+    OAEI conference gold standard."" ;
+    mqv:hasMappingType ""Ontology Alignment"" ;
+    mqv:hasMappingFormat ""Alignment API RDF/XML"" .","Generate a RML mapping artefact for the following task.
+
+Task description:
+You are given two ontologies describing academic 
+conference organisation. The source ontology is cmt 
+and the target ontology is the conference ontology. 
+Both describe concepts related to academic events 
+including papers, authors, reviews, and programme 
+committees.
+
+Generate an ontology alignment that identifies 
+equivalent concepts between the two ontologies.
+
+Return the alignment in RDF/XML format using the 
+Alignment API format with align:Alignment structure. 
+Each correspondence must use align:Cell with 
+align:entity1, align:entity2, align:measure, 
+and align:relation.
+
+Lifecycle metadata:
+The following lifecycle metadata is drawn from the Mapping 
+Metadata Vocabulary (MMV: http://w3id.org/mmv/0.1). Use it 
+to guide your alignment generation decisions.
+
+[mmv:AnalysisActivity]
+mmv:hasPurpose: Enable data integration between two 
+conference management systems by identifying semantically 
+equivalent concepts across their respective ontologies.
+mmv:hasMappingDomain: Academic / Conference Organisation
+mmv:hasRequirement: Each correspondence must reference 
+real URIs from the actual cmt and conference ontologies. 
+Each Cell must include entity1, entity2, measure, 
+and relation.
+mmv:hasAssumption: Equivalence is based on semantic 
+meaning not just label similarity. Some concepts in 
+cmt may have no equivalent in the conference ontology.
+mmv:hasDomainAssumption: The cmt ontology uses the 
+namespace http://cmt# for example http://cmt#Paper, 
+http://cmt#Author, http://cmt#Review, 
+http://cmt#Reviewer, http://cmt#ProgramCommittee. 
+The conference ontology uses the namespace 
+http://conference# for example http://conference#Paper, 
+http://conference#Author, http://conference#Review, 
+http://conference#Programme_committee.
+mmv:hasTechnicalRequirement: Valid Alignment API 
+RDF/XML. Relation must use = not the word equivalent.
+mmv:hasRiskOrIssue: Using fabricated URIs like 
+http://example.org/cmt# produces an alignment that 
+scores zero against the OAEI gold standard.
+mmv:hasInputName: cmt.owl and conference.owl
+mmv:hasInputFormat: OWL/RDF
+
+[mmv:DesignActivity]
+mmv:hasDesignDecision: Use the actual cmt and 
+conference ontology namespaces. Assign varied 
+confidence values reflecting semantic similarity 
+strength. Use = as the relation for equivalence.
+mmv:hasJustification: The alignment will be evaluated 
+against the OAEI conference gold standard. Only 
+correspondences using real ontology URIs can score 
+against the gold standard.
+mmv:hasPlannedQualityMetric: Precision and Recall 
+against OAEI conference gold standard. All URIs 
+must use real ontology namespaces. Confidence 
+values must vary between 0 and 1.
+
+[mqv:DevelopmentActivity]
+mqv:hasMappingType: Ontology Alignment
+mqv:hasMappingFormat: Alignment API RDF/XML
+
+After generating the alignment append a metadata 
+block using MMV:
+
+@prefix mmv: <http://w3id.org/mmv/0.1#> .
+@prefix mqv: <https://alex-randles.github.io/MQV/#> .
+
+<http://example.org/alignment/oaei-conference>
+    a mmv:MappingArtifact ;
+    mmv:hasPurpose ""Conference ontology alignment 
+    for academic data integration."" ;
+    mmv:hasMappingDomain ""Academic / Conference Organisation"" ;
+    mmv:hasDesignDecision ""Use real cmt and conference 
+    ontology URIs. Use = for equivalence. 
+    Vary confidence values."" ;
+    mmv:hasJustification ""Enables evaluation against 
+    OAEI conference gold standard."" ;
+    mqv:hasMappingType ""Ontology Alignment"" ;
+    mqv:hasMappingFormat ""Alignment API RDF/XML"" .
+
+Return only the RML output with no extra explanation.",gpt-4o-mini,"@prefix align: <http://knowledgeweb.semanticweb.org/heterogeneity/alignment#> .
+@prefix cmt: <http://cmt#> .
+@prefix conference: <http://conference#> .
+@prefix mmv: <http://w3id.org/mmv/0.1#> .
+@prefix mqv: <https://alex-randles.github.io/MQV/#> .
+
+<http://example.org/alignment/oaei-conference>
+    a mmv:MappingArtifact ;
+    mmv:hasPurpose ""Conference ontology alignment for academic data integration."" ;
+    mmv:hasMappingDomain ""Academic / Conference Organisation"" ;
+    mmv:hasDesignDecision ""Use real cmt and conference ontology URIs. Use = for equivalence. Vary confidence values."" ;
+    mmv:hasJustification ""Enables evaluation against OAEI conference gold standard."" ;
+    mqv:hasMappingType ""Ontology Alignment"" ;
+    mqv:hasMappingFormat ""Alignment API RDF/XML"" .
+
+align:Alignment a align:Alignment ;
+    align:cell [
+        align:entity1 cmt:Paper ;
+        align:entity2 conference:Paper ;
+        align:measure 0.9 ;
+        align:relation ""=""
+    ] ;
+    align:cell [
+        align:entity1 cmt:Author ;
+        align:entity2 conference:Author ;
+        align:measure 0.95 ;
+        align:relation ""=""
+    ] ;
+    align:cell [
+        align:entity1 cmt:Review ;
+        align:entity2 conference:Review ;
+        align:measure 0.85 ;
+        align:relation ""=""
+    ] ;
+    align:cell [
+        align:entity1 cmt:ProgramCommittee ;
+        align:entity2 conference:Programme_committee ;
+        align:measure 0.8 ;
+        align:relation ""=""
+    ] .",Valid - 28 triples,
+09/04/2026 0:46,S3A_VRTI_INTERLINK,Interlinking,1,without_metadata,"You are given two RDF datasets containing information 
+about Irish places.
+
+Dataset A contains records from Ordnance Survey Ireland 
+with properties: rdfs:label, dbo:location, 
+geo:lat, geo:long.
+
+Dataset B contains Wikidata records with properties: 
+rdfs:label, wdt:P17, geo:lat, geo:long.
+
+Generate a SPARQL query that links matching places 
+across the two datasets using owl:sameAs.
+Return only the SPARQL query.",,"Generate a Interlinking mapping artefact for the following task.
+
+Task description:
+You are given two RDF datasets containing information 
+about Irish places.
+
+Dataset A contains records from Ordnance Survey Ireland 
+with properties: rdfs:label, dbo:location, 
+geo:lat, geo:long.
+
+Dataset B contains Wikidata records with properties: 
+rdfs:label, wdt:P17, geo:lat, geo:long.
+
+Generate a SPARQL query that links matching places 
+across the two datasets using owl:sameAs.
+Return only the SPARQL query.
+
+Return only the Interlinking output with no extra explanation.",gpt-4o-mini,"PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+PREFIX wdt: <https://www.wikidata.org/prop/direct/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+CONSTRUCT {
+  ?placeA owl:sameAs ?placeB .
+}
+WHERE {
+  ?placeA a dbo:Place ;
+           rdfs:label ?labelA ;
+           geo:lat ?latA ;
+           geo:long ?longA .
+  
+  ?placeB a wdt:P17 ;
+           rdfs:label ?labelB ;
+           geo:lat ?latB ;
+           geo:long ?longB .
+
+  FILTER (str(?labelA) = str(?labelB) && ?latA = ?latB && ?longA = ?longB)
+}",Valid SPARQL + sameAs present,
+09/04/2026 0:48,S3A_VRTI_INTERLINK,Interlinking,2,with_metadata,"Generated Output
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+PREFIX wdt: <https://www.wikidata.org/prop/direct/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+CONSTRUCT {
+  ?placeA owl:sameAs ?placeB .
+}
+WHERE {
+  ?placeA a dbo:Place ;
+           rdfs:label ?labelA ;
+           geo:lat ?latA ;
+           geo:long ?longA .
+  
+  ?placeB a wdt:P17 ;
+           rdfs:label ?labelB ;
+           geo:lat ?latB ;
+           geo:long ?longB .
+
+  FILTER (str(?labelA) = str(?labelB) && ?latA = ?latB && ?longA = ?longB)
+}
+Full Prompt Sent to Model
+Generate a Interlinking mapping artefact for the following task.
+
+Task description:
+You are given two RDF datasets containing information 
+about Irish places.
+
+Dataset A contains records from Ordnance Survey Ireland 
+with properties: rdfs:label, dbo:location, 
+geo:lat, geo:long.
+
+Dataset B contains Wikidata records with properties: 
+rdfs:label, wdt:P17, geo:lat, geo:long.
+
+Generate a SPARQL query that links matching places 
+across the two datasets using owl:sameAs.
+Return only the SPARQL query.
+
+Return only the Interlinking output with no extra explanation.","The following lifecycle metadata is drawn from the Mapping 
+Metadata Vocabulary (MMV: http://w3id.org/mmv/0.1). Use it 
+to guide your interlinking query generation decisions.
+
+[mmv:AnalysisActivity]
+mmv:hasPurpose: Enrich the Virtual Record Treasury of 
+Ireland knowledge graph by linking OSi place records 
+to Wikidata entries to enable access to additional 
+contextual data about Irish historical places.
+mmv:hasMappingDomain: Geospatial / Irish Historical Geography
+mmv:hasRequirement: Query must use at least two 
+independent matching signals. Must produce owl:sameAs 
+triples. Must handle case-insensitive name matching.
+mmv:hasAssumption: Name matching alone is insufficient 
+due to spelling variants and common place names. 
+County information provides supporting evidence. 
+Coordinates can disambiguate places with the same name.
+mmv:hasDomainAssumption: Exact coordinate equality is 
+too strict for geospatial matching due to differences 
+in coordinate precision between datasets. A tolerance 
+of 0.05 decimal degrees should be applied using FILTER 
+with ABS(). Case-insensitive comparison is required 
+using lcase() for name matching.
+mmv:hasTechnicalRequirement: Valid executable SPARQL 
+query. Must use FILTER for coordinate tolerance. 
+Must produce owl:sameAs assertions.
+mmv:hasRiskOrIssue: Exact string matching on labels 
+produces false negatives for spelling variants. 
+Exact coordinate equality produces false negatives 
+due to coordinate precision differences between 
+OSi and Wikidata datasets.
+mmv:hasInputFormat: RDF/Turtle
+
+[mmv:DesignActivity]
+mmv:hasDesignDecision: Use multi-signal matching 
+combining case-insensitive name similarity and 
+coordinate proximity within 0.05 decimal degree 
+tolerance. Use lcase() for name comparison. 
+Use ABS() with FILTER for coordinate tolerance.
+mmv:hasJustification: Single-signal matching on 
+name alone produces false positives for common 
+Irish place names. The combination of name and 
+coordinate evidence is standard practice in 
+geospatial link discovery as used in LIMES and Silk.
+mmv:hasPlannedQualityMetric: Query uses minimum 
+two matching signals. Coordinate tolerance 
+explicitly defined as 0.05. Query executes 
+without syntax errors and returns results 
+against sample data.
+
+[mqv:DevelopmentActivity]
+mqv:hasMappingType: Interlinking
+mqv:hasMappingFormat: SPARQL CONSTRUCT query
+
+After generating the SPARQL query append a 
+metadata block using MMV:
+
+@prefix mmv: <http://w3id.org/mmv/0.1#> .
+@prefix mqv: <https://alex-randles.github.io/MQV/#> .
+
+<http://example.org/mapping/vrti-interlink>
+    a mmv:MappingArtifact ;
+    mmv:hasPurpose ""Link OSi Irish places to Wikidata 
+    for VRTI knowledge graph enrichment."" ;
+    mmv:hasMappingDomain ""Geospatial / Irish Historical Geography"" ;
+    mmv:hasDesignDecision ""Multi-signal matching: 
+    lcase() name match + coordinate tolerance 0.05."" ;
+    mmv:hasJustification ""Prevents false positives 
+    from name-only matching on common Irish place names."" ;
+    mqv:hasMappingType ""Interlinking"" ;
+    mqv:hasMappingFormat ""SPARQL CONSTRUCT query"" .","Generate a Interlinking mapping artefact for the following task.
+
+Task description:
+Generated Output
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+PREFIX wdt: <https://www.wikidata.org/prop/direct/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+CONSTRUCT {
+  ?placeA owl:sameAs ?placeB .
+}
+WHERE {
+  ?placeA a dbo:Place ;
+           rdfs:label ?labelA ;
+           geo:lat ?latA ;
+           geo:long ?longA .
+  
+  ?placeB a wdt:P17 ;
+           rdfs:label ?labelB ;
+           geo:lat ?latB ;
+           geo:long ?longB .
+
+  FILTER (str(?labelA) = str(?labelB) && ?latA = ?latB && ?longA = ?longB)
+}
+Full Prompt Sent to Model
+Generate a Interlinking mapping artefact for the following task.
+
+Task description:
+You are given two RDF datasets containing information 
+about Irish places.
+
+Dataset A contains records from Ordnance Survey Ireland 
+with properties: rdfs:label, dbo:location, 
+geo:lat, geo:long.
+
+Dataset B contains Wikidata records with properties: 
+rdfs:label, wdt:P17, geo:lat, geo:long.
+
+Generate a SPARQL query that links matching places 
+across the two datasets using owl:sameAs.
+Return only the SPARQL query.
+
+Return only the Interlinking output with no extra explanation.
+
+Lifecycle metadata:
+The following lifecycle metadata is drawn from the Mapping 
+Metadata Vocabulary (MMV: http://w3id.org/mmv/0.1). Use it 
+to guide your interlinking query generation decisions.
+
+[mmv:AnalysisActivity]
+mmv:hasPurpose: Enrich the Virtual Record Treasury of 
+Ireland knowledge graph by linking OSi place records 
+to Wikidata entries to enable access to additional 
+contextual data about Irish historical places.
+mmv:hasMappingDomain: Geospatial / Irish Historical Geography
+mmv:hasRequirement: Query must use at least two 
+independent matching signals. Must produce owl:sameAs 
+triples. Must handle case-insensitive name matching.
+mmv:hasAssumption: Name matching alone is insufficient 
+due to spelling variants and common place names. 
+County information provides supporting evidence. 
+Coordinates can disambiguate places with the same name.
+mmv:hasDomainAssumption: Exact coordinate equality is 
+too strict for geospatial matching due to differences 
+in coordinate precision between datasets. A tolerance 
+of 0.05 decimal degrees should be applied using FILTER 
+with ABS(). Case-insensitive comparison is required 
+using lcase() for name matching.
+mmv:hasTechnicalRequirement: Valid executable SPARQL 
+query. Must use FILTER for coordinate tolerance. 
+Must produce owl:sameAs assertions.
+mmv:hasRiskOrIssue: Exact string matching on labels 
+produces false negatives for spelling variants. 
+Exact coordinate equality produces false negatives 
+due to coordinate precision differences between 
+OSi and Wikidata datasets.
+mmv:hasInputFormat: RDF/Turtle
+
+[mmv:DesignActivity]
+mmv:hasDesignDecision: Use multi-signal matching 
+combining case-insensitive name similarity and 
+coordinate proximity within 0.05 decimal degree 
+tolerance. Use lcase() for name comparison. 
+Use ABS() with FILTER for coordinate tolerance.
+mmv:hasJustification: Single-signal matching on 
+name alone produces false positives for common 
+Irish place names. The combination of name and 
+coordinate evidence is standard practice in 
+geospatial link discovery as used in LIMES and Silk.
+mmv:hasPlannedQualityMetric: Query uses minimum 
+two matching signals. Coordinate tolerance 
+explicitly defined as 0.05. Query executes 
+without syntax errors and returns results 
+against sample data.
+
+[mqv:DevelopmentActivity]
+mqv:hasMappingType: Interlinking
+mqv:hasMappingFormat: SPARQL CONSTRUCT query
+
+After generating the SPARQL query append a 
+metadata block using MMV:
+
+@prefix mmv: <http://w3id.org/mmv/0.1#> .
+@prefix mqv: <https://alex-randles.github.io/MQV/#> .
+
+<http://example.org/mapping/vrti-interlink>
+    a mmv:MappingArtifact ;
+    mmv:hasPurpose ""Link OSi Irish places to Wikidata 
+    for VRTI knowledge graph enrichment."" ;
+    mmv:hasMappingDomain ""Geospatial / Irish Historical Geography"" ;
+    mmv:hasDesignDecision ""Multi-signal matching: 
+    lcase() name match + coordinate tolerance 0.05."" ;
+    mmv:hasJustification ""Prevents false positives 
+    from name-only matching on common Irish place names."" ;
+    mqv:hasMappingType ""Interlinking"" ;
+    mqv:hasMappingFormat ""SPARQL CONSTRUCT query"" .
+
+Return only the Interlinking output with no extra explanation.",gpt-4o-mini,"PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+PREFIX wdt: <https://www.wikidata.org/prop/direct/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+CONSTRUCT {
+  ?placeA owl:sameAs ?placeB .
+}
+WHERE {
+  ?placeA a dbo:Place ;
+           rdfs:label ?labelA ;
+           geo:lat ?latA ;
+           geo:long ?longA .
+
+  ?placeB a wdt:P17 ;
+           rdfs:label ?labelB ;
+           geo:lat ?latB ;
+           geo:long ?longB .
+
+  FILTER (lcase(str(?labelA)) = lcase(str(?labelB)) && 
+           ABS(?latA - ?latB) <= 0.05 && 
+           ABS(?longA - ?longB) <= 0.05)
+}
+
+@prefix mmv: <http://w3id.org/mmv/0.1#> .
+@prefix mqv: <https://alex-randles.github.io/MQV/#> .
+
+<http://example.org/mapping/vrti-interlink>
+    a mmv:MappingArtifact ;
+    mmv:hasPurpose ""Link OSi Irish places to Wikidata for VRTI knowledge graph enrichment."" ;
+    mmv:hasMappingDomain ""Geospatial / Irish Historical Geography"" ;
+    mmv:hasDesignDecision ""Multi-signal matching: lcase() name match + coordinate tolerance 0.05."" ;
+    mmv:hasJustification ""Prevents false positives from name-only matching on common Irish place names."" ;
+    mqv:hasMappingType ""Interlinking"" ;
+    mqv:hasMappingFormat ""SPARQL CONSTRUCT query"" .",Valid SPARQL + sameAs present,
+09/04/2026 0:51,S3B_DBPEDIA_GEONAMES,Interlinking,1,without_metadata,"You are given two RDF datasets containing geographic 
+place information.
+
+Dataset A is from DBpedia with properties: 
+rdfs:label, dbo:country, geo:lat, geo:long, 
+rdf:type dbo:Place.
+
+Dataset B is from GeoNames with properties: 
+gn:name, gn:countryCode, geo:lat, geo:long, 
+rdf:type gn:Feature.
+
+Generate a SPARQL query that identifies matching 
+places across both datasets and generates 
+owl:sameAs links.
+Return only the SPARQL query.",,"Generate a Interlinking mapping artefact for the following task.
+
+Task description:
+You are given two RDF datasets containing geographic 
+place information.
+
+Dataset A is from DBpedia with properties: 
+rdfs:label, dbo:country, geo:lat, geo:long, 
+rdf:type dbo:Place.
+
+Dataset B is from GeoNames with properties: 
+gn:name, gn:countryCode, geo:lat, geo:long, 
+rdf:type gn:Feature.
+
+Generate a SPARQL query that identifies matching 
+places across both datasets and generates 
+owl:sameAs links.
+Return only the SPARQL query.
+
+Return only the Interlinking output with no extra explanation.",gpt-4o-mini,"PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX gn: <http://www.geonames.org/ontology#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+CONSTRUCT {
+  ?placeA owl:sameAs ?placeB .
+}
+WHERE {
+  ?placeA a dbo:Place ;
+           rdfs:label ?labelA ;
+           dbo:country ?countryA ;
+           geo:lat ?latA ;
+           geo:long ?longA .
+
+  ?placeB a gn:Feature ;
+           gn:name ?labelB ;
+           gn:countryCode ?countryB ;
+           geo:lat ?latB ;
+           geo:long ?longB .
+
+  FILTER (str(?labelA) = str(?labelB) && 
+          ?countryA = ?countryB && 
+          ?latA = ?latB && 
+          ?longA = ?longB)
+}",Valid SPARQL + sameAs present,
+09/04/2026 0:52,S3B_DBPEDIA_GEONAMES,Interlinking,2,with_metadata,"You are given two RDF datasets containing geographic 
+place information.
+
+Dataset A is from DBpedia with properties: 
+rdfs:label, dbo:country, geo:lat, geo:long, 
+rdf:type dbo:Place.
+
+Dataset B is from GeoNames with properties: 
+gn:name, gn:countryCode, geo:lat, geo:long, 
+rdf:type gn:Feature.
+
+Generate a SPARQL query that identifies matching 
+places across both datasets and generates 
+owl:sameAs links.
+Return only the SPARQL query.","The following lifecycle metadata is drawn from the Mapping 
+Metadata Vocabulary (MMV: http://w3id.org/mmv/0.1). Use it 
+to guide your interlinking query generation decisions.
+
+[mmv:AnalysisActivity]
+mmv:hasPurpose: Enrich DBpedia place entities with 
+GeoNames identifiers to improve geographic coverage 
+and enable cross-dataset queries over complementary 
+place descriptions.
+mmv:hasMappingDomain: Geospatial / Linked Open Data
+mmv:hasRequirement: Query must use at least two 
+independent matching signals. Must produce owl:sameAs 
+triples. Must handle case-insensitive name matching.
+mmv:hasAssumption: Place name matching must be 
+case-insensitive using lcase(). DBpedia country 
+values are URIs such as dbr:Ireland. GeoNames 
+countryCode values are ISO 3166-1 alpha-2 strings 
+such as IE. These cannot be compared directly and 
+should not be used as a matching signal.
+mmv:hasDomainAssumption: Coordinate proximity within 
+0.05 decimal degrees indicates a likely match. 
+Exact coordinate equality is too strict due to 
+differences in coordinate precision between 
+DBpedia and GeoNames. ABS() with FILTER must be 
+used for coordinate matching.
+mmv:hasTechnicalRequirement: Valid executable SPARQL 
+query. Must use FILTER with lcase() for name matching. 
+Must use ABS() for coordinate tolerance. 
+Must produce owl:sameAs triples.
+mmv:hasRiskOrIssue: Comparing DBpedia country URIs 
+directly to GeoNames ISO country code strings will 
+always fail and produce zero results. Exact coordinate 
+equality produces false negatives due to precision 
+differences between datasets.
+mmv:hasInputFormat: RDF
+
+[mmv:DesignActivity]
+mmv:hasDesignDecision: Use two matching signals — 
+case-insensitive name matching using lcase() and 
+coordinate proximity using ABS() with tolerance 
+0.05. Do not use country as a matching signal 
+because DBpedia and GeoNames represent country 
+in incompatible formats.
+mmv:hasJustification: Country matching between 
+DBpedia URIs and GeoNames ISO codes will always 
+fail. Name and coordinate signals are sufficient 
+for reliable geospatial interlinking and are 
+consistent with standard practice in LIMES 
+and Silk link discovery tools.
+mmv:hasPlannedQualityMetric: Query uses name 
+and coordinate signals only. Coordinate tolerance 
+0.05 explicitly stated. Query returns results 
+when tested against sample data. Does not 
+attempt country URI to string comparison.
+
+[mqv:DevelopmentActivity]
+mqv:hasMappingType: Interlinking
+mqv:hasMappingFormat: SPARQL CONSTRUCT query
+
+After generating the SPARQL query append a 
+metadata block using MMV:
+
+@prefix mmv: <http://w3id.org/mmv/0.1#> .
+@prefix mqv: <https://alex-randles.github.io/MQV/#> .
+
+<http://example.org/mapping/dbpedia-geonames>
+    a mmv:MappingArtifact ;
+    mmv:hasPurpose ""Link DBpedia places to GeoNames 
+    for geographic coverage enrichment."" ;
+    mmv:hasMappingDomain ""Geospatial / Linked Open Data"" ;
+    mmv:hasDesignDecision ""Name lcase() match + 
+    coordinate ABS() tolerance 0.05. Country signal 
+    excluded due to incompatible formats."" ;
+    mmv:hasJustification ""DBpedia country URIs and 
+    GeoNames ISO codes cannot be compared directly."" ;
+    mqv:hasMappingType ""Interlinking"" ;
+    mqv:hasMappingFormat ""SPARQL CONSTRUCT query"" .","Generate a Interlinking mapping artefact for the following task.
+
+Task description:
+You are given two RDF datasets containing geographic 
+place information.
+
+Dataset A is from DBpedia with properties: 
+rdfs:label, dbo:country, geo:lat, geo:long, 
+rdf:type dbo:Place.
+
+Dataset B is from GeoNames with properties: 
+gn:name, gn:countryCode, geo:lat, geo:long, 
+rdf:type gn:Feature.
+
+Generate a SPARQL query that identifies matching 
+places across both datasets and generates 
+owl:sameAs links.
+Return only the SPARQL query.
+
+Lifecycle metadata:
+The following lifecycle metadata is drawn from the Mapping 
+Metadata Vocabulary (MMV: http://w3id.org/mmv/0.1). Use it 
+to guide your interlinking query generation decisions.
+
+[mmv:AnalysisActivity]
+mmv:hasPurpose: Enrich DBpedia place entities with 
+GeoNames identifiers to improve geographic coverage 
+and enable cross-dataset queries over complementary 
+place descriptions.
+mmv:hasMappingDomain: Geospatial / Linked Open Data
+mmv:hasRequirement: Query must use at least two 
+independent matching signals. Must produce owl:sameAs 
+triples. Must handle case-insensitive name matching.
+mmv:hasAssumption: Place name matching must be 
+case-insensitive using lcase(). DBpedia country 
+values are URIs such as dbr:Ireland. GeoNames 
+countryCode values are ISO 3166-1 alpha-2 strings 
+such as IE. These cannot be compared directly and 
+should not be used as a matching signal.
+mmv:hasDomainAssumption: Coordinate proximity within 
+0.05 decimal degrees indicates a likely match. 
+Exact coordinate equality is too strict due to 
+differences in coordinate precision between 
+DBpedia and GeoNames. ABS() with FILTER must be 
+used for coordinate matching.
+mmv:hasTechnicalRequirement: Valid executable SPARQL 
+query. Must use FILTER with lcase() for name matching. 
+Must use ABS() for coordinate tolerance. 
+Must produce owl:sameAs triples.
+mmv:hasRiskOrIssue: Comparing DBpedia country URIs 
+directly to GeoNames ISO country code strings will 
+always fail and produce zero results. Exact coordinate 
+equality produces false negatives due to precision 
+differences between datasets.
+mmv:hasInputFormat: RDF
+
+[mmv:DesignActivity]
+mmv:hasDesignDecision: Use two matching signals — 
+case-insensitive name matching using lcase() and 
+coordinate proximity using ABS() with tolerance 
+0.05. Do not use country as a matching signal 
+because DBpedia and GeoNames represent country 
+in incompatible formats.
+mmv:hasJustification: Country matching between 
+DBpedia URIs and GeoNames ISO codes will always 
+fail. Name and coordinate signals are sufficient 
+for reliable geospatial interlinking and are 
+consistent with standard practice in LIMES 
+and Silk link discovery tools.
+mmv:hasPlannedQualityMetric: Query uses name 
+and coordinate signals only. Coordinate tolerance 
+0.05 explicitly stated. Query returns results 
+when tested against sample data. Does not 
+attempt country URI to string comparison.
+
+[mqv:DevelopmentActivity]
+mqv:hasMappingType: Interlinking
+mqv:hasMappingFormat: SPARQL CONSTRUCT query
+
+After generating the SPARQL query append a 
+metadata block using MMV:
+
+@prefix mmv: <http://w3id.org/mmv/0.1#> .
+@prefix mqv: <https://alex-randles.github.io/MQV/#> .
+
+<http://example.org/mapping/dbpedia-geonames>
+    a mmv:MappingArtifact ;
+    mmv:hasPurpose ""Link DBpedia places to GeoNames 
+    for geographic coverage enrichment."" ;
+    mmv:hasMappingDomain ""Geospatial / Linked Open Data"" ;
+    mmv:hasDesignDecision ""Name lcase() match + 
+    coordinate ABS() tolerance 0.05. Country signal 
+    excluded due to incompatible formats."" ;
+    mmv:hasJustification ""DBpedia country URIs and 
+    GeoNames ISO codes cannot be compared directly."" ;
+    mqv:hasMappingType ""Interlinking"" ;
+    mqv:hasMappingFormat ""SPARQL CONSTRUCT query"" .
+
+Return only the Interlinking output with no extra explanation.",gpt-4o-mini,"PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+PREFIX gn: <http://www.geonames.org/ontology#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+CONSTRUCT {
+  ?placeA owl:sameAs ?placeB .
+}
+WHERE {
+  ?placeA a dbo:Place ;
+           rdfs:label ?labelA ;
+           geo:lat ?latA ;
+           geo:long ?longA .
+
+  ?placeB a gn:Feature ;
+           gn:name ?labelB ;
+           geo:lat ?latB ;
+           geo:long ?longB .
+
+  FILTER (lcase(?labelA) = lcase(?labelB))
+  FILTER (ABS(?latA - ?latB) < 0.05)
+  FILTER (ABS(?longA - ?longB) < 0.05)
+}
+
+@prefix mmv: <http://w3id.org/mmv/0.1#> .
+@prefix mqv: <https://alex-randles.github.io/MQV/#> .
+
+<http://example.org/mapping/dbpedia-geonames>
+    a mmv:MappingArtifact ;
+    mmv:hasPurpose ""Link DBpedia places to GeoNames for geographic coverage enrichment."" ;
+    mmv:hasMappingDomain ""Geospatial / Linked Open Data"" ;
+    mmv:hasDesignDecision ""Name lcase() match + coordinate ABS() tolerance 0.05. Country signal excluded due to incompatible formats."" ;
+    mmv:hasJustification ""DBpedia country URIs and GeoNames ISO codes cannot be compared directly."" ;
+    mqv:hasMappingType ""Interlinking"" ;
+    mqv:hasMappingFormat ""SPARQL CONSTRUCT query"" .",Valid SPARQL + sameAs present,
