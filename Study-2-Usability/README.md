@@ -8,7 +8,7 @@ Study 2 evaluated the usability of MetaSEMAP and the interpretability of its met
 
 ## Contents
 
-- `questionnaire/` — The survey instrument and the three scenario briefs distributed to participants.
-- `raw-data/` — Anonymised survey responses (`MetaSEMAP_Survey.csv`) and the annotation files produced by participants in both Named Graph and RDF-star formats.
-- `results/` — Processed data
+- `questionnaire/` - The survey instrument and the three scenario briefs distributed to participants.
+- `raw-data/` - Anonymised survey responses (`MetaSEMAP_Survey.csv`) and the annotation files produced by participants in both Named Graph and RDF-star formats.
+- `results/` - Processed data
 
