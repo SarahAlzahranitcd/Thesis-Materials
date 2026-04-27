@@ -1,0 +1,2088 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="resources/primer.css" media="screen"/>
+<link rel="stylesheet" href="resources/rec.css" media="screen"/>
+<link rel="stylesheet" href="resources/extra.css" media="screen"/>
+<link rel="stylesheet" href="resources/owl.css" media="screen"/>
+<link rel="stylesheet" href="resources/dark.css" media="(prefers-color-scheme: dark)"/>
+<link rel="stylesheet" href="resources/light.css" media="(prefers-color-scheme: light)"/>
+<link rel="stylesheet" href="resources/slider.css" media="screen"/>
+<meta name="color-scheme" content="dark light">
+<script type="module" src="resources/dark-mode-toggle.mjs"></script><div class="darkmode">
+	<dark-mode-toggle class="slider"></dark-mode-toggle>
+</div>
+ <title>The Mapping Metadata Vocabulary</title>
+
+
+<!-- SCHEMA.ORG METADATA -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","url":"http://w3id.org/mmv/0.1#","image":"http://vowl.visualdataweb.org/webvowl/#iri=http://w3id.org/mmv/0.1#","name":"The Mapping Metadata Vocabulary", "headline":"The Mapping Metadata Vocabulary (MMV) is a lifecycle-based ontology for documenting declarative mapping projects used to generate knowledge graphs and Linked Data. It captures contextual, design, implementation, testing, and maintenance metadata to support mapping understanding, assessment, and reuse. MMV complements existing provenance and quality vocabularies by focusing on mapping-specific lifecycle information.", "dateReleased":"2026-02-01", "version":"0.1", "license":"https://creativecommons.org/licenses/by/4.0/", "author":[{"@type":"Person","name":"Sarah Alzahrani"}]}</script>
+
+<script src="resources/jquery.js"></script> 
+<script src="resources/marked.min.js"></script> 
+    <script> 
+function loadHash() {
+  jQuery(".markdown").each(function(el){jQuery(this).after(marked.parse(jQuery(this).text())).remove()});
+	var hash = location.hash;
+	if($(hash).offset()!=null){
+	  $('html, body').animate({scrollTop: $(hash).offset().top}, 0);
+}
+	loadTOC();
+}
+function loadTOC(){
+	//process toc dynamically
+	  var t='<h2>Table of contents</h2><ul>';i = 1;j=0;
+	  jQuery(".list").each(function(){
+		if(jQuery(this).is('h2')){
+			if(j>0){
+				t+='</ul>';
+				j=0;
+			}
+			t+= '<li>'+i+'. <a href=#'+ jQuery(this).attr('id')+'>'+ jQuery(this).ignore("span").text()+'</a></li>';
+			i++;
+		}
+		if(jQuery(this).is('h3')){
+			if(j==0){
+				t+='<ul>';
+			}
+			j++;
+			t+= '<li>'+(i-1)+'.'+j+'. '+'<a href=#'+ jQuery(this).attr('id')+'>'+ jQuery(this).ignore("span").text()+'</a></li>';
+		}
+	  });
+	  t+='</ul>';
+	  $("#toc").html(t); 
+}
+$(function(){
+    loadHash();
+}); $.fn.ignore = function(sel){
+        return this.clone().find(sel||">*").remove().end();
+ }; 
+   </script> 
+  </head> 
+
+<body>
+<div class="container">
+<div class="head">
+<div style="float:right">language <a href="index-en.html"><b>en</b></a> </div>
+<h1>The Mapping Metadata Vocabulary</h1>
+<h2>Release: 2026-02-01</h2>
+
+
+<dl>
+<dt>This version:</dt>
+<dd><a href="http://w3id.org/mmv/0.1">http://w3id.org/mmv/0.1</a></dd>
+<dt>Latest version:</dt>
+<dd><a href="http://w3id.org/mmv/0.1#">http://w3id.org/mmv/0.1#</a></dd>
+<dt>Revision:</dt>
+<dd>0.1</dd>
+<dt>Issued on:</dt>
+<dd>2025-11-12</dd>
+<dt>Authors:</dt>
+<dd>Sarah Alzahrani</dd>
+
+<dt>Publisher:</dt>
+<dd>Trinity College Dublin</dd>
+<dt>Imported Ontologies:</dt>
+<dd><a href="http://www.w3.org/ns/prov-o#">prov-o#</a></dd>
+
+<dt>Download serialization:</dt><dd><span><a href="ontology.jsonld" target="_blank"><img src="https://img.shields.io/badge/Format-JSON_LD-blue.svg" alt="JSON-LD" /></a> </span><span><a href="ontology.owl" target="_blank"><img src="https://img.shields.io/badge/Format-RDF/XML-blue.svg" alt="RDF/XML" /></a> </span><span><a href="ontology.nt" target="_blank"><img src="https://img.shields.io/badge/Format-N_Triples-blue.svg" alt="N-Triples" /></a> </span><span><a href="ontology.ttl" target="_blank"><img src="https://img.shields.io/badge/Format-TTL-blue.svg" alt="TTL" /></a> </span></dd><dt>License:</dt><dd><a href="https://creativecommons.org/licenses/by/4.0/" target="_blank"><img src="https://img.shields.io/badge/License-https://creativecommons.org/licenses/by/4.0/-blue.svg" alt="https://creativecommons.org/licenses/by/4.0/" /></a>
+</dd><dt>Visualization:</dt><dd><a href="webvowl/index.html#" target="_blank"><img src="https://img.shields.io/badge/Visualize_with-WebVowl-blue.svg" alt="Visualize with WebVowl" /></a></dd>
+<!-- <dt>Evaluation:</dt><dd><a href="OOPSevaluation/oopsEval.html#" target="_blank"><img src="https://img.shields.io/badge/Evaluate_with-OOPS! (OntOlogy Pitfall Scanner!)-blue.svg" alt="Evaluate with OOPS!" /></a></dd> --><dt>Cite as:</dt>
+<dd>Sarah Alzahrani. The Mapping Metadata Vocabulary. Revision: 0.1. Retrieved from: http://w3id.org/mmv/0.1</dd>
+</dl>
+
+<hr/>
+</div>
+<div class="status">
+<div>
+<span>Ontology Specification Draft</span>
+</div>
+</div>     <div id="abstract"><h2>Abstract</h2><span class="markdown">
+The Mapping Metadata Vocabulary (MMV) is a lifecycle-based ontology for documenting declarative mapping projects used to generate knowledge graphs and Linked Data. It captures contextual, design, implementation, testing, and maintenance metadata to support mapping understanding, assessment, and reuse. MMV complements existing provenance and quality vocabularies by focusing on mapping-specific lifecycle information.</span>
+</div>
+<div id="toc"></div> 
+
+<!--INTRODUCTION SECTION-->
+    <div id="introduction"><h2 id="intro" class="list">Introduction <span class="backlink"> back to <a href="#toc">ToC</a></span></h2>
+<span class="markdown"><p>
+
+    Declarative mappings (e.g., RML mappings, ontology alignments, and interlinking rules) are central to generating RDF and
+    knowledge graphs from heterogeneous data sources. However, mapping artefacts are typically shared as standalone technical
+    files with limited contextual documentation. While executable, such artefacts often lack structured metadata describing
+    their purpose, design decisions, validation results, and maintenance history. This limits transparency, evaluation,
+    governance, and informed reuse.
+    Existing vocabularies such as PROV-O and DQV support provenance and quality description, but they do not explicitly capture
+    the lifecycle context of mapping projects nor provide mapping-specific metadata constructs that integrate analysis, design,
+    development, testing, and maintenance information.
+    The Mapping Metadata Vocabulary (MMV) addresses this gap by introducing a lifecycle-based model for documenting declarative
+    mapping projects. MMV structures metadata across five lifecycle phases: 
+    <ul>
+    <li><strong>- Analysis</strong>: purpose, requirements, assumptions, and input datasets</li>
+    <li><strong>- Design</strong>: modelling decisions and justifications</li>
+    <li><strong>- Development</strong>: implementation details and methods</li>
+    <li><strong>- Testing</strong>: validation activities and quality assessment</li>
+    <li><strong>- Maintenance</strong>: versioning and publication information</li>
+    </ul>
+    By organising metadata around lifecycle activities, MMV moves beyond artefact-centric documentation toward a process-aware
+    representation that improves mapping understanding, assessment, and reuse.
+    MMV complements existing standards rather than replacing them. It reuses established Semantic Web vocabularies (e.g., PROV-O,
+    DQV, FOAF, MQV) while specialising in mapping-oriented lifecycle metadata. The vocabulary is intended for knowledge engineers,
+    ontology engineers, and researchers who require structured, transparent documentation of mapping artefacts.</p></span>
+
+
+     <!-- OVERVIEW DIAGRAM -->
+<div id="overview-diagram">
+  <h3>Conceptual Overview of MMV</h3>
+
+  <p>
+    Figure 1 presents a high-level overview of the Mapping Metadata Vocabulary (MMV).
+    The <code>mmv:MappingProject</code> acts as the central entity coordinating
+    lifecycle phases (Analysis, Design, Development, Testing, and Maintenance).
+    The diagram also illustrates alignment with PROV-O for stakeholder modelling
+    and DQV for quality assessment.
+  </p>
+
+  <div style="text-align:center; margin:20px 0;">
+    <img src="resources/diagram.png"
+         alt="Conceptual Overview of MMV"
+         style="max-width:100%; height:auto; border:1px solid #ccc;" />
+  </div>
+
+  <p style="font-size:0.9em; text-align:center;">
+    Figure 1. Conceptual overview of the Mapping Metadata Vocabulary (MMV).
+  </p>
+</div>
+
+<div id="namespacedeclarations">
+<h3 id="ns" class="list">Namespace declarations</h3>
+<div id="ns" align="center">
+<table>
+<caption> <a href="#ns"> Table 1</a>: Namespaces used in the document </caption>
+<tbody>
+<tr><td><b>dcterms</b></td><td>&lt;http://purl.org/dc/terms/&gt;</td></tr>
+<tr><td><b>dqv</b></td><td>&lt;http://www.w3.org/ns/dqv#&gt;</td></tr>
+<tr><td><b>foaf</b></td><td>&lt;http://xmlns.com/foaf/0.1/&gt;</td></tr>
+<tr><td><b>mmv</b></td><td>&lt;http://w3id.org/mmv/0.1#&gt;</td></tr>
+<tr><td><b>mqv</b></td><td>&lt;https://alex-randles.github.io/MQV/#&gt;</td></tr>
+<tr><td><b>owl</b></td><td>&lt;http://www.w3.org/2002/07/owl#&gt;</td></tr>
+<tr><td><b>prov</b></td><td>&lt;http://www.w3.org/ns/prov#&gt;</td></tr>
+<tr><td><b>rdf</b></td><td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;</td></tr>
+<tr><td><b>rdfs</b></td><td>&lt;http://www.w3.org/2000/01/rdf-schema#&gt;</td></tr>
+<tr><td><b>skos</b></td><td>&lt;http://www.w3.org/2004/02/skos/core#&gt;</td></tr>
+<tr><td><b>vann</b></td><td>&lt;http://purl.org/vocab/vann/&gt;</td></tr>
+<tr><td><b>xml</b></td><td>&lt;http://www.w3.org/XML/1998/namespace&gt;</td></tr>
+<tr><td><b>xsd</b></td><td>&lt;http://www.w3.org/2001/XMLSchema#&gt;</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+  
+
+<!--OVERVIEW SECTION-->
+    <div id="overview"><h2 id="overv" class="list">The Mapping Metadata Vocabulary: Overview <span class="backlink"> back to <a href="#toc">ToC</a></span></h2>
+<span class="markdown">
+This ontology has the following classes and properties.</span>
+<h4>Classes</h4>
+<ul xmlns:widoco="https://w3id.org/widoco/vocab#"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    class="hlist">
+   <li>
+      <a href="#AnalysisActivity" title="http://w3id.org/mmv/0.1#AnalysisActivity">AnalysisActivity</a>
+   </li>
+   <li>
+      <a href="#DataSet" title="http://w3id.org/mmv/0.1#DataSet">DataSet</a>
+   </li>
+   <li>
+      <a href="#DesignActivity" title="http://w3id.org/mmv/0.1#DesignActivity">DesignActivity</a>
+   </li>
+   <li>
+      <a href="#DevelopmentActivity" title="http://w3id.org/mmv/0.1#DevelopmentActivity">DevelopmentActivity</a>
+   </li>
+   <li>
+      <a href="#MaintenanceActivity" title="http://w3id.org/mmv/0.1#MaintenanceActivity">MaintenanceActivity</a>
+   </li>
+   <li>
+      <a href="#MappingArtifact" title="http://w3id.org/mmv/0.1#MappingArtifact">MappingArtifact</a>
+   </li>
+   <li>
+      <a href="#MappingProject" title="http://w3id.org/mmv/0.1#MappingProject">MappingProject</a>
+   </li>
+   <li>
+      <a href="#http://www.w3.org/ns/dqv#Metric" title="http://www.w3.org/ns/dqv#Metric">
+         <span>Metric</span>
+      </a>
+   </li>
+   <li>
+      <a href="#http://www.w3.org/ns/dqv#QualityMeasurement" title="http://www.w3.org/ns/dqv#QualityMeasurement">
+         <span>Quality Measurement</span>
+      </a>
+   </li>
+   <li>
+      <a href="#QualityAssessment" title="http://w3id.org/mmv/0.1#QualityAssessment">QualityAssessment</a>
+   </li>
+   <li>
+      <a href="#TestingActivity" title="http://w3id.org/mmv/0.1#TestingActivity">TestingActivity</a>
+   </li>
+</ul><h4>Object Properties</h4><ul xmlns:widoco="https://w3id.org/widoco/vocab#"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    class="hlist">
+   <li>
+      <a href="#hasStakeholder" title="http://w3id.org/mmv/0.1#hasStakeholder">
+         <span>has Stakeholder</span>
+      </a>
+   </li>
+   <li>
+      <a href="#hasAnalysis" title="http://w3id.org/mmv/0.1#hasAnalysis">hasAnalysis</a>
+   </li>
+   <li>
+      <a href="#hasDesign" title="http://w3id.org/mmv/0.1#hasDesign">hasDesign</a>
+   </li>
+   <li>
+      <a href="#hasDevelopment" title="http://w3id.org/mmv/0.1#hasDevelopment">hasDevelopment</a>
+   </li>
+   <li>
+      <a href="#hasInput" title="http://w3id.org/mmv/0.1#hasInput">hasInput</a>
+   </li>
+   <li>
+      <a href="#hasMaintenance" title="http://w3id.org/mmv/0.1#hasMaintenance">hasMaintenance</a>
+   </li>
+   <li>
+      <a href="#hasMappingArtifact" title="http://w3id.org/mmv/0.1#hasMappingArtifact">hasMappingArtifact</a>
+   </li>
+   <li>
+      <a href="#hasPlannedQualityMetric" title="http://w3id.org/mmv/0.1#hasPlannedQualityMetric">hasPlannedQualityMetric</a>
+   </li>
+   <li>
+      <a href="#hasQualityMeasurement" title="http://w3id.org/mmv/0.1#hasQualityMeasurement">hasQualityMeasurement</a>
+   </li>
+   <li>
+      <a href="#hasTesting" title="http://w3id.org/mmv/0.1#hasTesting">hasTesting</a>
+   </li>
+   <li>
+      <a href="#isAnalysisOf" title="http://w3id.org/mmv/0.1#isAnalysisOf">isAnalysisOf</a>
+   </li>
+   <li>
+      <a href="#isDesignOf" title="http://w3id.org/mmv/0.1#isDesignOf">isDesignOf</a>
+   </li>
+   <li>
+      <a href="#isDevelopmentOf" title="http://w3id.org/mmv/0.1#isDevelopmentOf">isDevelopmentOf</a>
+   </li>
+   <li>
+      <a href="#isMaintenanceOf" title="http://w3id.org/mmv/0.1#isMaintenanceOf">isMaintenanceOf</a>
+   </li>
+   <li>
+      <a href="#isMappingArtifactOf" title="http://w3id.org/mmv/0.1#isMappingArtifactOf">isMappingArtifactOf</a>
+   </li>
+   <li>
+      <a href="#isTestingOf" title="http://w3id.org/mmv/0.1#isTestingOf">isTestingOf</a>
+   </li>
+</ul><h4>Data Properties</h4><ul xmlns:widoco="https://w3id.org/widoco/vocab#"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    class="hlist">
+   <li>
+      <a href="#hasAssumption" title="http://w3id.org/mmv/0.1#hasAssumption">hasAssumption</a>
+   </li>
+   <li>
+      <a href="#hasBackground" title="http://w3id.org/mmv/0.1#hasBackground">hasBackground</a>
+   </li>
+   <li>
+      <a href="#hasDescription" title="http://w3id.org/mmv/0.1#hasDescription">hasDescription</a>
+   </li>
+   <li>
+      <a href="#hasDesignDecision" title="http://w3id.org/mmv/0.1#hasDesignDecision">hasDesignDecision</a>
+   </li>
+   <li>
+      <a href="#hasDomainAssumption" title="http://w3id.org/mmv/0.1#hasDomainAssumption">hasDomainAssumption</a>
+   </li>
+   <li>
+      <a href="#hasIdentifier" title="http://w3id.org/mmv/0.1#hasIdentifier">hasIdentifier</a>
+   </li>
+   <li>
+      <a href="#hasInputCreator" title="http://w3id.org/mmv/0.1#hasInputCreator">hasInputCreator</a>
+   </li>
+   <li>
+      <a href="#hasInputDescription" title="http://w3id.org/mmv/0.1#hasInputDescription">hasInputDescription</a>
+   </li>
+   <li>
+      <a href="#hasInputFormat" title="http://w3id.org/mmv/0.1#hasInputFormat">hasInputFormat</a>
+   </li>
+   <li>
+      <a href="#hasInputName" title="http://w3id.org/mmv/0.1#hasInputName">hasInputName</a>
+   </li>
+   <li>
+      <a href="#hasInputSource" title="http://w3id.org/mmv/0.1#hasInputSource">hasInputSource</a>
+   </li>
+   <li>
+      <a href="#hasInputType" title="http://w3id.org/mmv/0.1#hasInputType">hasInputType</a>
+   </li>
+   <li>
+      <a href="#hasJustification" title="http://w3id.org/mmv/0.1#hasJustification">hasJustification</a>
+   </li>
+   <li>
+      <a href="#hasMappingAlgorithm" title="http://w3id.org/mmv/0.1#hasMappingAlgorithm">hasMappingAlgorithm</a>
+   </li>
+   <li>
+      <a href="#hasMappingDomain" title="http://w3id.org/mmv/0.1#hasMappingDomain">hasMappingDomain</a>
+   </li>
+   <li>
+      <a href="#https://alex-randles.github.io/MQV/#hasMappingFormat"
+         title="https://alex-randles.github.io/MQV/#hasMappingFormat">hasMappingFormat</a>
+   </li>
+   <li>
+      <a href="#https://alex-randles.github.io/MQV/#hasMappingMethod"
+         title="https://alex-randles.github.io/MQV/#hasMappingMethod">hasMappingMethod</a>
+   </li>
+   <li>
+      <a href="#https://alex-randles.github.io/MQV/#hasMappingType"
+         title="https://alex-randles.github.io/MQV/#hasMappingType">hasMappingType</a>
+   </li>
+   <li>
+      <a href="#hasPublisherName" title="http://w3id.org/mmv/0.1#hasPublisherName">hasPublisherName</a>
+   </li>
+   <li>
+      <a href="#hasPublisherSource" title="http://w3id.org/mmv/0.1#hasPublisherSource">hasPublisherSource</a>
+   </li>
+   <li>
+      <a href="#hasPurpose" title="http://w3id.org/mmv/0.1#hasPurpose">hasPurpose</a>
+   </li>
+   <li>
+      <a href="#hasRequirement" title="http://w3id.org/mmv/0.1#hasRequirement">hasRequirement</a>
+   </li>
+   <li>
+      <a href="#hasRiskOrIssue" title="http://w3id.org/mmv/0.1#hasRiskOrIssue">hasRiskOrIssue</a>
+   </li>
+   <li>
+      <a href="#hasRole" title="http://w3id.org/mmv/0.1#hasRole">hasRole</a>
+   </li>
+   <li>
+      <a href="#hasTechnicalRequirement" title="http://w3id.org/mmv/0.1#hasTechnicalRequirement">hasTechnicalRequirement</a>
+   </li>
+   <li>
+      <a href="#hasTestingResult" title="http://w3id.org/mmv/0.1#hasTestingResult">hasTestingResult</a>
+   </li>
+   <li>
+      <a href="#hasTestingType" title="http://w3id.org/mmv/0.1#hasTestingType">hasTestingType</a>
+   </li>
+   <li>
+      <a href="#hasTool" title="http://w3id.org/mmv/0.1#hasTool">hasTool</a>
+   </li>
+   <li>
+      <a href="#hasVersionDateTime" title="http://w3id.org/mmv/0.1#hasVersionDateTime">hasVersionDateTime</a>
+   </li>
+   <li>
+      <a href="#version" title="http://w3id.org/mmv/0.1#version">version</a>
+   </li>
+</ul><iframe src="webvowl/index.html"></iframe> 
+</div>
+  
+
+<!--DESCRIPTION SECTION-->
+    <div id="description"><h2 id="desc" class="list">The Mapping Metadata Vocabulary: Description <span class="backlink"> back to <a href="#toc">ToC</a></span></h2>
+
+<span class="markdown">A lifecycle-based vocabulary for describing metadata, provenance, and quality of mapping projects and artifacts.</span></div>
+   
+
+<!--CROSSREF SECTION-->
+   <div id="crossref"><h2 id="crossreference" class="list">Cross-reference for The Mapping Metadata Vocabulary classes, object properties and data properties <span class="backlink"> back to <a href="#toc">ToC</a></span></h2>
+This section provides details for each class and property defined by The Mapping Metadata Vocabulary.
+<div xmlns:widoco="https://w3id.org/widoco/vocab#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="classes">
+ <h3 id="classes-headline" class="list">Classes</h3>
+ <ul class="hlist">
+  <li><a href="#AnalysisActivity" title="http://w3id.org/mmv/0.1#AnalysisActivity">AnalysisActivity</a></li>
+  <li><a href="#DataSet" title="http://w3id.org/mmv/0.1#DataSet">DataSet</a></li>
+  <li><a href="#DesignActivity" title="http://w3id.org/mmv/0.1#DesignActivity">DesignActivity</a></li>
+  <li><a href="#DevelopmentActivity" title="http://w3id.org/mmv/0.1#DevelopmentActivity">DevelopmentActivity</a></li>
+  <li><a href="#MaintenanceActivity" title="http://w3id.org/mmv/0.1#MaintenanceActivity">MaintenanceActivity</a></li>
+  <li><a href="#MappingArtifact" title="http://w3id.org/mmv/0.1#MappingArtifact">MappingArtifact</a></li>
+  <li><a href="#MappingProject" title="http://w3id.org/mmv/0.1#MappingProject">MappingProject</a></li>
+  <li><a href="#http://www.w3.org/ns/dqv#Metric" title="http://www.w3.org/ns/dqv#Metric"> <span>Metric</span> </a></li>
+  <li><a href="#http://www.w3.org/ns/dqv#QualityMeasurement" title="http://www.w3.org/ns/dqv#QualityMeasurement"> <span>Quality Measurement</span> </a></li>
+  <li><a href="#QualityAssessment" title="http://w3id.org/mmv/0.1#QualityAssessment">QualityAssessment</a></li>
+  <li><a href="#TestingActivity" title="http://w3id.org/mmv/0.1#TestingActivity">TestingActivity</a></li>
+ </ul>
+ <div class="entity" id="AnalysisActivity">
+  <h3>AnalysisActivity<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#AnalysisActivity</p>
+  <div class="comment">
+   <span class="markdown">Represents the analysis phase of a mapping project, where stakeholders, input datasets, requirements, assumptions, and potential risks are identified before mapping design and implementation.</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/ns/prov#Activity" target="_blank" title="http://www.w3.org/ns/prov#Activity">Activity</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    is in domain of
+   </dt>
+   <dd>
+    <a href="#hasAssumption" title="http://w3id.org/mmv/0.1#hasAssumption">hasAssumption</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#hasDomainAssumption" title="http://w3id.org/mmv/0.1#hasDomainAssumption">hasDomainAssumption</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#hasInput" title="http://w3id.org/mmv/0.1#hasInput">hasInput</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasInputCreator" title="http://w3id.org/mmv/0.1#hasInputCreator">hasInputCreator</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#hasInputDescription" title="http://w3id.org/mmv/0.1#hasInputDescription">hasInputDescription</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#hasInputFormat" title="http://w3id.org/mmv/0.1#hasInputFormat">hasInputFormat</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#hasInputName" title="http://w3id.org/mmv/0.1#hasInputName">hasInputName</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#hasInputSource" title="http://w3id.org/mmv/0.1#hasInputSource">hasInputSource</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#hasInputType" title="http://w3id.org/mmv/0.1#hasInputType">hasInputType</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#hasMappingDomain" title="http://w3id.org/mmv/0.1#hasMappingDomain">hasMappingDomain</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#hasPurpose" title="http://w3id.org/mmv/0.1#hasPurpose">hasPurpose</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#hasRequirement" title="http://w3id.org/mmv/0.1#hasRequirement">hasRequirement</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#hasRiskOrIssue" title="http://w3id.org/mmv/0.1#hasRiskOrIssue">hasRiskOrIssue</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#hasTechnicalRequirement" title="http://w3id.org/mmv/0.1#hasTechnicalRequirement">hasTechnicalRequirement</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#isAnalysisOf" title="http://w3id.org/mmv/0.1#isAnalysisOf">isAnalysisOf</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+   <dt>
+    is in range of
+   </dt>
+   <dd>
+    <a href="#hasAnalysis" title="http://w3id.org/mmv/0.1#hasAnalysis">hasAnalysis</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+   <dt>
+    is disjoint with
+   </dt>
+   <dd>
+    <a href="#DesignActivity" title="http://w3id.org/mmv/0.1#DesignActivity">DesignActivity</a> <sup class="type-c" title="class">c</sup>, <a href="#DevelopmentActivity" title="http://w3id.org/mmv/0.1#DevelopmentActivity">DevelopmentActivity</a> <sup class="type-c" title="class">c</sup>, <a href="#MaintenanceActivity" title="http://w3id.org/mmv/0.1#MaintenanceActivity">MaintenanceActivity</a> <sup class="type-c" title="class">c</sup>, <a href="#TestingActivity" title="http://w3id.org/mmv/0.1#TestingActivity">TestingActivity</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="DataSet">
+  <h3>DataSet<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#DataSet</p>
+  <div class="comment">
+   <span class="markdown">Represents a structured collection of data that serves as an input or output to a declarative mapping project, documented for analysis and reuse purposes rather than full dataset publication.</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/ns/prov#Entity" target="_blank" title="http://www.w3.org/ns/prov#Entity">Entity</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    is in range of
+   </dt>
+   <dd>
+    <a href="#hasInput" title="http://w3id.org/mmv/0.1#hasInput">hasInput</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="DesignActivity">
+  <h3>DesignActivity<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#DesignActivity</p>
+  <div class="comment">
+   <span class="markdown">Represents the design phase of a mapping project, where mapping decisions are made, including modeling choices, reuse considerations, and justifications for the selected approach.</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/ns/prov#Activity" target="_blank" title="http://www.w3.org/ns/prov#Activity">Activity</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    is in domain of
+   </dt>
+   <dd>
+    <a href="#hasDesignDecision" title="http://w3id.org/mmv/0.1#hasDesignDecision">hasDesignDecision</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#hasJustification" title="http://w3id.org/mmv/0.1#hasJustification">hasJustification</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#hasPlannedQualityMetric" title="http://w3id.org/mmv/0.1#hasPlannedQualityMetric">hasPlannedQualityMetric</a> <sup class="type-op" title="object property">op</sup>, <a href="#isDesignOf" title="http://w3id.org/mmv/0.1#isDesignOf">isDesignOf</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+   <dt>
+    is in range of
+   </dt>
+   <dd>
+    <a href="#hasDesign" title="http://w3id.org/mmv/0.1#hasDesign">hasDesign</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+   <dt>
+    is disjoint with
+   </dt>
+   <dd>
+    <a href="#AnalysisActivity" title="http://w3id.org/mmv/0.1#AnalysisActivity">AnalysisActivity</a> <sup class="type-c" title="class">c</sup>, <a href="#DevelopmentActivity" title="http://w3id.org/mmv/0.1#DevelopmentActivity">DevelopmentActivity</a> <sup class="type-c" title="class">c</sup>, <a href="#MaintenanceActivity" title="http://w3id.org/mmv/0.1#MaintenanceActivity">MaintenanceActivity</a> <sup class="type-c" title="class">c</sup>, <a href="#TestingActivity" title="http://w3id.org/mmv/0.1#TestingActivity">TestingActivity</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="DevelopmentActivity">
+  <h3>DevelopmentActivity<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#DevelopmentActivity</p>
+  <div class="comment">
+   <span class="markdown">Represents the development phase of a mapping project, where mappings are implemented using specific tools, methods, algorithms, and formats.</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/ns/prov#Activity" target="_blank" title="http://www.w3.org/ns/prov#Activity">Activity</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    is in domain of
+   </dt>
+   <dd>
+    <a href="#hasMappingAlgorithm" title="http://w3id.org/mmv/0.1#hasMappingAlgorithm">hasMappingAlgorithm</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#https://alex-randles.github.io/MQV/#hasMappingFormat" title="https://alex-randles.github.io/MQV/#hasMappingFormat">hasMappingFormat</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#https://alex-randles.github.io/MQV/#hasMappingMethod" title="https://alex-randles.github.io/MQV/#hasMappingMethod">hasMappingMethod</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#https://alex-randles.github.io/MQV/#hasMappingType" title="https://alex-randles.github.io/MQV/#hasMappingType">hasMappingType</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#hasTool" title="http://w3id.org/mmv/0.1#hasTool">hasTool</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#isDevelopmentOf" title="http://w3id.org/mmv/0.1#isDevelopmentOf">isDevelopmentOf</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+   <dt>
+    is in range of
+   </dt>
+   <dd>
+    <a href="#hasDevelopment" title="http://w3id.org/mmv/0.1#hasDevelopment">hasDevelopment</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+   <dt>
+    is disjoint with
+   </dt>
+   <dd>
+    <a href="#AnalysisActivity" title="http://w3id.org/mmv/0.1#AnalysisActivity">AnalysisActivity</a> <sup class="type-c" title="class">c</sup>, <a href="#DesignActivity" title="http://w3id.org/mmv/0.1#DesignActivity">DesignActivity</a> <sup class="type-c" title="class">c</sup>, <a href="#MaintenanceActivity" title="http://w3id.org/mmv/0.1#MaintenanceActivity">MaintenanceActivity</a> <sup class="type-c" title="class">c</sup>, <a href="#TestingActivity" title="http://w3id.org/mmv/0.1#TestingActivity">TestingActivity</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="MaintenanceActivity">
+  <h3>MaintenanceActivity<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#MaintenanceActivity</p>
+  <div class="comment">
+   <span class="markdown">Represents the maintenance phase of a mapping project, where mapping artifacts are published, versioned, updated, and maintained over time.</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/ns/prov#Activity" target="_blank" title="http://www.w3.org/ns/prov#Activity">Activity</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    is in domain of
+   </dt>
+   <dd>
+    <a href="#hasPublisherName" title="http://w3id.org/mmv/0.1#hasPublisherName">hasPublisherName</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#hasPublisherSource" title="http://w3id.org/mmv/0.1#hasPublisherSource">hasPublisherSource</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#isMaintenanceOf" title="http://w3id.org/mmv/0.1#isMaintenanceOf">isMaintenanceOf</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+   <dt>
+    is in range of
+   </dt>
+   <dd>
+    <a href="#hasMaintenance" title="http://w3id.org/mmv/0.1#hasMaintenance">hasMaintenance</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+   <dt>
+    is disjoint with
+   </dt>
+   <dd>
+    <a href="#AnalysisActivity" title="http://w3id.org/mmv/0.1#AnalysisActivity">AnalysisActivity</a> <sup class="type-c" title="class">c</sup>, <a href="#DesignActivity" title="http://w3id.org/mmv/0.1#DesignActivity">DesignActivity</a> <sup class="type-c" title="class">c</sup>, <a href="#DevelopmentActivity" title="http://w3id.org/mmv/0.1#DevelopmentActivity">DevelopmentActivity</a> <sup class="type-c" title="class">c</sup>, <a href="#TestingActivity" title="http://w3id.org/mmv/0.1#TestingActivity">TestingActivity</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="MappingArtifact">
+  <h3>MappingArtifact<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#MappingArtifact</p>
+  <div class="comment">
+   <span class="markdown">A tangible output of a mapping project, such as an RML file, ontology alignment, or linkset.</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/ns/prov#Entity" target="_blank" title="http://www.w3.org/ns/prov#Entity">Entity</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    is in domain of
+   </dt>
+   <dd>
+    <a href="#hasDescription" title="http://w3id.org/mmv/0.1#hasDescription">hasDescription</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#hasIdentifier" title="http://w3id.org/mmv/0.1#hasIdentifier">hasIdentifier</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#hasVersionDateTime" title="http://w3id.org/mmv/0.1#hasVersionDateTime">hasVersionDateTime</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#isMappingArtifactOf" title="http://w3id.org/mmv/0.1#isMappingArtifactOf">isMappingArtifactOf</a> <sup class="type-op" title="object property">op</sup>, <a href="#version" title="http://w3id.org/mmv/0.1#version">version</a> <sup class="type-dp" title="data property">dp</sup>
+   </dd>
+   <dt>
+    is in range of
+   </dt>
+   <dd>
+    <a href="#hasMappingArtifact" title="http://w3id.org/mmv/0.1#hasMappingArtifact">hasMappingArtifact</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="MappingProject">
+  <h3>MappingProject<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#MappingProject</p>
+  <div class="comment">
+   <span class="markdown">Represents a mapping project encompassing the analysis, design, development, testing, and maintenance of a single mapping artifact.</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/ns/prov#Entity" target="_blank" title="http://www.w3.org/ns/prov#Entity">Entity</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    is in domain of
+   </dt>
+   <dd>
+    <a href="#hasStakeholder" title="http://w3id.org/mmv/0.1#hasStakeholder">has Stakeholder</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasAnalysis" title="http://w3id.org/mmv/0.1#hasAnalysis">hasAnalysis</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasDesign" title="http://w3id.org/mmv/0.1#hasDesign">hasDesign</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasDevelopment" title="http://w3id.org/mmv/0.1#hasDevelopment">hasDevelopment</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasMaintenance" title="http://w3id.org/mmv/0.1#hasMaintenance">hasMaintenance</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasMappingArtifact" title="http://w3id.org/mmv/0.1#hasMappingArtifact">hasMappingArtifact</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasTesting" title="http://w3id.org/mmv/0.1#hasTesting">hasTesting</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+   <dt>
+    is in range of
+   </dt>
+   <dd>
+    <a href="#isAnalysisOf" title="http://w3id.org/mmv/0.1#isAnalysisOf">isAnalysisOf</a> <sup class="type-op" title="object property">op</sup>, <a href="#isDesignOf" title="http://w3id.org/mmv/0.1#isDesignOf">isDesignOf</a> <sup class="type-op" title="object property">op</sup>, <a href="#isDevelopmentOf" title="http://w3id.org/mmv/0.1#isDevelopmentOf">isDevelopmentOf</a> <sup class="type-op" title="object property">op</sup>, <a href="#isMaintenanceOf" title="http://w3id.org/mmv/0.1#isMaintenanceOf">isMaintenanceOf</a> <sup class="type-op" title="object property">op</sup>, <a href="#isMappingArtifactOf" title="http://w3id.org/mmv/0.1#isMappingArtifactOf">isMappingArtifactOf</a> <sup class="type-op" title="object property">op</sup>, <a href="#isTestingOf" title="http://w3id.org/mmv/0.1#isTestingOf">isTestingOf</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="http://www.w3.org/ns/dqv#Metric">
+  <h3>Metric<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://www.w3.org/ns/dqv#Metric</p>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    http://www.w3.org/ns/dqv#
+   </dd>
+  </dl>
+  <dl class="description">
+   <dt>
+    is in range of
+   </dt>
+   <dd>
+    <a href="#hasPlannedQualityMetric" title="http://w3id.org/mmv/0.1#hasPlannedQualityMetric">hasPlannedQualityMetric</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="http://www.w3.org/ns/dqv#QualityMeasurement">
+  <h3>Quality Measurement<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://www.w3.org/ns/dqv#QualityMeasurement</p>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    http://www.w3.org/ns/dqv#
+   </dd>
+  </dl>
+  <dl class="description">
+   <dt>
+    is in range of
+   </dt>
+   <dd>
+    <a href="#hasQualityMeasurement" title="http://w3id.org/mmv/0.1#hasQualityMeasurement">hasQualityMeasurement</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="QualityAssessment">
+  <h3>QualityAssessment<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#QualityAssessment</p>
+  <div class="comment">
+   <span class="markdown">Represents a quality assessment performed as part of the testing phase of a mapping project, focusing on the evaluation of mapping artifacts using quality metrics and assessment criteria.</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/ns/prov#Activity" target="_blank" title="http://www.w3.org/ns/prov#Activity">Activity</a> <sup class="type-c" title="class">c</sup>, <a href="#TestingActivity" title="http://w3id.org/mmv/0.1#TestingActivity">TestingActivity</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="TestingActivity">
+  <h3>TestingActivity<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#TestingActivity</p>
+  <div class="comment">
+   <span class="markdown">Represents the testing and validation phase of a mapping project, where mapping artifacts are tested, validated, and assessed to ensure correctness, consistency, and quality.</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/ns/prov#Activity" target="_blank" title="http://www.w3.org/ns/prov#Activity">Activity</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    has sub-classes
+   </dt>
+   <dd>
+    <a href="#QualityAssessment" title="http://w3id.org/mmv/0.1#QualityAssessment">QualityAssessment</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    is in domain of
+   </dt>
+   <dd>
+    <a href="#hasQualityMeasurement" title="http://w3id.org/mmv/0.1#hasQualityMeasurement">hasQualityMeasurement</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasTestingResult" title="http://w3id.org/mmv/0.1#hasTestingResult">hasTestingResult</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#hasTestingType" title="http://w3id.org/mmv/0.1#hasTestingType">hasTestingType</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#isTestingOf" title="http://w3id.org/mmv/0.1#isTestingOf">isTestingOf</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+   <dt>
+    is in range of
+   </dt>
+   <dd>
+    <a href="#hasTesting" title="http://w3id.org/mmv/0.1#hasTesting">hasTesting</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+   <dt>
+    is disjoint with
+   </dt>
+   <dd>
+    <a href="#AnalysisActivity" title="http://w3id.org/mmv/0.1#AnalysisActivity">AnalysisActivity</a> <sup class="type-c" title="class">c</sup>, <a href="#DesignActivity" title="http://w3id.org/mmv/0.1#DesignActivity">DesignActivity</a> <sup class="type-c" title="class">c</sup>, <a href="#DevelopmentActivity" title="http://w3id.org/mmv/0.1#DevelopmentActivity">DevelopmentActivity</a> <sup class="type-c" title="class">c</sup>, <a href="#MaintenanceActivity" title="http://w3id.org/mmv/0.1#MaintenanceActivity">MaintenanceActivity</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+  </dl>
+ </div>
+</div><div xmlns:widoco="https://w3id.org/widoco/vocab#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="objectproperties">
+ <h3 id="properties" class="list">Object Properties</h3>
+ <ul class="hlist">
+  <li><a href="#hasStakeholder" title="http://w3id.org/mmv/0.1#hasStakeholder"> <span>has Stakeholder</span> </a></li>
+  <li><a href="#hasAnalysis" title="http://w3id.org/mmv/0.1#hasAnalysis">hasAnalysis</a></li>
+  <li><a href="#hasDesign" title="http://w3id.org/mmv/0.1#hasDesign">hasDesign</a></li>
+  <li><a href="#hasDevelopment" title="http://w3id.org/mmv/0.1#hasDevelopment">hasDevelopment</a></li>
+  <li><a href="#hasInput" title="http://w3id.org/mmv/0.1#hasInput">hasInput</a></li>
+  <li><a href="#hasMaintenance" title="http://w3id.org/mmv/0.1#hasMaintenance">hasMaintenance</a></li>
+  <li><a href="#hasMappingArtifact" title="http://w3id.org/mmv/0.1#hasMappingArtifact">hasMappingArtifact</a></li>
+  <li><a href="#hasPlannedQualityMetric" title="http://w3id.org/mmv/0.1#hasPlannedQualityMetric">hasPlannedQualityMetric</a></li>
+  <li><a href="#hasQualityMeasurement" title="http://w3id.org/mmv/0.1#hasQualityMeasurement">hasQualityMeasurement</a></li>
+  <li><a href="#hasTesting" title="http://w3id.org/mmv/0.1#hasTesting">hasTesting</a></li>
+  <li><a href="#isAnalysisOf" title="http://w3id.org/mmv/0.1#isAnalysisOf">isAnalysisOf</a></li>
+  <li><a href="#isDesignOf" title="http://w3id.org/mmv/0.1#isDesignOf">isDesignOf</a></li>
+  <li><a href="#isDevelopmentOf" title="http://w3id.org/mmv/0.1#isDevelopmentOf">isDevelopmentOf</a></li>
+  <li><a href="#isMaintenanceOf" title="http://w3id.org/mmv/0.1#isMaintenanceOf">isMaintenanceOf</a></li>
+  <li><a href="#isMappingArtifactOf" title="http://w3id.org/mmv/0.1#isMappingArtifactOf">isMappingArtifactOf</a></li>
+  <li><a href="#isTestingOf" title="http://w3id.org/mmv/0.1#isTestingOf">isTestingOf</a></li>
+ </ul>
+ <div class="entity" id="hasStakeholder">
+  <h3>has Stakeholder<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#hasStakeholder</p>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#MappingProject" title="http://w3id.org/mmv/0.1#MappingProject">MappingProject</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/ns/prov#Agent" target="_blank" title="http://www.w3.org/ns/prov#Agent">Agent</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasAnalysis">
+  <h3>hasAnalysis<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#hasAnalysis</p>
+  <div class="comment">
+   <span class="markdown">Links a mapping project to its analysis phase, capturing early-stage information such as requirements, assumptions, risks, stakeholders, and input datasets.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#MappingProject" title="http://w3id.org/mmv/0.1#MappingProject">MappingProject</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#AnalysisActivity" title="http://w3id.org/mmv/0.1#AnalysisActivity">AnalysisActivity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     is inverse of
+    </dt>
+    <dd>
+     <a href="#isAnalysisOf" title="http://w3id.org/mmv/0.1#isAnalysisOf">isAnalysisOf</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasDesign">
+  <h3>hasDesign<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#hasDesign</p>
+  <div class="comment">
+   <span class="markdown">Links a mapping project to its design phase, capturing mapping design decisions and their justifications.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#MappingProject" title="http://w3id.org/mmv/0.1#MappingProject">MappingProject</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#DesignActivity" title="http://w3id.org/mmv/0.1#DesignActivity">DesignActivity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     is inverse of
+    </dt>
+    <dd>
+     <a href="#isDesignOf" title="http://w3id.org/mmv/0.1#isDesignOf">isDesignOf</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasDevelopment">
+  <h3>hasDevelopment<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#hasDevelopment</p>
+  <div class="comment">
+   <span class="markdown">Links a mapping project to its development phase, capturing details about the implementation of the mapping, including tools, methods, and formats.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#MappingProject" title="http://w3id.org/mmv/0.1#MappingProject">MappingProject</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#DevelopmentActivity" title="http://w3id.org/mmv/0.1#DevelopmentActivity">DevelopmentActivity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     is inverse of
+    </dt>
+    <dd>
+     <a href="#isDevelopmentOf" title="http://w3id.org/mmv/0.1#isDevelopmentOf">isDevelopmentOf</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasInput">
+  <h3>hasInput<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#hasInput</p>
+  <div class="comment">
+   <span class="markdown">Links a mapping lifecycle activity to an input dataset or artefact that is analysed, referenced, or used to inform mapping decisions, requirements, or validation criteria.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#AnalysisActivity" title="http://w3id.org/mmv/0.1#AnalysisActivity">AnalysisActivity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#DataSet" title="http://w3id.org/mmv/0.1#DataSet">DataSet</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasMaintenance">
+  <h3>hasMaintenance<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#hasMaintenance</p>
+  <div class="comment">
+   <span class="markdown">Links a mapping project to its maintenance phase, capturing publication, versioning, and long-term management of mapping artifacts.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#MappingProject" title="http://w3id.org/mmv/0.1#MappingProject">MappingProject</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#MaintenanceActivity" title="http://w3id.org/mmv/0.1#MaintenanceActivity">MaintenanceActivity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     is inverse of
+    </dt>
+    <dd>
+     <a href="#isMaintenanceOf" title="http://w3id.org/mmv/0.1#isMaintenanceOf">isMaintenanceOf</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasMappingArtifact">
+  <h3>hasMappingArtifact<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#hasMappingArtifact</p>
+  <div class="comment">
+   <span class="markdown">Links a mapping project snapshot to the mapping artefact(s) documented in that version</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#MappingProject" title="http://w3id.org/mmv/0.1#MappingProject">MappingProject</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#MappingArtifact" title="http://w3id.org/mmv/0.1#MappingArtifact">MappingArtifact</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     is inverse of
+    </dt>
+    <dd>
+     <a href="#isMappingArtifactOf" title="http://w3id.org/mmv/0.1#isMappingArtifactOf">isMappingArtifactOf</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasPlannedQualityMetric">
+  <h3>hasPlannedQualityMetric<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#hasPlannedQualityMetric</p>
+  <div class="comment">
+   <span class="markdown">Links a design activity to the quality metrics that are intended to be applied later when validating the resulting mapping artefact, enabling explicit test planning and reuse-oriented evaluation criteria.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#DesignActivity" title="http://w3id.org/mmv/0.1#DesignActivity">DesignActivity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#http://www.w3.org/ns/dqv#Metric" title="http://www.w3.org/ns/dqv#Metric">Metric</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasQualityMeasurement">
+  <h3>hasQualityMeasurement<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#hasQualityMeasurement</p>
+  <div class="comment">
+   <span class="markdown">Links a testing activity to computed quality measurements obtained during validation, capturing evidence that supports assessment and informed reuse of the mapping artefact.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#TestingActivity" title="http://w3id.org/mmv/0.1#TestingActivity">TestingActivity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#http://www.w3.org/ns/dqv#QualityMeasurement" title="http://www.w3.org/ns/dqv#QualityMeasurement">Quality Measurement</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasTesting">
+  <h3>hasTesting<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#hasTesting</p>
+  <div class="comment">
+   <span class="markdown">Links a mapping project to its testing phase, capturing validation activities and their outcomes.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#MappingProject" title="http://w3id.org/mmv/0.1#MappingProject">MappingProject</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#TestingActivity" title="http://w3id.org/mmv/0.1#TestingActivity">TestingActivity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     is inverse of
+    </dt>
+    <dd>
+     <a href="#isTestingOf" title="http://w3id.org/mmv/0.1#isTestingOf">isTestingOf</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="isAnalysisOf">
+  <h3>isAnalysisOf<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#isAnalysisOf</p>
+  <div class="comment">
+   <span class="markdown">Inverse of hasAnalysis. Relates an AnalysisActivity to the MappingProject it is part of.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#AnalysisActivity" title="http://w3id.org/mmv/0.1#AnalysisActivity">AnalysisActivity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#MappingProject" title="http://w3id.org/mmv/0.1#MappingProject">MappingProject</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     is inverse of
+    </dt>
+    <dd>
+     <a href="#hasAnalysis" title="http://w3id.org/mmv/0.1#hasAnalysis">hasAnalysis</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="isDesignOf">
+  <h3>isDesignOf<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#isDesignOf</p>
+  <div class="comment">
+   <span class="markdown">Inverse of hasDesign. Relates a DesignActivity to the MappingProject it belongs to.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#DesignActivity" title="http://w3id.org/mmv/0.1#DesignActivity">DesignActivity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#MappingProject" title="http://w3id.org/mmv/0.1#MappingProject">MappingProject</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     is inverse of
+    </dt>
+    <dd>
+     <a href="#hasDesign" title="http://w3id.org/mmv/0.1#hasDesign">hasDesign</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="isDevelopmentOf">
+  <h3>isDevelopmentOf<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#isDevelopmentOf</p>
+  <div class="comment">
+   <span class="markdown">Inverse of hasDevelopment. Relates a DevelopmentActivity to the MappingProject it belongs to.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#DevelopmentActivity" title="http://w3id.org/mmv/0.1#DevelopmentActivity">DevelopmentActivity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#MappingProject" title="http://w3id.org/mmv/0.1#MappingProject">MappingProject</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     is inverse of
+    </dt>
+    <dd>
+     <a href="#hasDevelopment" title="http://w3id.org/mmv/0.1#hasDevelopment">hasDevelopment</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="isMaintenanceOf">
+  <h3>isMaintenanceOf<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#isMaintenanceOf</p>
+  <div class="comment">
+   <span class="markdown">Inverse of hasMaintenance. Relates a MaintenanceActivity to the MappingProject it belongs to.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#MaintenanceActivity" title="http://w3id.org/mmv/0.1#MaintenanceActivity">MaintenanceActivity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#MappingProject" title="http://w3id.org/mmv/0.1#MappingProject">MappingProject</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     is inverse of
+    </dt>
+    <dd>
+     <a href="#hasMaintenance" title="http://w3id.org/mmv/0.1#hasMaintenance">hasMaintenance</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="isMappingArtifactOf">
+  <h3>isMappingArtifactOf<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#isMappingArtifactOf</p>
+  <div class="comment">
+   <span class="markdown">Inverse of hasMappingArtifact. Relates a MappingArtifact to the MappingProject it belongs to.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#MappingArtifact" title="http://w3id.org/mmv/0.1#MappingArtifact">MappingArtifact</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#MappingProject" title="http://w3id.org/mmv/0.1#MappingProject">MappingProject</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     is inverse of
+    </dt>
+    <dd>
+     <a href="#hasMappingArtifact" title="http://w3id.org/mmv/0.1#hasMappingArtifact">hasMappingArtifact</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="isTestingOf">
+  <h3>isTestingOf<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#isTestingOf</p>
+  <div class="comment">
+   <span class="markdown">Inverse of hasTesting. Relates a TestingActivity to the MappingProject it belongs to.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#TestingActivity" title="http://w3id.org/mmv/0.1#TestingActivity">TestingActivity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#MappingProject" title="http://w3id.org/mmv/0.1#MappingProject">MappingProject</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     is inverse of
+    </dt>
+    <dd>
+     <a href="#hasTesting" title="http://w3id.org/mmv/0.1#hasTesting">hasTesting</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+</div><div xmlns:widoco="https://w3id.org/widoco/vocab#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="dataproperties">
+ <h3 id="dataproperties-headline" class="list">Data Properties</h3>
+ <ul class="hlist">
+  <li><a href="#hasAssumption" title="http://w3id.org/mmv/0.1#hasAssumption">hasAssumption</a></li>
+  <li><a href="#hasBackground" title="http://w3id.org/mmv/0.1#hasBackground">hasBackground</a></li>
+  <li><a href="#hasDescription" title="http://w3id.org/mmv/0.1#hasDescription">hasDescription</a></li>
+  <li><a href="#hasDesignDecision" title="http://w3id.org/mmv/0.1#hasDesignDecision">hasDesignDecision</a></li>
+  <li><a href="#hasDomainAssumption" title="http://w3id.org/mmv/0.1#hasDomainAssumption">hasDomainAssumption</a></li>
+  <li><a href="#hasIdentifier" title="http://w3id.org/mmv/0.1#hasIdentifier">hasIdentifier</a></li>
+  <li><a href="#hasInputCreator" title="http://w3id.org/mmv/0.1#hasInputCreator">hasInputCreator</a></li>
+  <li><a href="#hasInputDescription" title="http://w3id.org/mmv/0.1#hasInputDescription">hasInputDescription</a></li>
+  <li><a href="#hasInputFormat" title="http://w3id.org/mmv/0.1#hasInputFormat">hasInputFormat</a></li>
+  <li><a href="#hasInputName" title="http://w3id.org/mmv/0.1#hasInputName">hasInputName</a></li>
+  <li><a href="#hasInputSource" title="http://w3id.org/mmv/0.1#hasInputSource">hasInputSource</a></li>
+  <li><a href="#hasInputType" title="http://w3id.org/mmv/0.1#hasInputType">hasInputType</a></li>
+  <li><a href="#hasJustification" title="http://w3id.org/mmv/0.1#hasJustification">hasJustification</a></li>
+  <li><a href="#hasMappingAlgorithm" title="http://w3id.org/mmv/0.1#hasMappingAlgorithm">hasMappingAlgorithm</a></li>
+  <li><a href="#hasMappingDomain" title="http://w3id.org/mmv/0.1#hasMappingDomain">hasMappingDomain</a></li>
+  <li><a href="#https://alex-randles.github.io/MQV/#hasMappingFormat" title="https://alex-randles.github.io/MQV/#hasMappingFormat">hasMappingFormat</a></li>
+  <li><a href="#https://alex-randles.github.io/MQV/#hasMappingMethod" title="https://alex-randles.github.io/MQV/#hasMappingMethod">hasMappingMethod</a></li>
+  <li><a href="#https://alex-randles.github.io/MQV/#hasMappingType" title="https://alex-randles.github.io/MQV/#hasMappingType">hasMappingType</a></li>
+  <li><a href="#hasPublisherName" title="http://w3id.org/mmv/0.1#hasPublisherName">hasPublisherName</a></li>
+  <li><a href="#hasPublisherSource" title="http://w3id.org/mmv/0.1#hasPublisherSource">hasPublisherSource</a></li>
+  <li><a href="#hasPurpose" title="http://w3id.org/mmv/0.1#hasPurpose">hasPurpose</a></li>
+  <li><a href="#hasRequirement" title="http://w3id.org/mmv/0.1#hasRequirement">hasRequirement</a></li>
+  <li><a href="#hasRiskOrIssue" title="http://w3id.org/mmv/0.1#hasRiskOrIssue">hasRiskOrIssue</a></li>
+  <li><a href="#hasRole" title="http://w3id.org/mmv/0.1#hasRole">hasRole</a></li>
+  <li><a href="#hasTechnicalRequirement" title="http://w3id.org/mmv/0.1#hasTechnicalRequirement">hasTechnicalRequirement</a></li>
+  <li><a href="#hasTestingResult" title="http://w3id.org/mmv/0.1#hasTestingResult">hasTestingResult</a></li>
+  <li><a href="#hasTestingType" title="http://w3id.org/mmv/0.1#hasTestingType">hasTestingType</a></li>
+  <li><a href="#hasTool" title="http://w3id.org/mmv/0.1#hasTool">hasTool</a></li>
+  <li><a href="#hasVersionDateTime" title="http://w3id.org/mmv/0.1#hasVersionDateTime">hasVersionDateTime</a></li>
+  <li><a href="#version" title="http://w3id.org/mmv/0.1#version">version</a></li>
+ </ul>
+ <div class="entity" id="hasAssumption">
+  <h3>hasAssumption<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#hasAssumption</p>
+  <div class="comment">
+   <span class="markdown">Records assumptions made during analysis about the source data, target model, or transformation logic, supporting correct interpretation and reuse.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#AnalysisActivity" title="http://w3id.org/mmv/0.1#AnalysisActivity">AnalysisActivity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#string" target="_blank" title="http://www.w3.org/2001/XMLSchema#string">string</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasBackground">
+  <h3>hasBackground<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#hasBackground</p>
+  <div class="comment">
+   <span class="markdown">Summarises relevant stakeholder expertise or experience, providing interpretive context for design and validation decisions.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/ns/prov#Agent" target="_blank" title="http://www.w3.org/ns/prov#Agent">Agent</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#string" target="_blank" title="http://www.w3.org/2001/XMLSchema#string">string</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasDescription">
+  <h3>hasDescription<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#hasDescription</p>
+  <div class="comment">
+   <span class="markdown">Provides a concise description of a mapping artefact or project element to support understanding and discovery.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#MappingArtifact" title="http://w3id.org/mmv/0.1#MappingArtifact">MappingArtifact</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#string" target="_blank" title="http://www.w3.org/2001/XMLSchema#string">string</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasDesignDecision">
+  <h3>hasDesignDecision<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#hasDesignDecision</p>
+  <div class="comment">
+   <span class="markdown">Captures final design choices made during the design phase (e.g., modelling patterns, reuse choices), enabling rationale-aware reuse and comparison.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#DesignActivity" title="http://w3id.org/mmv/0.1#DesignActivity">DesignActivity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#string" target="_blank" title="http://www.w3.org/2001/XMLSchema#string">string</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasDomainAssumption">
+  <h3>hasDomainAssumption<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#hasDomainAssumption</p>
+  <div class="comment">
+   <span class="markdown">Captures assumptions about domain semantics or modelling expectations that affect mapping interpretation, helping others understand potential validity limits during reuse.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#AnalysisActivity" title="http://w3id.org/mmv/0.1#AnalysisActivity">AnalysisActivity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#string" target="_blank" title="http://www.w3.org/2001/XMLSchema#string">string</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasIdentifier">
+  <h3>hasIdentifier<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#hasIdentifier</p>
+  <div class="comment">
+   <span class="markdown">Records a persistent identifier or IRI for a mapping artefact, supporting citation, discovery, and change tracking</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#MappingArtifact" title="http://w3id.org/mmv/0.1#MappingArtifact">MappingArtifact</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#anyURI" target="_blank" title="http://www.w3.org/2001/XMLSchema#anyURI">any U R I</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasInputCreator">
+  <h3>hasInputCreator<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#hasInputCreator</p>
+  <div class="comment">
+   <span class="markdown">Identifies the creator of the input dataset as stated or known at the time of mapping creation, supporting provenance-aware reuse.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#AnalysisActivity" title="http://w3id.org/mmv/0.1#AnalysisActivity">AnalysisActivity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#string" target="_blank" title="http://www.w3.org/2001/XMLSchema#string">string</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasInputDescription">
+  <h3>hasInputDescription<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#hasInputDescription</p>
+  <div class="comment">
+   <span class="markdown">Provides a concise description of the input dataset content and scope, to support understanding and reuse without requiring full dataset publication.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#AnalysisActivity" title="http://w3id.org/mmv/0.1#AnalysisActivity">AnalysisActivity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#string" target="_blank" title="http://www.w3.org/2001/XMLSchema#string">string</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasInputFormat">
+  <h3>hasInputFormat<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#hasInputFormat</p>
+  <div class="comment">
+   <span class="markdown">Records the file format or media type of the input dataset (e.g., text/csv), supporting reproducibility and tool selection.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#AnalysisActivity" title="http://w3id.org/mmv/0.1#AnalysisActivity">AnalysisActivity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#string" target="_blank" title="http://www.w3.org/2001/XMLSchema#string">string</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasInputName">
+  <h3>hasInputName<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#hasInputName</p>
+  <div class="comment">
+   <span class="markdown">Captures the human-readable name of an input dataset (e.g., a file name), supporting traceability of the source used during mapping creation.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#AnalysisActivity" title="http://w3id.org/mmv/0.1#AnalysisActivity">AnalysisActivity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#string" target="_blank" title="http://www.w3.org/2001/XMLSchema#string">string</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasInputSource">
+  <h3>hasInputSource<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#hasInputSource</p>
+  <div class="comment">
+   <span class="markdown">Records the origin or provider of the input dataset (e.g., an archive, portal, or organisation), supporting traceability of the data used during mapping development.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#AnalysisActivity" title="http://w3id.org/mmv/0.1#AnalysisActivity">AnalysisActivity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#string" target="_blank" title="http://www.w3.org/2001/XMLSchema#string">string</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasInputType">
+  <h3>hasInputType<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#hasInputType</p>
+  <div class="comment">
+   <span class="markdown">Captures the type of input data (e.g., CSV, JSON, XML), supporting quick assessment of suitability and tool compatibility.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#AnalysisActivity" title="http://w3id.org/mmv/0.1#AnalysisActivity">AnalysisActivity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#string" target="_blank" title="http://www.w3.org/2001/XMLSchema#string">string</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasJustification">
+  <h3>hasJustification<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#hasJustification</p>
+  <div class="comment">
+   <span class="markdown">Provides the rationale for a recorded design decision, supporting transparency and helping future maintainers assess trade-offs.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#DesignActivity" title="http://w3id.org/mmv/0.1#DesignActivity">DesignActivity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#string" target="_blank" title="http://www.w3.org/2001/XMLSchema#string">string</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasMappingAlgorithm">
+  <h3>hasMappingAlgorithm<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#hasMappingAlgorithm</p>
+  <div class="comment">
+   <span class="markdown">Describes any algorithmic approach used to generate, validate, or automate the mapping (e.g., heuristic matching, rule-based transformation), supporting transparency.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#DevelopmentActivity" title="http://w3id.org/mmv/0.1#DevelopmentActivity">DevelopmentActivity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#string" target="_blank" title="http://www.w3.org/2001/XMLSchema#string">string</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasMappingDomain">
+  <h3>hasMappingDomain<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#hasMappingDomain</p>
+  <div class="comment">
+   <span class="markdown">Indicates the subject area or domain the mapping addresses (e.g., cultural heritage, geospatial), supporting discovery and contextual reuse.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#AnalysisActivity" title="http://w3id.org/mmv/0.1#AnalysisActivity">AnalysisActivity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#string" target="_blank" title="http://www.w3.org/2001/XMLSchema#string">string</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="https://alex-randles.github.io/MQV/#hasMappingFormat">
+  <h3>hasMappingFormat<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://alex-randles.github.io/MQV/#hasMappingFormat</p>
+  <div class="comment">
+   <span class="markdown">Reuse of the MQV property to specify the concrete syntax or encoding format in which a mapping definition is expressed, such as RML, R2RML, SPARQL, or SSSOM.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    https://alex-randles.github.io/MQV/
+   </dd>
+  </dl>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#DevelopmentActivity" title="http://w3id.org/mmv/0.1#DevelopmentActivity">DevelopmentActivity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#string" target="_blank" title="http://www.w3.org/2001/XMLSchema#string">string</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="https://alex-randles.github.io/MQV/#hasMappingMethod">
+  <h3>hasMappingMethod<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://alex-randles.github.io/MQV/#hasMappingMethod</p>
+  <div class="comment">
+   <span class="markdown">Reuse of the MQV property to describe the method by which a mapping was produced, such as manual, semi-automatic, or fully automatic generation.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    https://alex-randles.github.io/MQV/
+   </dd>
+  </dl>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#DevelopmentActivity" title="http://w3id.org/mmv/0.1#DevelopmentActivity">DevelopmentActivity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#string" target="_blank" title="http://www.w3.org/2001/XMLSchema#string">string</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="https://alex-randles.github.io/MQV/#hasMappingType">
+  <h3>hasMappingType<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://alex-randles.github.io/MQV/#hasMappingType</p>
+  <div class="comment">
+   <span class="markdown">Reuse of the MQV property to indicate the type of mapping being created, for example uplift mapping, ontology alignment, or interlinking.</span>
+  </div>
+  <dl class="definedBy">
+   <dt>
+    Is defined by
+   </dt>
+   <dd>
+    https://alex-randles.github.io/MQV/
+   </dd>
+  </dl>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#DevelopmentActivity" title="http://w3id.org/mmv/0.1#DevelopmentActivity">DevelopmentActivity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#string" target="_blank" title="http://www.w3.org/2001/XMLSchema#string">string</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasPublisherName">
+  <h3>hasPublisherName<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#hasPublisherName</p>
+  <div class="comment">
+   <span class="markdown">Identifies the person or organisation responsible for publishing or releasing the mapping artefact, supporting provenance and citation.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#MaintenanceActivity" title="http://w3id.org/mmv/0.1#MaintenanceActivity">MaintenanceActivity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#string" target="_blank" title="http://www.w3.org/2001/XMLSchema#string">string</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasPublisherSource">
+  <h3>hasPublisherSource<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#hasPublisherSource</p>
+  <div class="comment">
+   <span class="markdown">Records where the published mapping artefact is hosted or referenced (e.g., repository URL), supporting traceability and reuse.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#MaintenanceActivity" title="http://w3id.org/mmv/0.1#MaintenanceActivity">MaintenanceActivity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#anyURI" target="_blank" title="http://www.w3.org/2001/XMLSchema#anyURI">any U R I</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasPurpose">
+  <h3>hasPurpose<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#hasPurpose</p>
+  <div class="comment">
+   <span class="markdown">Describes the intended purpose or goal of the mapping project.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#AnalysisActivity" title="http://w3id.org/mmv/0.1#AnalysisActivity">AnalysisActivity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#string" target="_blank" title="http://www.w3.org/2001/XMLSchema#string">string</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasRequirement">
+  <h3>hasRequirement<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#hasRequirement</p>
+  <div class="comment">
+   <span class="markdown">requirements of the project</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#AnalysisActivity" title="http://w3id.org/mmv/0.1#AnalysisActivity">AnalysisActivity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#string" target="_blank" title="http://www.w3.org/2001/XMLSchema#string">string</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasRiskOrIssue">
+  <h3>hasRiskOrIssue<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#hasRiskOrIssue</p>
+  <div class="comment">
+   <span class="markdown">Risks or issues related to the project</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#AnalysisActivity" title="http://w3id.org/mmv/0.1#AnalysisActivity">AnalysisActivity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#string" target="_blank" title="http://www.w3.org/2001/XMLSchema#string">string</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasRole">
+  <h3>hasRole<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#hasRole</p>
+  <div class="comment">
+   <span class="markdown">Records the stakeholder role in the mapping project (e.g., developer, reviewer, domain expert), supporting accountability and provenance-oriented interpretation.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/ns/prov#Agent" target="_blank" title="http://www.w3.org/ns/prov#Agent">Agent</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#string" target="_blank" title="http://www.w3.org/2001/XMLSchema#string">string</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasTechnicalRequirement">
+  <h3>hasTechnicalRequirement<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#hasTechnicalRequirement</p>
+  <div class="comment">
+   <span class="markdown">Records technical constraints that influence implementation choices (e.g., required tool support or execution environment), supporting reproducibility and future maintenance decisions.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#AnalysisActivity" title="http://w3id.org/mmv/0.1#AnalysisActivity">AnalysisActivity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#string" target="_blank" title="http://www.w3.org/2001/XMLSchema#string">string</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasTestingResult">
+  <h3>hasTestingResult<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#hasTestingResult</p>
+  <div class="comment">
+   <span class="markdown">Records the outcome of a testing activity (e.g., pass/fail summary), supporting quality assessment and reuse decisions.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#TestingActivity" title="http://w3id.org/mmv/0.1#TestingActivity">TestingActivity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#string" target="_blank" title="http://www.w3.org/2001/XMLSchema#string">string</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasTestingType">
+  <h3>hasTestingType<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#hasTestingType</p>
+  <div class="comment">
+   <span class="markdown">Specifies the type of testing or validation performed (e.g., SHACL validation, unit testing), supporting assessment of mapping trustworthiness.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#TestingActivity" title="http://w3id.org/mmv/0.1#TestingActivity">TestingActivity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#string" target="_blank" title="http://www.w3.org/2001/XMLSchema#string">string</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasTool">
+  <h3>hasTool<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#hasTool</p>
+  <div class="comment">
+   <span class="markdown">Lists the software tools or platforms used to create or edit the mapping (e.g., RMLEditor, Protégé), supporting reproducibility.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#DevelopmentActivity" title="http://w3id.org/mmv/0.1#DevelopmentActivity">DevelopmentActivity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#string" target="_blank" title="http://www.w3.org/2001/XMLSchema#string">string</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasVersionDateTime">
+  <h3>hasVersionDateTime<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#hasVersionDateTime</p>
+  <div class="comment">
+   <span class="markdown">Records the date and time when this version of the mapping artefact was created or released, supporting audit and reuse decisions.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#MappingArtifact" title="http://w3id.org/mmv/0.1#MappingArtifact">MappingArtifact</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#dateTime" target="_blank" title="http://www.w3.org/2001/XMLSchema#dateTime">date Time</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="version">
+  <h3>version<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://w3id.org/mmv/0.1#version</p>
+  <div class="comment">
+   <span class="markdown">Records a version identifier for the mapping artefact, enabling change tracking and controlled reuse across releases.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#MappingArtifact" title="http://w3id.org/mmv/0.1#MappingArtifact">MappingArtifact</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#string" target="_blank" title="http://www.w3.org/2001/XMLSchema#string">string</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+</div><div id="legend">
+<h2>Legend <span class="backlink"> back to <a href="#toc">ToC</a></span></h2>
+<div   class="entity">
+<sup class="type-c" title="Classes">c</sup>: Classes <br/>
+<sup class="type-op" title="Object Properties">op</sup>: Object Properties <br/>
+<sup class="type-dp" title="Data Properties">dp</sup>: Data Properties <br/>
+</div>
+</div>
+</div>
+    
+<section id="Example">
+
+<div id="Example">
+<h2 id="ack" class="list">Example <span class="backlink"> back to <a href="#toc">ToC</a></span></h2>
+
+
+  <h3>Example: Lifecycle-Based Uplift Mapping from CSV to RDF</h3>
+
+  <p>
+    This example illustrates how MMV can be used to document a lifecycle-based mapping project
+    that transforms a CSV dataset into RDF (e.g., using RML). It demonstrates how a
+    <code>mmv:MappingProject</code> links to its lifecycle phases (Analysis, Design, Development,
+    Testing, and Maintenance), records key metadata, and captures stakeholder information.
+  </p>
+
+  <p><strong>Example in Turtle</strong></p>
+
+  <pre><code class="language-turtle">
+@prefix mmv: &lt;http://w3id.org/mmv/0.1#&gt; .
+@prefix mqv: &lt;https://alex-randles.github.io/MQV/#&gt; .
+@prefix prov: &lt;http://www.w3.org/ns/prov#&gt; .
+@prefix dqv: &lt;http://www.w3.org/ns/dqv#&gt; .
+@prefix dcterms: &lt;http://purl.org/dc/terms/&gt; .
+@prefix foaf: &lt;http://xmlns.com/foaf/0.1/&gt; .
+@prefix ex: &lt;http://example.org/&gt; .
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt; .
+
+# Mapping Project
+ex:Project1 a mmv:MappingProject ;
+    dcterms:title "Electoral Division Mapping Project" ;
+    mmv:hasMappingArtifact ex:MappingV1 ;
+    mmv:hasAnalysis ex:Analysis1 ;
+    mmv:hasDesign ex:Design1 ;
+    mmv:hasDevelopment ex:Development1 ;
+    mmv:hasTesting ex:Testing1 ;
+    mmv:hasMaintenance ex:Maintenance1 ;
+    mmv:hasStakeholder ex:Sarah .
+
+# Mapping Artifact
+ex:MappingV1 a mmv:MappingArtifact ;
+    dcterms:title "Electoral Division Uplift Mapping v1" ;
+    mqv:hasMappingType "Uplift Mapping" ;
+    mqv:hasMappingMethod "Semi-automatic with manual validation" ;
+    mqv:hasMappingFormat "RML" ;
+    mmv:version "1.0" ;
+    mmv:hasDescription "Transforms CSV electoral division data into RDF using RML." .
+
+
+# Analysis Phase
+ex:Analysis1 a mmv:AnalysisActivity ;
+    mmv:hasPurpose "Transform CSV dataset into RDF for Linked Data publication." ;
+    mmv:hasRequirement "All divisions must receive persistent URIs." ;
+    mmv:hasMappingDomain "Geospatial statistics" ;
+    mmv:hasDomainAssumption "Each division has a unique code." ;
+    mmv:hasTechnicalRequirement "Mapping tool must support RDF-star." ;
+    mmv:hasInputName "electoral_divisions_2022.csv" ;
+    mmv:hasInputDescription "CSV dataset containing electoral division boundaries and codes." .
+
+# Design Phase
+ex:Design1 a mmv:DesignActivity ;
+    mmv:hasDesignDecision "Reuse GeoSPARQL vocabulary for geometry modelling." ;
+    mmv:hasJustification "Ensures interoperability with geospatial Linked Data systems." ;
+    mmv:hasPlannedQualityMetric ex:CompletenessMetric .
+
+ex:CompletenessMetric a dqv:Metric .
+
+# Development Phase
+ex:Development1 a mmv:DevelopmentActivity ;
+    prov:startedAtTime "2025-06-01"^^xsd:date ;
+    prov:endedAtTime "2025-06-06"^^xsd:date .
+
+
+# Testing Phase
+ex:Testing1 a mmv:TestingActivity ;
+    mmv:hasTestingType "SHACL validation" ;
+    mmv:hasTestingResult "All constraints passed." ;
+    prov:generatedAtTime "2025-06-07T15:00:00"^^xsd:dateTime .
+
+# Maintenance Phase
+ex:Maintenance1 a mmv:MaintenanceActivity ;
+    mmv:hasPublisherName "Trinity College Dublin" ;
+    dcterms:issued "2025-06-07T18:30:00"^^xsd:dateTime .
+
+
+# Stakeholder
+ex:Sarah a foaf:Person ;
+    foaf:name "Sarah Alzahrani" ;
+    mmv:hasRole "Mapping Developer" ;
+    mmv:hasBackground "Researcher in knowledge graph engineering and semantic mappings." .
+  </code></pre>
+
+  <p>
+    In this example, the mapping project links to lifecycle phases using object properties such as
+    <code>mmv:hasAnalysis</code>, <code>mmv:hasDesign</code>, and <code>mmv:hasTesting</code>.
+    Each lifecycle phase records relevant metadata using MMV data properties (e.g., purpose,
+    requirements, design decisions, testing outcomes, and versioning information),
+    supporting transparency, evaluation, and informed reuse of mapping artefacts.
+  </p>
+
+</section>
+
+<!--REFERENCES SECTION-->
+  <div id="references">
+<h2 id="ref" class="list">References <span class="backlink"> back to <a href="#toc">ToC</a></span></h2>
+<span class="markdown">
+<ol>
+
+    <li>
+      Alzahrani, S., &amp; O’Sullivan, D. (2022).
+      <em>Towards a Unified Metadata Model for Semantic and Data Mappings.</em>
+      Proceedings of the 17th International Workshop on Ontology Matching (OM 2022),
+      CEUR Workshop Proceedings.
+    </li>
+
+    <li>
+      Alzahrani, S., &amp; O’Sullivan, D. (2023).
+      <em>What metadata is needed for semantic and data mappings?</em>
+      IEEE 17th International Conference on Semantic Computing (ICSC 2023),
+      pp. 312–316.
+      <a href="https://doi.org/10.1109/ICSC56153.2023.00064" target="_blank">
+        https://doi.org/10.1109/ICSC56153.2023.00064
+      </a>
+    </li>
+
+    <li>
+      Alzahrani, S., &amp; O’Sullivan, D. (2024).
+      <em>MetaMap: Facilitating Mapping Reuse and Lifecycle Documentation.</em>
+      IEEE 18th International Conference on Semantic Computing (ICSC 2024),
+      pp. 323–328.
+      <a href="https://doi.org/10.1109/ICSC59802.2024.00058" target="_blank">
+        https://doi.org/10.1109/ICSC59802.2024.00058
+      </a>
+    </li>
+
+    <li>
+      Alzahrani, S., &amp; O’Sullivan, D. (2025).
+      <em>MetaSEMAP: Usability Evaluation for Metadata Annotation Across the Mapping Lifecycle.</em>
+      First International Workshop on Users and Knowledge Graphs (UKG 2025),
+      co-located with SEMANTiCS 2025.
+    </li>
+
+    <li>
+      Alzahrani, S., &amp; O’Sullivan, D. (2025).
+      <em>Guiding LLM Generated Mappings with Lifecycle-Based Metadata: An Early Evaluation.</em>
+      Workshop on Knowledge Graphs and Neurosymbolic AI (KG-NeSy 2025),
+      co-located with SEMANTiCS 2025.
+    </li>
+
+    <li>
+      Alzahrani, S., &amp; O’Sullivan, D. (2026).
+      <em>MMV: A Lifecycle-Based Ontology for Declarative Mapping Projects.</em>
+      IEEE International Conference on Semantic Computing (ICSC 2026).
+    </li>
+
+  </ol></span>
+
+</div>
+</div>
+<div id="acknowledgments">
+<h2 id="ack" class="list">Acknowledgments <span class="backlink"> back to <a href="#toc">ToC</a></span></h2>
+<p>
+The authors would like to thank <a href="http://www.essepuntato.it/">Silvio Peroni</a> for developing <a href="http://www.essepuntato.it/lode">LODE</a>, a Live OWL Documentation Environment, which is used for representing the Cross Referencing Section of this document and <a href="https://w3id.org/people/dgarijo">Daniel Garijo</a> for developing <a href="https://github.com/dgarijo/Widoco">Widoco</a>, the program used to create the template used in this documentation.</p>
+</div>
+
+
+</div>
+</body>
+</html>

@@ -1,0 +1,1163 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://w3id.org/mmv#"
+     xml:base="http://w3id.org/mmv"
+     xmlns:mmv="http://w3id.org/mmv/0.1#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:foaf="http://xmlns.com/foaf/0.1/"
+     xmlns:prov="http://www.w3.org/ns/prov#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+     xmlns:vann="http://purl.org/vocab/vann/"
+     xmlns:terms="http://purl.org/dc/terms/">
+    <owl:Ontology rdf:about="http://w3id.org/mmv">
+        <owl:versionIRI rdf:resource="http://w3id.org/mmv/0.1"/>
+        <owl:imports rdf:resource="http://www.w3.org/ns/prov-o-20130430"/>
+        <terms:abstract>The Mapping Metadata Vocabulary (MMV) is a lifecycle-based ontology for documenting declarative mapping projects used to generate knowledge graphs and Linked Data. It captures contextual, design, implementation, testing, and maintenance metadata to support mapping understanding, assessment, and reuse. MMV complements existing provenance and quality vocabularies by focusing on mapping-specific lifecycle information.</terms:abstract>
+        <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2026-02-01</terms:created>
+        <terms:creator>Sarah Alzahrani</terms:creator>
+        <terms:description>A lifecycle-based vocabulary for describing metadata, provenance, and quality of mapping projects and artifacts.</terms:description>
+        <terms:description>Declarative mappings are widely used to generate RDF and knowledge graphs from heterogeneous data sources, yet their documentation is often incomplete, inconsistent, or informal. Existing vocabularies support provenance and data quality description but do not capture the full lifecycle context of mapping projects. MMV addresses this gap by organising mapping metadata around five lifecycle phases: analysis, design, development, testing, and maintenance, enabling improved transparency, evaluation, and reuse of mapping artefacts.</terms:description>
+        <terms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2025-11-12</terms:issued>
+        <terms:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
+        <terms:publisher>Trinity College Dublin</terms:publisher>
+        <terms:title>The Mapping Metadata Vocabulary</terms:title>
+        <vann:preferredNamespacePrefix>mmv</vann:preferredNamespacePrefix>
+        <vann:preferredNamespaceUri rdf:resource="http://w3id.org/mmv/0.1#"/>
+        <mmv:status>Draft</mmv:status>
+        <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.1</owl:versionInfo>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+    
+
+
+    <!-- http://purl.org/dc/terms/abstract -->
+
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/abstract"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/contributor -->
+
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/contributor"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/created -->
+
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/created"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/creator -->
+
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/creator"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/description -->
+
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/description"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/issued -->
+
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/issued"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/license -->
+
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/license"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/modified -->
+
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/modified"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/publisher -->
+
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/publisher"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/title -->
+
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/title"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/type -->
+
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/type"/>
+    
+
+
+    <!-- http://purl.org/vocab/vann/preferredNamespacePrefix -->
+
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/vocab/vann/preferredNamespacePrefix"/>
+    
+
+
+    <!-- http://purl.org/vocab/vann/preferredNamespaceUri -->
+
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/vocab/vann/preferredNamespaceUri"/>
+    
+
+
+    <!-- http://purl.org/vocab/vann/usageNote -->
+
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/vocab/vann/usageNote"/>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#status -->
+
+
+    <owl:AnnotationProperty rdf:about="http://w3id.org/mmv/0.1#status"/>
+    
+
+
+    <!-- http://www.w3.org/2002/07/owl#versionInfo -->
+
+
+    <owl:AnnotationProperty rdf:about="http://www.w3.org/2002/07/owl#versionInfo"/>
+    
+
+
+    <!-- http://www.w3.org/2004/02/skos/core#broader -->
+
+
+    <owl:AnnotationProperty rdf:about="http://www.w3.org/2004/02/skos/core#broader"/>
+    
+
+
+    <!-- http://www.w3.org/2004/02/skos/core#definition -->
+
+
+    <owl:AnnotationProperty rdf:about="http://www.w3.org/2004/02/skos/core#definition"/>
+    
+
+
+    <!-- http://www.w3.org/2004/02/skos/core#prefLabel -->
+
+
+    <owl:AnnotationProperty rdf:about="http://www.w3.org/2004/02/skos/core#prefLabel"/>
+    
+
+
+    <!-- http://www.w3.org/ns/prov#wasRevisionOf -->
+
+
+    <rdf:Description rdf:about="http://www.w3.org/ns/prov#wasRevisionOf">
+        <rdfs:range rdf:resource="http://w3id.org/mmv/0.1#MappingArtifact"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/name -->
+
+
+    <owl:AnnotationProperty rdf:about="http://xmlns.com/foaf/0.1/name"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Datatypes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+    
+
+
+    <!-- http://www.w3.org/2001/XMLSchema#anySimpleType -->
+
+
+    <rdfs:Datatype rdf:about="http://www.w3.org/2001/XMLSchema#anySimpleType"/>
+    
+
+
+    <!-- http://www.w3.org/2001/XMLSchema#date -->
+
+
+    <rdfs:Datatype rdf:about="http://www.w3.org/2001/XMLSchema#date"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#hasAnalysis -->
+
+
+    <owl:ObjectProperty rdf:about="http://w3id.org/mmv/0.1#hasAnalysis">
+        <owl:inverseOf rdf:resource="http://w3id.org/mmv/0.1#isAnalysisOf"/>
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#MappingProject"/>
+        <rdfs:range rdf:resource="http://w3id.org/mmv/0.1#AnalysisActivity"/>
+        <rdfs:comment>Links a mapping project to its analysis phase, capturing early-stage information such as requirements, assumptions, risks, stakeholders, and input datasets.</rdfs:comment>
+        <rdfs:label>hasAnalysis</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#hasDesign -->
+
+
+    <owl:ObjectProperty rdf:about="http://w3id.org/mmv/0.1#hasDesign">
+        <owl:inverseOf rdf:resource="http://w3id.org/mmv/0.1#isDesignOf"/>
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#MappingProject"/>
+        <rdfs:range rdf:resource="http://w3id.org/mmv/0.1#DesignActivity"/>
+        <rdfs:comment>Links a mapping project to its design phase, capturing mapping design decisions and their justifications.</rdfs:comment>
+        <rdfs:label>hasDesign</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#hasDevelopment -->
+
+
+    <owl:ObjectProperty rdf:about="http://w3id.org/mmv/0.1#hasDevelopment">
+        <owl:inverseOf rdf:resource="http://w3id.org/mmv/0.1#isDevelopmentOf"/>
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#MappingProject"/>
+        <rdfs:range rdf:resource="http://w3id.org/mmv/0.1#DevelopmentActivity"/>
+        <rdfs:comment>Links a mapping project to its development phase, capturing details about the implementation of the mapping, including tools, methods, and formats.</rdfs:comment>
+        <rdfs:label>hasDevelopment</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#hasInput -->
+
+
+    <owl:ObjectProperty rdf:about="http://w3id.org/mmv/0.1#hasInput">
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#AnalysisActivity"/>
+        <rdfs:range rdf:resource="http://w3id.org/mmv/0.1#DataSet"/>
+        <rdfs:comment>Links a mapping lifecycle activity to an input dataset or artefact that is analysed, referenced, or used to inform mapping decisions, requirements, or validation criteria.</rdfs:comment>
+        <rdfs:label>hasInput</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#hasMaintenance -->
+
+
+    <owl:ObjectProperty rdf:about="http://w3id.org/mmv/0.1#hasMaintenance">
+        <owl:inverseOf rdf:resource="http://w3id.org/mmv/0.1#isMaintenanceOf"/>
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#MappingProject"/>
+        <rdfs:range rdf:resource="http://w3id.org/mmv/0.1#MaintenanceActivity"/>
+        <rdfs:comment>Links a mapping project to its maintenance phase, capturing publication, versioning, and long-term management of mapping artifacts.</rdfs:comment>
+        <rdfs:label>hasMaintenance</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#hasMappingArtifact -->
+
+
+    <owl:ObjectProperty rdf:about="http://w3id.org/mmv/0.1#hasMappingArtifact">
+        <owl:inverseOf rdf:resource="http://w3id.org/mmv/0.1#isMappingArtifactOf"/>
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#MappingProject"/>
+        <rdfs:range rdf:resource="http://w3id.org/mmv/0.1#MappingArtifact"/>
+        <rdfs:comment>Links a mapping project snapshot to the mapping artefact(s) documented in that version</rdfs:comment>
+        <rdfs:label>hasMappingArtifact</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#hasPlannedQualityMetric -->
+
+
+    <owl:ObjectProperty rdf:about="http://w3id.org/mmv/0.1#hasPlannedQualityMetric">
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#DesignActivity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/ns/dqv#Metric"/>
+        <rdfs:comment>Links a design activity to the quality metrics that are intended to be applied later when validating the resulting mapping artefact, enabling explicit test planning and reuse-oriented evaluation criteria.</rdfs:comment>
+        <rdfs:label>hasPlannedQualityMetric</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#hasQualityMeasurement -->
+
+
+    <owl:ObjectProperty rdf:about="http://w3id.org/mmv/0.1#hasQualityMeasurement">
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#TestingActivity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/ns/dqv#QualityMeasurement"/>
+        <rdfs:comment>Links a testing activity to computed quality measurements obtained during validation, capturing evidence that supports assessment and informed reuse of the mapping artefact.</rdfs:comment>
+        <rdfs:label>hasQualityMeasurement</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#hasStakeholder -->
+
+
+    <owl:ObjectProperty rdf:about="http://w3id.org/mmv/0.1#hasStakeholder">
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#MappingProject"/>
+        <rdfs:range rdf:resource="http://www.w3.org/ns/prov#Agent"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#hasTesting -->
+
+
+    <owl:ObjectProperty rdf:about="http://w3id.org/mmv/0.1#hasTesting">
+        <owl:inverseOf rdf:resource="http://w3id.org/mmv/0.1#isTestingOf"/>
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#MappingProject"/>
+        <rdfs:range rdf:resource="http://w3id.org/mmv/0.1#TestingActivity"/>
+        <rdfs:comment>Links a mapping project to its testing phase, capturing validation activities and their outcomes.</rdfs:comment>
+        <rdfs:label>hasTesting</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#isAnalysisOf -->
+
+
+    <owl:ObjectProperty rdf:about="http://w3id.org/mmv/0.1#isAnalysisOf">
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#AnalysisActivity"/>
+        <rdfs:range rdf:resource="http://w3id.org/mmv/0.1#MappingProject"/>
+        <rdfs:comment>Inverse of hasAnalysis. Relates an AnalysisActivity to the MappingProject it is part of.</rdfs:comment>
+        <rdfs:label>isAnalysisOf</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#isDesignOf -->
+
+
+    <owl:ObjectProperty rdf:about="http://w3id.org/mmv/0.1#isDesignOf">
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#DesignActivity"/>
+        <rdfs:range rdf:resource="http://w3id.org/mmv/0.1#MappingProject"/>
+        <rdfs:comment>Inverse of hasDesign. Relates a DesignActivity to the MappingProject it belongs to.</rdfs:comment>
+        <rdfs:label>isDesignOf</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#isDevelopmentOf -->
+
+
+    <owl:ObjectProperty rdf:about="http://w3id.org/mmv/0.1#isDevelopmentOf">
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#DevelopmentActivity"/>
+        <rdfs:range rdf:resource="http://w3id.org/mmv/0.1#MappingProject"/>
+        <rdfs:comment>Inverse of hasDevelopment. Relates a DevelopmentActivity to the MappingProject it belongs to.</rdfs:comment>
+        <rdfs:label>isDevelopmentOf</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#isMaintenanceOf -->
+
+
+    <owl:ObjectProperty rdf:about="http://w3id.org/mmv/0.1#isMaintenanceOf">
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#MaintenanceActivity"/>
+        <rdfs:range rdf:resource="http://w3id.org/mmv/0.1#MappingProject"/>
+        <rdfs:comment>Inverse of hasMaintenance. Relates a MaintenanceActivity to the MappingProject it belongs to.</rdfs:comment>
+        <rdfs:label>isMaintenanceOf</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#isMappingArtifactOf -->
+
+
+    <owl:ObjectProperty rdf:about="http://w3id.org/mmv/0.1#isMappingArtifactOf">
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#MappingArtifact"/>
+        <rdfs:range rdf:resource="http://w3id.org/mmv/0.1#MappingProject"/>
+        <rdfs:comment>Inverse of hasMappingArtifact. Relates a MappingArtifact to the MappingProject it belongs to.</rdfs:comment>
+        <rdfs:label>isMappingArtifactOf</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#isTestingOf -->
+
+
+    <owl:ObjectProperty rdf:about="http://w3id.org/mmv/0.1#isTestingOf">
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#TestingActivity"/>
+        <rdfs:range rdf:resource="http://w3id.org/mmv/0.1#MappingProject"/>
+        <rdfs:comment>Inverse of hasTesting. Relates a TestingActivity to the MappingProject it belongs to.</rdfs:comment>
+        <rdfs:label>isTestingOf</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/prov#wasRevisionOf -->
+
+
+    <rdf:Description rdf:about="http://www.w3.org/ns/prov#wasRevisionOf">
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#MappingArtifact"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/homepage -->
+
+
+    <owl:ObjectProperty rdf:about="http://xmlns.com/foaf/0.1/homepage"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#hasAssumption -->
+
+
+    <owl:DatatypeProperty rdf:about="http://w3id.org/mmv/0.1#hasAssumption">
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#AnalysisActivity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Records assumptions made during analysis about the source data, target model, or transformation logic, supporting correct interpretation and reuse.</rdfs:comment>
+        <rdfs:label>hasAssumption</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#hasBackground -->
+
+
+    <owl:DatatypeProperty rdf:about="http://w3id.org/mmv/0.1#hasBackground">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/prov#Agent"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Summarises relevant stakeholder expertise or experience, providing interpretive context for design and validation decisions.</rdfs:comment>
+        <rdfs:label>hasBackground</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#hasDescription -->
+
+
+    <owl:DatatypeProperty rdf:about="http://w3id.org/mmv/0.1#hasDescription">
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#MappingArtifact"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Provides a concise description of a mapping artefact or project element to support understanding and discovery.</rdfs:comment>
+        <rdfs:label>hasDescription</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#hasDesignDecision -->
+
+
+    <owl:DatatypeProperty rdf:about="http://w3id.org/mmv/0.1#hasDesignDecision">
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#DesignActivity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Captures final design choices made during the design phase (e.g., modelling patterns, reuse choices), enabling rationale-aware reuse and comparison.</rdfs:comment>
+        <rdfs:label>hasDesignDecision</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#hasDomainAssumption -->
+
+
+    <owl:DatatypeProperty rdf:about="http://w3id.org/mmv/0.1#hasDomainAssumption">
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#AnalysisActivity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Captures assumptions about domain semantics or modelling expectations that affect mapping interpretation, helping others understand potential validity limits during reuse.</rdfs:comment>
+        <rdfs:label>hasDomainAssumption</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#hasIdentifier -->
+
+
+    <owl:DatatypeProperty rdf:about="http://w3id.org/mmv/0.1#hasIdentifier">
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#MappingArtifact"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
+        <rdfs:comment>Records a persistent identifier or IRI for a mapping artefact, supporting citation, discovery, and change tracking</rdfs:comment>
+        <rdfs:label>hasIdentifier</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#hasInputCreator -->
+
+
+    <owl:DatatypeProperty rdf:about="http://w3id.org/mmv/0.1#hasInputCreator">
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#AnalysisActivity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Identifies the creator of the input dataset as stated or known at the time of mapping creation, supporting provenance-aware reuse.</rdfs:comment>
+        <rdfs:label>hasInputCreator</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#hasInputDescription -->
+
+
+    <owl:DatatypeProperty rdf:about="http://w3id.org/mmv/0.1#hasInputDescription">
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#AnalysisActivity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Provides a concise description of the input dataset content and scope, to support understanding and reuse without requiring full dataset publication.</rdfs:comment>
+        <rdfs:label>hasInputDescription</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#hasInputFormat -->
+
+
+    <owl:DatatypeProperty rdf:about="http://w3id.org/mmv/0.1#hasInputFormat">
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#AnalysisActivity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Records the file format or media type of the input dataset (e.g., text/csv), supporting reproducibility and tool selection.</rdfs:comment>
+        <rdfs:label>hasInputFormat</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#hasInputName -->
+
+
+    <owl:DatatypeProperty rdf:about="http://w3id.org/mmv/0.1#hasInputName">
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#AnalysisActivity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Captures the human-readable name of an input dataset (e.g., a file name), supporting traceability of the source used during mapping creation.</rdfs:comment>
+        <rdfs:label>hasInputName</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#hasInputSource -->
+
+
+    <owl:DatatypeProperty rdf:about="http://w3id.org/mmv/0.1#hasInputSource">
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#AnalysisActivity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Records the origin or provider of the input dataset (e.g., an archive, portal, or organisation), supporting traceability of the data used during mapping development.</rdfs:comment>
+        <rdfs:label>hasInputSource</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#hasInputType -->
+
+
+    <owl:DatatypeProperty rdf:about="http://w3id.org/mmv/0.1#hasInputType">
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#AnalysisActivity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Captures the type of input data (e.g., CSV, JSON, XML), supporting quick assessment of suitability and tool compatibility.</rdfs:comment>
+        <rdfs:label>hasInputType</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#hasJustification -->
+
+
+    <owl:DatatypeProperty rdf:about="http://w3id.org/mmv/0.1#hasJustification">
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#DesignActivity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Provides the rationale for a recorded design decision, supporting transparency and helping future maintainers assess trade-offs.</rdfs:comment>
+        <rdfs:label>hasJustification</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#hasMappingAlgorithm -->
+
+
+    <owl:DatatypeProperty rdf:about="http://w3id.org/mmv/0.1#hasMappingAlgorithm">
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#DevelopmentActivity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Describes any algorithmic approach used to generate, validate, or automate the mapping (e.g., heuristic matching, rule-based transformation), supporting transparency.</rdfs:comment>
+        <rdfs:label>hasMappingAlgorithm</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#hasMappingDomain -->
+
+
+    <owl:DatatypeProperty rdf:about="http://w3id.org/mmv/0.1#hasMappingDomain">
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#AnalysisActivity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Indicates the subject area or domain the mapping addresses (e.g., cultural heritage, geospatial), supporting discovery and contextual reuse.</rdfs:comment>
+        <rdfs:label>hasMappingDomain</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#hasPublisherName -->
+
+
+    <owl:DatatypeProperty rdf:about="http://w3id.org/mmv/0.1#hasPublisherName">
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#MaintenanceActivity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Identifies the person or organisation responsible for publishing or releasing the mapping artefact, supporting provenance and citation.</rdfs:comment>
+        <rdfs:label>hasPublisherName</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#hasPublisherSource -->
+
+
+    <owl:DatatypeProperty rdf:about="http://w3id.org/mmv/0.1#hasPublisherSource">
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#MaintenanceActivity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
+        <rdfs:comment>Records where the published mapping artefact is hosted or referenced (e.g., repository URL), supporting traceability and reuse.</rdfs:comment>
+        <rdfs:label>hasPublisherSource</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#hasPurpose -->
+
+
+    <owl:DatatypeProperty rdf:about="http://w3id.org/mmv/0.1#hasPurpose">
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#AnalysisActivity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Describes the intended purpose or goal of the mapping project.</rdfs:comment>
+        <rdfs:label>hasPurpose</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#hasRequirement -->
+
+
+    <owl:DatatypeProperty rdf:about="http://w3id.org/mmv/0.1#hasRequirement">
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#AnalysisActivity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>requirements of the project</rdfs:comment>
+        <rdfs:label>hasRequirement</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#hasRiskOrIssue -->
+
+
+    <owl:DatatypeProperty rdf:about="http://w3id.org/mmv/0.1#hasRiskOrIssue">
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#AnalysisActivity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Risks or issues related to the project</rdfs:comment>
+        <rdfs:label>hasRiskOrIssue</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#hasRole -->
+
+
+    <owl:DatatypeProperty rdf:about="http://w3id.org/mmv/0.1#hasRole">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/prov#Agent"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Records the stakeholder role in the mapping project (e.g., developer, reviewer, domain expert), supporting accountability and provenance-oriented interpretation.</rdfs:comment>
+        <rdfs:label>hasRole</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#hasTechnicalRequirement -->
+
+
+    <owl:DatatypeProperty rdf:about="http://w3id.org/mmv/0.1#hasTechnicalRequirement">
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#AnalysisActivity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Records technical constraints that influence implementation choices (e.g., required tool support or execution environment), supporting reproducibility and future maintenance decisions.</rdfs:comment>
+        <rdfs:label>hasTechnicalRequirement</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#hasTestingResult -->
+
+
+    <owl:DatatypeProperty rdf:about="http://w3id.org/mmv/0.1#hasTestingResult">
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#TestingActivity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Records the outcome of a testing activity (e.g., pass/fail summary), supporting quality assessment and reuse decisions.</rdfs:comment>
+        <rdfs:label>hasTestingResult</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#hasTestingType -->
+
+
+    <owl:DatatypeProperty rdf:about="http://w3id.org/mmv/0.1#hasTestingType">
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#TestingActivity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Specifies the type of testing or validation performed (e.g., SHACL validation, unit testing), supporting assessment of mapping trustworthiness.</rdfs:comment>
+        <rdfs:label>hasTestingType</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#hasTool -->
+
+
+    <owl:DatatypeProperty rdf:about="http://w3id.org/mmv/0.1#hasTool">
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#DevelopmentActivity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Lists the software tools or platforms used to create or edit the mapping (e.g., RMLEditor, Protégé), supporting reproducibility.</rdfs:comment>
+        <rdfs:label>hasTool</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#hasVersionDateTime -->
+
+
+    <owl:DatatypeProperty rdf:about="http://w3id.org/mmv/0.1#hasVersionDateTime">
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#MappingArtifact"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+        <rdfs:comment>Records the date and time when this version of the mapping artefact was created or released, supporting audit and reuse decisions.</rdfs:comment>
+        <rdfs:label>hasVersionDateTime</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#version -->
+
+
+    <owl:DatatypeProperty rdf:about="http://w3id.org/mmv/0.1#version">
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#MappingArtifact"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Records a version identifier for the mapping artefact, enabling change tracking and controlled reuse across releases.</rdfs:comment>
+        <rdfs:label>version</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://alex-randles.github.io/MQV/#hasMappingFormat -->
+
+
+    <owl:DatatypeProperty rdf:about="https://alex-randles.github.io/MQV/#hasMappingFormat">
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#DevelopmentActivity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Reuse of the MQV property to specify the concrete syntax or encoding format in which a mapping definition is expressed, such as RML, R2RML, SPARQL, or SSSOM.</rdfs:comment>
+        <rdfs:isDefinedBy>https://alex-randles.github.io/MQV/</rdfs:isDefinedBy>
+        <rdfs:label>hasMappingFormat</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://alex-randles.github.io/MQV/#hasMappingMethod -->
+
+
+    <owl:DatatypeProperty rdf:about="https://alex-randles.github.io/MQV/#hasMappingMethod">
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#DevelopmentActivity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Reuse of the MQV property to describe the method by which a mapping was produced, such as manual, semi-automatic, or fully automatic generation.</rdfs:comment>
+        <rdfs:isDefinedBy>https://alex-randles.github.io/MQV/</rdfs:isDefinedBy>
+        <rdfs:label>hasMappingMethod</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://alex-randles.github.io/MQV/#hasMappingType -->
+
+
+    <owl:DatatypeProperty rdf:about="https://alex-randles.github.io/MQV/#hasMappingType">
+        <rdfs:domain rdf:resource="http://w3id.org/mmv/0.1#DevelopmentActivity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Reuse of the MQV property to indicate the type of mapping being created, for example uplift mapping, ontology alignment, or interlinking.</rdfs:comment>
+        <rdfs:isDefinedBy>https://alex-randles.github.io/MQV/</rdfs:isDefinedBy>
+        <rdfs:label>hasMappingType</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#AnalysisActivity -->
+
+
+    <owl:Class rdf:about="http://w3id.org/mmv/0.1#AnalysisActivity">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/prov#Activity"/>
+        <owl:disjointWith rdf:resource="http://w3id.org/mmv/0.1#DesignActivity"/>
+        <owl:disjointWith rdf:resource="http://w3id.org/mmv/0.1#DevelopmentActivity"/>
+        <owl:disjointWith rdf:resource="http://w3id.org/mmv/0.1#MaintenanceActivity"/>
+        <owl:disjointWith rdf:resource="http://w3id.org/mmv/0.1#TestingActivity"/>
+        <vann:usageNote>@prefix mmv: &lt;http://w3id.org/mmv/0.1#&gt; .
+@prefix ex: &lt;http://example.org/&gt; .
+
+ex:analysis1 a mmv:AnalysisActivity ;
+    mmv:hasPurpose &quot;To align historical datasets&quot; ;
+    mmv:hasRequirement &quot;Map all person records to CIDOC-CRM&quot; ;
+    mmv:hasRiskOrIssue &quot;Ambiguous geographic identifiers&quot; .</vann:usageNote>
+        <rdfs:comment>Represents the analysis phase of a mapping project, where stakeholders, input datasets, requirements, assumptions, and potential risks are identified before mapping design and implementation.</rdfs:comment>
+        <rdfs:label>AnalysisActivity</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#DataSet -->
+
+
+    <owl:Class rdf:about="http://w3id.org/mmv/0.1#DataSet">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/prov#Entity"/>
+        <rdfs:comment>Represents a structured collection of data that serves as an input or output to a declarative mapping project, documented for analysis and reuse purposes rather than full dataset publication.</rdfs:comment>
+        <rdfs:label>DataSet</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#DesignActivity -->
+
+
+    <owl:Class rdf:about="http://w3id.org/mmv/0.1#DesignActivity">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/prov#Activity"/>
+        <owl:disjointWith rdf:resource="http://w3id.org/mmv/0.1#DevelopmentActivity"/>
+        <owl:disjointWith rdf:resource="http://w3id.org/mmv/0.1#MaintenanceActivity"/>
+        <owl:disjointWith rdf:resource="http://w3id.org/mmv/0.1#TestingActivity"/>
+        <rdfs:comment>Represents the design phase of a mapping project, where mapping decisions are made, including modeling choices, reuse considerations, and justifications for the selected approach.</rdfs:comment>
+        <rdfs:label>DesignActivity</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#DevelopmentActivity -->
+
+
+    <owl:Class rdf:about="http://w3id.org/mmv/0.1#DevelopmentActivity">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/prov#Activity"/>
+        <owl:disjointWith rdf:resource="http://w3id.org/mmv/0.1#MaintenanceActivity"/>
+        <owl:disjointWith rdf:resource="http://w3id.org/mmv/0.1#TestingActivity"/>
+        <rdfs:comment>Represents the development phase of a mapping project, where mappings are implemented using specific tools, methods, algorithms, and formats.</rdfs:comment>
+        <rdfs:label>DevelopmentActivity</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#MaintenanceActivity -->
+
+
+    <owl:Class rdf:about="http://w3id.org/mmv/0.1#MaintenanceActivity">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/prov#Activity"/>
+        <owl:disjointWith rdf:resource="http://w3id.org/mmv/0.1#TestingActivity"/>
+        <vann:usageNote>@prefix mmv: &lt;http://w3id.org/mmv/0.1#&gt; .
+@prefix ex: &lt;http://example.org/&gt; .
+
+ex:maintenance1 a mmv:MaintenanceActivity ;
+    mmv:hasPublisherName &quot;Trinity College Dublin&quot; ;
+    mmv:version &quot;1.0&quot; .</vann:usageNote>
+        <rdfs:comment>Represents the maintenance phase of a mapping project, where mapping artifacts are published, versioned, updated, and maintained over time.</rdfs:comment>
+        <rdfs:label>MaintenanceActivity</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#MappingArtifact -->
+
+
+    <owl:Class rdf:about="http://w3id.org/mmv/0.1#MappingArtifact">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/prov#Entity"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/ns/prov#wasRevisionOf"/>
+                <owl:allValuesFrom rdf:resource="http://w3id.org/mmv/0.1#MappingArtifact"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://w3id.org/mmv/0.1#isMappingArtifactOf"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://w3id.org/mmv/0.1#MappingProject"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <vann:usageNote>@prefix mmv: &lt;http://w3id.org/mmv/0.1#&gt; .
+@prefix prov: &lt;http://www.w3.org/ns/prov#&gt; .
+@prefix ex: &lt;http://example.org/&gt; .
+
+ex:mappingV2 a mmv:MappingArtifact ;
+    prov:wasRevisionOf ex:mappingV1 ;
+    mmv:version &quot;2.0&quot; .</vann:usageNote>
+        <rdfs:comment>A tangible output of a mapping project, such as an RML file, ontology alignment, or linkset.</rdfs:comment>
+        <rdfs:label>MappingArtifact</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#MappingProject -->
+
+
+    <owl:Class rdf:about="http://w3id.org/mmv/0.1#MappingProject">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/prov#Entity"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://w3id.org/mmv/0.1#hasMappingArtifact"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://w3id.org/mmv/0.1#MappingArtifact"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://w3id.org/mmv/0.1#hasAnalysis"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://w3id.org/mmv/0.1#AnalysisActivity"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://w3id.org/mmv/0.1#hasDesign"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://w3id.org/mmv/0.1#DesignActivity"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://w3id.org/mmv/0.1#hasDevelopment"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://w3id.org/mmv/0.1#DevelopmentActivity"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://w3id.org/mmv/0.1#hasMaintenance"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://w3id.org/mmv/0.1#MaintenanceActivity"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://w3id.org/mmv/0.1#hasTesting"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://w3id.org/mmv/0.1#TestingActivity"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <vann:usageNote>@prefix mmv: &lt;http://w3id.org/mmv/0.1#&gt; .
+@prefix ex:  &lt;http://example.org/&gt; .
+
+ex:project1 a mmv:MappingProject ;
+    mmv:hasMappingArtifact ex:mappingV1 ;
+    mmv:hasAnalysis ex:analysis1 .</vann:usageNote>
+        <rdfs:comment>Represents a mapping project encompassing the analysis, design, development, testing, and maintenance of a single mapping artifact.</rdfs:comment>
+        <rdfs:label>MappingProject</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#QualityAssessment -->
+
+
+    <owl:Class rdf:about="http://w3id.org/mmv/0.1#QualityAssessment">
+        <rdfs:subClassOf rdf:resource="http://w3id.org/mmv/0.1#TestingActivity"/>
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/prov#Activity"/>
+        <rdfs:comment>Represents a quality assessment performed as part of the testing phase of a mapping project, focusing on the evaluation of mapping artifacts using quality metrics and assessment criteria.</rdfs:comment>
+        <rdfs:label>QualityAssessment</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://w3id.org/mmv/0.1#TestingActivity -->
+
+
+    <owl:Class rdf:about="http://w3id.org/mmv/0.1#TestingActivity">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/prov#Activity"/>
+        <vann:usageNote>@prefix mmv: &lt;http://w3id.org/mmv/0.1#&gt; .
+@prefix ex: &lt;http://example.org/&gt; .
+
+ex:test1 a mmv:TestingActivity ;
+    mmv:hasTestingType &quot;SHACL validation&quot; ;
+    mmv:hasTestingResult &quot;All constraints satisfied&quot; .</vann:usageNote>
+        <rdfs:comment>Represents the testing and validation phase of a mapping project, where mapping artifacts are tested, validated, and assessed to ensure correctness, consistency, and quality.</rdfs:comment>
+        <rdfs:label>TestingActivity</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3.org/2000/01/rdf-schema#Resource -->
+
+
+    <owl:Class rdf:about="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+    
+
+
+    <!-- http://www.w3.org/2004/02/skos/core#Concept -->
+
+
+    <owl:Class rdf:about="http://www.w3.org/2004/02/skos/core#Concept"/>
+    
+
+
+    <!-- http://www.w3.org/ns/dqv#Metric -->
+
+
+    <owl:Class rdf:about="http://www.w3.org/ns/dqv#Metric">
+        <rdfs:isDefinedBy>http://www.w3.org/ns/dqv#</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3.org/ns/dqv#QualityMeasurement -->
+
+
+    <owl:Class rdf:about="http://www.w3.org/ns/dqv#QualityMeasurement">
+        <rdfs:isDefinedBy>http://www.w3.org/ns/dqv#</rdfs:isDefinedBy>
+    </owl:Class>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/Person -->
+
+
+    <owl:Class rdf:about="http://xmlns.com/foaf/0.1/Person"/>
+    <rdf:Description>
+        <foaf:name>Riccardo Albertoni</foaf:name>
+    </rdf:Description>
+    <rdf:Description>
+        <foaf:name>Christophe Guéret</foaf:name>
+    </rdf:Description>
+    <rdf:Description>
+        <foaf:name>Riccardo Albertoni</foaf:name>
+    </rdf:Description>
+    <rdf:Description>
+        <foaf:name>Makx Dekkers</foaf:name>
+    </rdf:Description>
+    <rdf:Description>
+        <foaf:name>Antoine Isaac</foaf:name>
+    </rdf:Description>
+    <rdf:Description>
+        <foaf:name>Amrapali Zaveri</foaf:name>
+    </rdf:Description>
+    <rdf:Description>
+        <foaf:name>Christophe Guéret</foaf:name>
+    </rdf:Description>
+    <rdf:Description>
+        <foaf:name>Christophe Guéret</foaf:name>
+    </rdf:Description>
+    <rdf:Description>
+        <foaf:name>Riccardo Albertoni</foaf:name>
+    </rdf:Description>
+    <rdf:Description rdf:nodeID="genid18">
+        <rdfs:comment>Indicates the maturity/status of this MMV release (e.g., draft, stable)</rdfs:comment>
+        <rdfs:label>status</rdfs:label>
+    </rdf:Description>
+    <rdf:Description>
+        <foaf:name>Nandana Mihindukulasooriya</foaf:name>
+    </rdf:Description>
+    <rdf:Description>
+        <foaf:name>Amrapali Zaveri</foaf:name>
+    </rdf:Description>
+    <rdf:Description>
+        <foaf:name>Antoine Isaac</foaf:name>
+    </rdf:Description>
+    <rdf:Description>
+        <foaf:name>Jeremy Debattista</foaf:name>
+    </rdf:Description>
+    <rdf:Description>
+        <foaf:name>Deirdre Lee</foaf:name>
+    </rdf:Description>
+    <rdf:Description>
+        <foaf:name>Deirdre Lee</foaf:name>
+    </rdf:Description>
+    <rdf:Description>
+        <foaf:name>Makx Dekkers</foaf:name>
+    </rdf:Description>
+    <rdf:Description>
+        <foaf:name>Deirdre Lee</foaf:name>
+    </rdf:Description>
+    <rdf:Description>
+        <foaf:name>Amrapali Zaveri</foaf:name>
+    </rdf:Description>
+    <rdf:Description>
+        <foaf:name>Antoine Isaac</foaf:name>
+    </rdf:Description>
+    <rdf:Description>
+        <foaf:name>Makx Dekkers</foaf:name>
+    </rdf:Description>
+    <rdf:Description>
+        <foaf:name>Nandana Mihindukulasooriya</foaf:name>
+    </rdf:Description>
+    <rdf:Description>
+        <foaf:name>Nandana Mihindukulasooriya</foaf:name>
+    </rdf:Description>
+    <rdf:Description>
+        <foaf:name>Jeremy Debattista</foaf:name>
+    </rdf:Description>
+    <rdf:Description>
+        <foaf:name>Jeremy Debattista</foaf:name>
+    </rdf:Description>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotations
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+    <rdf:Description rdf:about="http://w3id.org/mmv/0.1#M1">
+        <rdfs:comment rdf:resource="http://w3id.org/mmv/0.1#"/>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 5.1.18) https://github.com/owlcs/owlapi/ -->
+
+
