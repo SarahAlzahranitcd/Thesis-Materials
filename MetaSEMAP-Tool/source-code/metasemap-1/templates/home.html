@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MetaSEMAP</title>
+    <style>
+        #con {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+        #con2 {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+        h2 {
+            padding-top: 30px;
+        }
+        #logo {
+            float: right;
+            margin: 5px;
+        }
+        #par {
+            text-align: justify;
+            font-size: 20px;
+        }
+        #footer {
+            text-align: center;
+        }
+        #footer a {
+            color: inherit;
+        }
+        .section-label {
+            font-size: 14px;
+            color: #555;
+            font-style: italic;
+            margin-top: 20px;
+            margin-bottom: 5px;
+            padding-left: 10px;
+        }
+        .bn49 {
+            border: 0;
+            text-align: center;
+            display: inline-block;
+            padding: 14px;
+            width: 30%;
+            margin: 10px;
+            color: #000000;
+            background-color: #87CEEB;
+            border-radius: 10px;
+            font-family: "proxima-nova-soft", sans-serif;
+            font-weight: 600;
+            text-decoration: none;
+            transition: box-shadow 200ms ease-out;
+        }
+        /* Primary button — refined version, current recommended workflow */
+        .bn49.primary {
+            padding: 18px;
+            width: 50%;
+            font-size: 16px;
+            display: block;
+            margin: 15px 0;
+        }
+        /* Study buttons stacked vertically, one per line, left-aligned */
+        .bn49.study {
+            display: block;
+            width: 50%;
+            margin: 8px 0;
+        }
+        /* Specific styling for the disabled "Reuse Mapping" button */
+        .bn49.disabled {
+            background-color: gray;
+            color: lightgray;
+            pointer-events: none;
+        }
+        .draft-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            background: #fce5b6;
+            color: #6b4400;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: 600;
+            vertical-align: middle;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div id="con">
+        <img id="bannner" src="/static/banner.jpg" height="200" width="750">
+        <h2>Welcome to MetaSEMAP</h2>
+        <div class="square">
+            <div>
+                <img id="logo" src="/static/logo.png" width="300" height="200">
+            </div>
+            <p id="par">
+                MetaSEMAP is a software application for annotating declarative mappings using lifecycle-based metadata. The refined version below implements the latest MMV v0.2 ontology and is the recommended entry point for current use. The three study buttons preserve the exact tool versions used in the thesis evaluation studies, ensuring experimental replicability.
+            </p>
+            <a class="bn49 primary" href="{{ url_for('v2_annotate') }}">MetaSEMAP for annotating mappings (Refined version)</a>
+
+            <div class="section-label">Experimental versions used in thesis evaluation studies:</div>
+            <a class="bn49 study" href="static/task_explanation.html">Annotate Mapping - Study 2</a>
+            <a class="bn49 study" href="{{ url_for('reuse_intro') }}">Reuse Mapping - Study 4</a>
+            <a class="bn49 study" href="{{ url_for('llm_experiment') }}">LLM Experiment - Study 5</a>
+        </div>
+    </div>
+    <div id="con2">
+        <div id="footer">
+            <p>
+                Copyright 2024–2026, Sarah Alzahrani &middot;
+                <a href="mailto:salzahra@tcd.ie">salzahra@tcd.ie</a> &middot;
+                <a href="https://sarahalzahranitcd.github.io/MMV-V02/" target="_blank" rel="noopener">MMV v0.2 documentation</a>
+            </p>
+        </div>
+        <img id="bottom" src="/static/bottom.png" height="100" width="750">
+    </div>
+</body>
+</html>

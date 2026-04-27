@@ -1,0 +1,78 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix cidoc: <http://erlangen-crm.org/current/> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix geom: <http://data.ordnancesurvey.co.uk/ontology/geometry/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix b2022: <https://ont.virtualtreasury.ie/ontology#> .
+@base <http://example.com/ns#>.
+@prefix rml: <http://semweb.mmlab.be/ns/rml#>.
+@prefix ql: <http://semweb.mmlab.be/ns/ql#>.
+@prefix ex: <http://example.com/> .
+
+<#COUNTY>
+	a rr:TriplesMap ;
+
+	rml:logicalSource [
+		rml:query """
+                      SELECT VRTI_ID, OSM_ID, T_IE_URL, NAME_TAG, 
+					  NAME_EN, NAME_GA, ALT_NAME, ALT_NAME_G,
+                       UNNEST(STRING_SPLIT(LOGAINM_RE, ';'))
+                       AS LOGAINM_RE FROM 'data_county.csv'
+                """;		
+		rml:source "data_county.csv" ;
+		rml:referenceFormulation ql:CSV
+	];
+
+	rr:subjectMap [
+		rr:template "https://kg.virtualtreasury.ie/place/present-day/county/{NAME_TAG}/{VRTI_ID}" ;
+		rr:class cidoc:E53_Place , geo:Feature ;
+	] ;
+
+	rr:predicateObjectMap [
+		rr:predicate cidoc:P2_has_type ;
+		rr:object b2022:PresentDayCounty ; # Note that it is implied that this class is an instance of cidoc:E55_Type
+	] ;
+
+	rr:predicateObjectMap [
+		rr:predicate b2022:VrtiIdentifier ;
+		rr:objectMap [
+			rml:reference "VRTI_ID" ;
+		] ;
+	] ;
+
+
+	rr:predicateObjectMap [
+		rr:predicate cidoc:P89_falls_within ;
+		rr:objectMap [ rr:template "https://kg.virtualtreasury.ie/place/present-day/province/{PROVINCE}/{PROV_IDS}" ] ;
+	] ;		
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:label ;
+		rr:objectMap [ rr:template "{NAME_TAG}" ; rr:termType rr:Literal ; rr:language "en" ; ] ;
+		rr:objectMap [ rr:template "{NAME_EN}" ; rr:termType rr:Literal ; rr:language "en" ; ] ;
+		rr:objectMap [ rr:template "{ALT_NAME}" ; rr:termType rr:Literal ; rr:language "en" ; ] ;	
+	] ;	
+
+	rr:predicateObjectMap [
+		rr:predicate geo:hasCentroid ;
+		rr:objectMap [ rr:template "https://kg.virtualtreasury.ie/place/present-day/county/centroid/{NAME_TAG}/{VRTI_ID}" ] ;
+	] ;		
+
+
+	rr:predicateObjectMap [
+		rr:predicate geo:hasBoundingBox ;
+		rr:objectMap [ rr:template "https://kg.virtualtreasury.ie/place/present-day/county/boundary/{NAME_TAG}/{VRTI_ID}" ] ;
+	] ;	
+
+
+	rr:predicateObjectMap [
+		rr:predicate geo:hasMetricArea ;
+		rr:objectMap [
+			rml:reference "AREA" ;
+			rr:datatype xsd:float ;
+		] ;
+	] ;		
+.
+

@@ -1,0 +1,21 @@
+<http://www.w3.org/2002/07/owl#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+
+INSERT {
+  ?vrtEntity owl:sameAs ?wikidataEntity .
+}
+WHERE {
+  # VRTI knowledge graph part
+  ?vrtEntity rdf:type <http://erlangen-crm.org/current/E21_Person> ;
+             foaf:name ?name .
+
+  # Wikidata knowledge graph part
+  ?wikidataEntity wdt:P31 wd:Q5 ; # Q5 represents humans in Wikidata
+                 rdfs:label ?name .
+  
+  # Filter to ensure name match
+  FILTER(LANG(?name) = "en")  # Ensures the label is in English
+}

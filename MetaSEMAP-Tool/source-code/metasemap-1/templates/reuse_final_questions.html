@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reuse Evaluation – Final Questions</title>
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      letter-spacing: normal !important;
+      word-spacing: normal !important;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    }
+
+    #con { max-width: 1050px; margin: 0 auto; }
+    #con2 { max-width: 1050px; margin: 0 auto; }
+    #footer { text-align: center; }
+
+    h2 { padding-top: 30px; }
+    h1, h2, h3, h4, p, label, summary, th, td, button, a {
+      letter-spacing: normal !important;
+      word-spacing: normal !important;
+      text-align: left;
+    }
+
+    #banner, #bottom {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .bn49 {
+      border: 0;
+      text-align: center;
+      display: inline-block;
+      padding: 14px;
+      min-width: 220px;
+      margin: 10px;
+      color: #000000;
+      background-color: #87CEEB;
+      border-radius: 10px;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      font-weight: 600;
+      text-decoration: none;
+      transition: box-shadow 200ms ease-out;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .bn49:hover {
+      box-shadow: 0 4px 18px rgba(0,0,0,0.15);
+    }
+
+    .note {
+      background: #fff7e6;
+      border: 1px solid #ffd591;
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 10px;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .muted {
+      color: #555;
+      font-size: 15px;
+    }
+
+    .qblock {
+      margin-top: 18px;
+    }
+
+    label {
+      display: block;
+      margin: 8px 0;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    textarea {
+      width: 98%;
+      resize: vertical;
+      border-radius: 6px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      min-height: 90px;
+      font-family: inherit;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="con">
+    <img id="banner" src="/static/banner.jpg" alt="MetaSEMAP banner" />
+
+    <h2>Final Questions</h2>
+
+    <div class="note">
+      <strong>Thank you.</strong><br/>
+      You have now completed the three scenarios. These final questions ask about your
+      overall preference after seeing all three mapping artefacts.
+    </div>
+
+    <form method="POST" action="/submit-reuse-final">
+      <input type="hidden" name="participant_id" value="{{ participant_id }}">
+
+      <div class="qblock">
+        <strong>1) After completing all three scenarios, which metadata representation would you prefer to use in practice when documenting mapping artefacts?</strong>
+        <label><input type="radio" name="overall_preference" value="A" required> Representation A (FAIR-IMPACT metadata model)</label>
+        <label><input type="radio" name="overall_preference" value="B"> Representation B (MMV lifecycle-based metadata model)</label>
+        <label><input type="radio" name="overall_preference" value="both"> Both together</label>
+        <label><input type="radio" name="overall_preference" value="no_preference"> No preference</label>
+      </div>
+
+      <div class="qblock">
+        <strong>2) Why?</strong>
+        <textarea name="overall_preference_reason" placeholder="Please briefly explain your choice."></textarea>
+      </div>
+
+      <div class="qblock">
+        <strong>3) Any final suggestions for improving metadata documentation for mapping reuse?</strong>
+        <textarea name="final_suggestions" placeholder="(Optional)"></textarea>
+      </div>
+
+      <div class="btn-row">
+        <button type="submit" class="bn49">Submit Final Responses</button>
+      </div>
+    </form>
+  </div>
+
+  <div id="con2">
+    <div id="footer">
+      <p>Copyright 2026, Sarah Alzahrani salzahra@tcd.ie</p>
+    </div>
+    <img id="bottom" src="/static/bottom.png" alt="footer" />
+  </div>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        #con {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        #con2 {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            padding-top: 30px;
+        }
+
+        #logo {
+            float: right;
+            margin: 5px;
+        }
+
+        #par {
+            text-align: justify;
+            font-size: 20px;
+        }
+
+        #footer {
+            text-align: center;
+        }
+
+        .bn49 {
+            border: 0;
+            text-align: center;
+            display: inline-block;
+            padding: 14px;
+            width: 200px;
+            margin: 10px;
+            color: #000000;
+            background-color: #87CEEB;
+            border-radius: 10px;
+            font-family: "proxima-nova-soft", sans-serif;
+            font-weight: 600;
+            text-decoration: none;
+            transition: box-shadow 200ms ease-out;
+            cursor: pointer;
+        }
+
+        table {
+            border-collapse: separate;
+            border-spacing: 10px;
+            background-color: #f0f0f0;
+            margin-left: auto;
+            margin-right: auto;
+            width: 60%; /* Adjust the width as per your requirement */
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            padding: 10px;
+        }
+        /* Unified code and survey box style */
+        #unique-code-box {
+            padding: 20px;
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+            text-align: center;
+            font-family: "proxima-nova-soft", sans-serif;
+            font-size: 16px;
+        }
+
+        #unique-code {
+            font-weight: bold;
+            color: #0000FF; /* Blue for the unique code text */
+            margin-bottom: 20px;
+        }
+
+        #survey-box p,
+        #unique-code-box p {
+            font-size: 16px;
+            color: #000000;
+        }
+
+        .survey-link {
+            color: #000000;
+            background-color: #87CEEB;
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+    <title>Metadata Added Successfully</title>
+</head>
+
+<body>
+    <div id="con">
+        <img id="bannner" src="/static/banner.jpg" height="200" width="750">
+        <h2>Metadata Added Successfully</h2>
+
+        <br>
+        <div class="square">
+            <p>Your metadata has been successfully added. Please review your results below and then proceed to the survey for feedback. Your insights are essential for improving the tool.</p>
+
+            <!-- Display the metadata -->
+            <table>
+                <tr>
+                    <th>Metadata Representation</th>
+                    <th>View</th>
+                    <th>Download</th>
+                </tr>
+                <tr>
+                    <td>Named Graph</td>
+                    <td><a class="view-link" href="{{ url_for('view_metadata', rdf_data_path=rdf_data_path_named_graph) }}" target="_blank">View</a></td>
+                    <td><a class="download-link" href="{{ url_for('download_metadata', rdf_data_path=rdf_data_path_named_graph) }}" target="_blank">Download</a></td>
+                </tr>
+                <tr>
+                    <td>RDF-Star</td>
+                    <td><a class="view-link" href="{{ url_for('view_metadata', rdf_star_data_path=rdf_data_path_rdf_star) }}" target="_blank">View</a></td>
+                    <td><a class="download-link" href="{{ url_for('download_metadata', rdf_star_data_path=rdf_data_path_rdf_star) }}" target="_blank">Download</a></td>
+                </tr>
+
+            </table>
+
+            <!-- Unified Unique Code and Survey Box -->
+            <div id="unique-code-box">
+                <p id="unique-code" style="color: red;">
+                    Your Unique Anonymous Code: <strong>{{ unique_code }}</strong>
+                </p>
+                <p><strong>Important:</strong> Please enter this code in the survey as a <strong>required field</strong> at the beginning of the survey. This code will help us link your participation with in the experiment with your feedback, confirming your successful completion of the experiment.</p>
+                <br>
+                <!-- Survey section with consistent styling -->
+                <p><a href="https://docs.google.com/forms/d/e/1FAIpQLSdRhBPxzCQwrQyi3zmMPdP-EeON7zqFAG5tR6aoSd0UnXuMXQ/viewform" target="_blank" class="survey-link">Complete the Survey</a></p>
+                <br>
+            </div>
+        </div>
+
+        <br><br>
+    </div>
+
+    <div id="con2">
+        <div id="footer">
+            <p>Copyrights 2024 , Sarah Alzahrani salzahra@tcd.ie</p>
+        </div>
+
+        <img id="bottom" src="/static/bottom.png" height="100" width="750">
+    </div>
+</body>
+
+</html>

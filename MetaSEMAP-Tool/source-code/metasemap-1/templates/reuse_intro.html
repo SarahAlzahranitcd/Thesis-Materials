@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reuse Evaluation – Study Information & Consent</title>
+
+  <style>
+    #con, #con2 { max-width: 720px; margin: 0 auto; }
+    h2 { padding-top: 30px; }
+    #footer { text-align: center; }
+    #par { text-align: justify; font-size: 20px; }
+
+    .bn49{
+      border:0; text-align:center; display:inline-block; padding:14px;
+      width:30%; margin:10px; color:#000; background-color:#87CEEB;
+      border-radius:10px; font-family:"proxima-nova-soft", sans-serif;
+      font-weight:600; text-decoration:none;
+      transition: box-shadow 200ms ease-out;
+      cursor:pointer;
+    }
+    .bn49:hover { box-shadow:0 4px 18px rgba(0,0,0,0.15); }
+
+    #overlay{
+      display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+      background-color:rgba(0,0,0,0.5); z-index:1000;
+    }
+
+    #consent-form{
+      background:#fff; padding:20px; width:55%; max-height:80%; overflow:auto;
+      position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+      border-radius:10px;
+    }
+
+    table{ border-collapse:collapse; width:100%; border:1px solid #000; }
+    th, td{ text-align:left; padding:8px; border:1px solid #000; vertical-align:top; }
+
+    .note{
+      background:#fff7e6; border:1px solid #ffd591;
+      padding:10px; border-radius:8px;
+      margin-top:10px; font-size:16px; line-height:1.6;
+    }
+
+    .muted{ color:#555; font-size:16px; }
+    ul{ margin-top:6px; }
+  </style>
+</head>
+
+<body>
+  <div id="con">
+    <img id="banner" src="/static/banner.jpg" height="200" width="750" alt="MetaSEMAP banner">
+
+    <div class="square">
+      <h2>Expert Study on Metadata for Mapping Reuse</h2>
+
+      <p class="muted" style="font-size:18px; line-height:1.7;">
+        This study investigates how metadata can help experts decide whether an existing
+        <strong>mapping artefact</strong> can be reused in a new project.
+        The research forms part of a PhD in Computer Science at
+        <strong>Trinity College Dublin</strong>.
+      </p>
+
+      <p class="muted" style="font-size:18px; line-height:1.7;">
+        In this study, a <strong>mapping artefact</strong> means a technical specification used to
+        transform, align, or connect data. Examples include an
+        <strong>interlinking rule</strong>, an <strong>RML mapping</strong>, and an
+        <strong>ontology alignment</strong>.
+      </p>
+
+      <div class="note">
+        <strong>Goal of the experiment:</strong>
+        The goal is to evaluate whether different metadata models provide enough context
+        for an expert to understand a mapping artefact, judge its trustworthiness,
+        and decide whether it could be reused as a starting point in another setting.
+      </div>
+
+      <div class="note">
+        <strong>About the two metadata models:</strong><br><br>
+
+        <strong>Representation A: FAIR-IMPACT metadata model</strong><br>
+        This model provides a concise description of the mapping artefact itself,
+        such as its identifier, source and target resources, creator, tool, context,
+        and evaluation information when available.<br><br>
+
+        <strong>Representation B: MMV lifecycle-based metadata model</strong><br>
+        This model describes the mapping artefact across its lifecycle.
+        In addition to basic artefact information, it may include details about
+        the purpose of the mapping, assumptions, design decisions, technical requirements,
+        risks, testing, maintenance, and stakeholders.
+      </div>
+
+      <h3>What you will do</h3>
+
+      <table>
+        <tr>
+          <td>
+            <ol style="font-size:18px; line-height:1.7;">
+              <li>
+                <strong>Review three reuse scenarios.</strong><br>
+                Each scenario presents one mapping artefact from a different type of task:
+                <ul>
+                  <li><strong>Scenario 1:</strong> Interlinking rule</li>
+                  <li><strong>Scenario 2:</strong> RML mapping</li>
+                  <li><strong>Scenario 3:</strong> Ontology alignment</li>
+                </ul>
+              </li>
+
+              <li>
+                <strong>Compare two metadata representations.</strong><br>
+                In each scenario, the same mapping artefact is described using two metadata models:
+                <ul>
+                  <li><strong>Representation A:</strong> FAIR-IMPACT metadata model</li>
+                  <li><strong>Representation B:</strong> MMV lifecycle-based metadata model</li>
+                </ul>
+              </li>
+
+              <li>
+                <strong>Make a reuse decision.</strong><br>
+                Your task is not to execute the mapping or inspect every rule in detail.
+                Instead, please imagine that you have discovered this artefact while searching
+                for reusable resources, and decide whether the metadata gives you enough
+                information to reuse it as a starting point.
+              </li>
+
+              <li>
+                <strong>Complete a short questionnaire after each scenario.</strong><br>
+                You will be asked whether you would consider the artefact reusable,
+                which representation better supported your decision,
+                which one was easier to understand,
+                and what information was most useful or missing.
+              </li>
+            </ol>
+
+            <div class="note">
+              <strong>Important:</strong>
+              You are not being asked to judge the full technical correctness of the artefact itself.
+              You are being asked whether the metadata description gives you enough information
+              to make an informed reuse decision.
+            </div>
+
+            <div class="note">
+              <strong>Please note:</strong>
+              Please base your responses only on the information shown in the study pages.
+              External searching or additional resources are not required.
+            </div>
+
+            <p class="muted" style="margin-top:10px;">
+              <strong>Estimated duration:</strong> approximately
+              <strong>15–20 minutes</strong> in total.
+            </p>
+
+            <p style="color: darkred; font-size:18px; line-height:1.6;">
+              For questions about the study, please contact
+              <a href="mailto:salzahra@tcd.ie" style="color: blue; text-decoration: none;">
+                salzahra@tcd.ie
+              </a>.
+            </p>
+          </td>
+        </tr>
+      </table>
+
+      <button id="proceedButton" class="bn49" onclick="showConsentForm()">Proceed</button>
+    </div>
+  </div>
+
+  <!-- CONSENT OVERLAY -->
+  <div id="overlay">
+    <div id="consent-form">
+      <h2>Consent Form</h2>
+
+      <p style="font-size:16px; line-height:1.6;">
+        This research investigates how metadata can support the discovery and reuse
+        of mapping artefacts. In the study, participants review three example artefacts
+        and compare two metadata models that describe each artefact.
+      </p>
+
+      <p style="font-size:16px; line-height:1.6;">
+        <strong>Procedures:</strong>
+        If consent is provided, participation involves completing three short reuse scenarios
+        and a brief questionnaire after each one. The study consists solely of reviewing
+        scenario information and evaluating metadata documentation. No personal identifiers are collected.
+      </p>
+
+      <p style="font-size:16px; line-height:1.6;">
+        <strong>Voluntary participation:</strong>
+        Participation is voluntary. The study may be discontinued at any time by closing the page.
+        Any question may be left unanswered without penalty.
+      </p>
+
+      <p style="font-size:16px; line-height:1.6;">
+        <strong>Anonymity and data handling:</strong>
+        Participation is anonymous and no personal details are required.
+        Responses will be analysed for academic research purposes and reported only in aggregated form
+        in publications and a PhD thesis.
+        Data will be stored securely for up to <strong>two years</strong> and then deleted.
+        Once responses are fully anonymised, withdrawal may no longer be possible.
+      </p>
+
+      <p style="font-size:16px; line-height:1.6;">
+        <strong>Data protection:</strong>
+        Any processing of research data will be conducted in accordance with
+        the General Data Protection Regulation (GDPR).
+      </p>
+
+      <ul style="font-size:15px; line-height:1.6;">
+        <li>I am 18 years or older and competent to provide consent.</li>
+        <li>I have read and understood the information above.</li>
+        <li>I understand participation is voluntary and may be discontinued at any time.</li>
+        <li>I consent to the data processing necessary to enable my participation.</li>
+        <li>I understand responses may be used for scientific publication in anonymised form.</li>
+      </ul>
+
+      <p style="font-size:15px; line-height:1.6;">
+        <input type="checkbox" id="consent-checkbox">
+        I consent to participate in this study.
+      </p>
+
+      <button class="bn49" style="width:auto;" onclick="acceptConsent()">Accept</button>
+      <button class="bn49" style="width:auto;" onclick="hideConsentForm()">Cancel</button>
+    </div>
+  </div>
+
+  <div id="con2">
+    <div id="footer">
+      <p>Copyright 2026, Sarah Alzahrani salzahra@tcd.ie</p>
+    </div>
+    <img id="bottom" src="/static/bottom.png" height="100" width="750" alt="footer">
+  </div>
+
+  <script>
+    function showConsentForm(){
+      document.getElementById("overlay").style.display="block";
+    }
+    function hideConsentForm(){
+      document.getElementById("overlay").style.display="none";
+    }
+    function acceptConsent(){
+      if(document.getElementById("consent-checkbox").checked){
+        window.location.href="/reuse-eval-s1";
+      } else {
+        alert("Please accept the consent statement to proceed.");
+      }
+    }
+  </script>
+</body>
+</html>

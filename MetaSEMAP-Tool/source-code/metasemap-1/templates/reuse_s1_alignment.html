@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reuse Evaluation – Scenario 3 (Ontology Alignment)</title>
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      letter-spacing: normal !important;
+      word-spacing: normal !important;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    }
+
+    #con { max-width: 1050px; margin: 0 auto; }
+    #con2 { max-width: 1050px; margin: 0 auto; }
+    h2 { padding-top: 30px; letter-spacing: normal; word-spacing: normal; }
+    #par { text-align: left; font-size: 18px; line-height: 1.7; letter-spacing: normal; word-spacing: normal; }
+    #footer { text-align: center; }
+
+    h1, h2, h3, h4, p, label, summary, th, td, button, a {
+      letter-spacing: normal !important;
+      word-spacing: normal !important;
+      text-align: left;
+    }
+
+    .bn49 {
+      border: 0;
+      text-align: center;
+      display: inline-block;
+      padding: 14px;
+      width: 30%;
+      margin: 10px;
+      color: #000000;
+      background-color: #87CEEB;
+      border-radius: 10px;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      font-weight: 600;
+      text-decoration: none;
+      transition: box-shadow 200ms ease-out;
+      cursor: pointer;
+    }
+    .bn49:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.15); }
+
+    table { border-collapse: collapse; width: 100%; border: 1px solid #000; }
+    th, td {
+      text-align: left;
+      padding: 8px;
+      border: 1px solid #000;
+      vertical-align: top;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+      white-space: normal;
+    }
+
+    .note {
+      background: #fff7e6;
+      border: 1px solid #ffd591;
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 10px;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    .muted { color: #555; font-size: 15px; }
+
+    details {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 10px;
+      margin-top: 12px;
+      background: #fff;
+    }
+    summary { cursor: pointer; font-weight: 700; }
+
+    pre {
+      background: #0b1020;
+      color: #e8e8e8;
+      padding: 12px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 12px;
+      line-height: 1.4;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      white-space: pre;
+      margin-top: 10px;
+    }
+
+    .qblock { margin-top: 10px; }
+    label { display: block; margin: 6px 0; }
+    textarea {
+      width: 98%;
+      resize: vertical;
+      border-radius: 6px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      min-height: 70px;
+      font-family: inherit;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      white-space: normal;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+    }
+
+    .np { color: #666; font-style: italic; }
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      white-space: normal;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+    }
+
+    .section-row td {
+      background: #f7f7f7;
+      font-weight: 900;
+    }
+    .lvl {
+      font-size: 12px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid #d0d0d0;
+      background: #fff;
+      display: inline-block;
+      font-weight: 800;
+      margin-left: 8px;
+    }
+
+    .btn-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+    .btn-row .bn49 { width: auto; }
+  </style>
+</head>
+
+<body>
+  <div id="con">
+    <img id="banner" src="/static/banner.jpg" height="200" width="750" alt="MetaSEMAP banner" />
+
+    <h2>Scenario 3: Reusing an Ontology Alignment</h2>
+    <p class="muted" style="margin-top:0;">
+      Artefact: <strong>An ontology alignment</strong> between <strong>mouse.owl</strong> and <strong>human.owl</strong>.
+    </p>
+
+    <div class="note">
+      <strong>Scenario:</strong><br/>
+      Imagine that you are working on a biomedical knowledge graph project and need an existing alignment as a starting point for a similar anatomy alignment task. You find an ontology alignment produced in the OAEI 2024 Anatomy track, where the goal is to align concepts between the Adult Mouse Anatomy ontology (mouse.owl) and a human anatomy ontology (human.owl) so that equivalent anatomical structures across the two species can be related.
+    </div>
+
+    <div class="note">
+      <strong>Your task:</strong><br/>
+      Review the artefact and the two metadata representations shown below. Then decide whether,
+      based on the metadata alone, you would consider this alignment reusable as a starting point
+      for a similar task in a new project.
+    </div>
+
+    <div class="note">
+      <strong>What you are evaluating:</strong><br/>
+      You are not being asked to judge the full technical correctness of the alignment itself.
+      You are being asked whether the metadata description gives you enough information to make
+      an informed reuse decision.
+    </div>
+
+    <div class="note" style="margin-top:10px;">
+      <strong>Please note:</strong><br/>
+      You do not need to inspect individual correspondences in detail. Please base your decision only on the
+      metadata shown on this page and assume that detailed technical inspection is not available at this stage.
+    </div>
+
+    <div id="par">
+      <details open>
+        <summary>Alignment file (excerpt)</summary>
+        <pre><code>&lt;Alignment&gt;
+  &lt;onto1&gt;http://mouse.owl&lt;/onto1&gt;
+  &lt;onto2&gt;http://human.owl&lt;/onto2&gt;
+
+  &lt;map&gt;
+    &lt;Cell&gt;
+      &lt;entity1 rdf:resource="http://mouse.owl#MA_0002668"/&gt;
+      &lt;entity2 rdf:resource="http://human.owl#NCI_C32827"/&gt;
+      &lt;relation&gt;=&lt;/relation&gt;
+      &lt;measure rdf:datatype="http://www.w3.org/2001/XMLSchema#float"&gt;0.7&lt;/measure&gt;
+    &lt;/Cell&gt;
+  &lt;/map&gt;
+
+  &lt;map&gt;
+    &lt;Cell&gt;
+      &lt;entity1 rdf:resource="http://mouse.owl#MA_0000378"/&gt;
+      &lt;entity2 rdf:resource="http://human.owl#NCI_C12416"/&gt;
+      &lt;relation&gt;=&lt;/relation&gt;
+      &lt;measure rdf:datatype="http://www.w3.org/2001/XMLSchema#float"&gt;0.94&lt;/measure&gt;
+    &lt;/Cell&gt;
+  &lt;/map&gt;
+
+  &lt;map&gt;
+    &lt;Cell&gt;
+      &lt;entity1 rdf:resource="http://mouse.owl#MA_0002492"/&gt;
+      &lt;entity2 rdf:resource="http://human.owl#NCI_C12331"/&gt;
+      &lt;relation&gt;=&lt;/relation&gt;
+      &lt;measure rdf:datatype="http://www.w3.org/2001/XMLSchema#float"&gt;0.8&lt;/measure&gt;
+    &lt;/Cell&gt;
+  &lt;/map&gt;
+&lt;/Alignment&gt;</code></pre>
+        <p class="muted">
+          (Please use only the information provided on this page for your decision.)
+        </p>
+      </details>
+
+      <details>
+        <summary>Show metadata (Representation A: FAIR-IMPACT metadata model)</summary>
+
+        <p class="muted" style="margin:8px 0 0;">
+          Values marked <span class="np">Not provided</span> were not available from the scenario source excerpt.
+          This representation focuses on concise artefact-level metadata.
+        </p>
+
+        <table style="margin-top:10px;">
+          <tr><th>Metadata element</th><th>Scenario 3 value</th></tr>
+
+          <tr class="section-row">
+            <td colspan="2">Mapping-set (crosswalk) level <span class="lvl">Mapping-level</span></td>
+          </tr>
+
+          <tr>
+            <td>mapping_set_id</td>
+            <td><span class="mono">http://example.org/oaei/2024/anatomy/logmap</span></td>
+          </tr>
+
+          <tr>
+            <td>source &amp; target semantic artefact IDs</td>
+            <td>
+              Source: <span class="mono">http://mouse.owl</span><br/>
+              Target: <span class="mono">http://human.owl</span>
+            </td>
+          </tr>
+
+          <tr>
+            <td>source &amp; target semantic artefact names</td>
+            <td>
+              Source: mouse.owl (Adult Mouse Anatomy ontology)<br/>
+              Target: human.owl (human anatomy ontology; NCI identifiers used in the alignment)
+            </td>
+          </tr>
+
+          <tr>
+            <td>version of the semantic artefacts</td>
+            <td><span class="np">Not provided</span></td>
+          </tr>
+
+          <tr>
+            <td>specific types of semantic artefacts mapped</td>
+            <td>Large biomedical anatomy ontologies (mouse anatomy ↔ human anatomy)</td>
+          </tr>
+
+          <tr>
+            <td>mapping context</td>
+            <td>
+              OAEI 2024 Anatomy track benchmark evaluation. Reported metrics include precision, recall, F-measure and recall+.
+              The track notes that recall+ reflects non-trivial correspondences where labels are not identical after normalization.
+            </td>
+          </tr>
+
+          <tr>
+            <td>version (mapping set)</td>
+            <td>OAEI 2024 (Anatomy track) — LogMap system output (standard setting)</td>
+          </tr>
+
+          <tr>
+            <td>date of creation of this version</td>
+            <td><span class="np">Not provided</span></td>
+          </tr>
+
+          <tr>
+            <td>license</td>
+            <td><span class="np">Not provided</span></td>
+          </tr>
+
+          <tr>
+            <td>author</td>
+            <td><span class="np">Not provided</span></td>
+          </tr>
+
+          <tr>
+            <td>creator</td>
+            <td>
+              Alignment generated by: <strong>LogMap</strong><br/>
+              (Developer or creator details: <span class="np">Not provided</span>)
+            </td>
+          </tr>
+
+          <tr>
+            <td>reviewer</td>
+            <td><span class="np">Not provided</span></td>
+          </tr>
+
+          <tr>
+            <td>software used to create the mapping</td>
+            <td>
+              Matcher: <strong>LogMap</strong><br/>
+              Track evaluation platform: MELT was used for most systems (ALIN and MDMapper used SEALS client, according to the track report).
+            </td>
+          </tr>
+
+          <tr>
+            <td>validation / evaluation (mapping-level summary)</td>
+            <td>
+              Track report: systems executed in standard setting; metrics computed were precision, recall, F-measure and recall+.
+              Track notes include filtering trivial <span class="mono">oboInOwl#Synonym</span>-style correspondences and non-equivalence relations;
+              coherence was checked with Pellet by merging ontologies and alignment.
+              <br/><br/>
+              <strong>LogMap (OAEI 2024 Anatomy results):</strong>
+              Runtime 12s; Size 1402; Precision 0.917; F-measure 0.881; Recall 0.848; Recall+ 0.602; Coherent: +
+            </td>
+          </tr>
+        </table>
+      </details>
+
+      <details>
+        <summary>Show metadata (Representation B: MMV lifecycle-based metadata model)</summary>
+
+        <p class="muted" style="margin:8px 0 0;">
+          Values marked <span class="np">Not provided</span> were not available from the scenario source excerpt.
+          This representation provides lifecycle-oriented metadata, including purpose, assumptions,
+          design, technical requirements, testing, and risks.
+        </p>
+
+        <table style="margin-top:10px;">
+          <tr><th>MMV field (phase-based)</th><th>Scenario 3 value</th></tr>
+
+          <tr class="section-row"><td colspan="2">Project &amp; Artefact</td></tr>
+          <tr><td>mmv:MappingProject</td><td><span class="mono">ex:OAEI2024_Anatomy_LogMap_Project</span></td></tr>
+          <tr><td>mmv:MappingArtifact</td><td>Ontology alignment output (Alignment API / RDF), e.g., <span class="mono">LogMap.rdf</span> from OAEI 2024 Anatomy track raw results</td></tr>
+          <tr><td>mmv:hasIdentifier</td><td><span class="mono">http://example.org/oaei/2024/anatomy/logmap</span></td></tr>
+          <tr><td>mmv:hasDescription</td><td>Alignment between mouse.owl and human.owl from the OAEI 2024 Anatomy track, represented using the Alignment API in RDF. Correspondences use an equivalence relation and include confidence measures.</td></tr>
+          <tr><td>mmv:version</td><td>OAEI 2024 (Anatomy track) — LogMap system output (standard setting)</td></tr>
+          <tr><td>mmv:hasVersionDateTime</td><td><span class="np">Not provided</span></td></tr>
+
+          <tr class="section-row"><td colspan="2">Analysis phase</td></tr>
+          <tr><td>mmv:hasPurpose</td><td>Provide a benchmark alignment artefact for ontology interoperability and support reuse decisions in new anatomy alignment settings.</td></tr>
+          <tr><td>mmv:hasMappingDomain</td><td>Biomedical anatomy / ontology interoperability</td></tr>
+          <tr><td>mmv:hasAssumption</td><td>Track report notes a mix of trivial and non-trivial correspondences; recall+ reflects detection of non-trivial matches where labels differ after normalization.</td></tr>
+          <tr><td>mmv:hasDomainAssumption</td><td><span class="np">Not provided</span></td></tr>
+          <tr><td>mmv:hasRequirement</td><td>Generate an alignment for mouse.owl and human.owl under the OAEI 2024 Anatomy track standard setting.</td></tr>
+          <tr><td>mmv:hasTechnicalRequirement</td><td>Executable in the OAEI evaluation environment; track report indicates MELT was used for most systems, while ALIN and MDMapper used SEALS.</td></tr>
+          <tr><td>mmv:hasRiskOrIssue</td><td>Reuse in a different setting may be affected by ontology drift, domain differences, and the proportion of non-trivial correspondences.</td></tr>
+          <tr><td>mmv:hasInputName</td><td>mouse.owl; human.owl</td></tr>
+          <tr><td>mmv:hasInputDescription</td><td><span class="np">Not provided</span></td></tr>
+          <tr><td>mmv:hasInputFormat</td><td><span class="np">Not provided</span></td></tr>
+          <tr><td>mmv:hasInputType</td><td>Ontology files (biomedical anatomy ontologies)</td></tr>
+          <tr><td>mmv:hasInputSource</td><td>OAEI 2024 Anatomy track (results page referenced in this study’s scenario source)</td></tr>
+          <tr><td>mmv:hasInputCreator</td><td><span class="np">Not provided</span></td></tr>
+
+          <tr class="section-row"><td colspan="2">Design phase</td></tr>
+          <tr><td>mmv:hasDesignDecision</td><td>Use Alignment API / RDF representation and represent correspondences with equivalence relation and confidence measure.</td></tr>
+          <tr><td>mmv:hasJustification</td><td>Alignment API is commonly used in OAEI outputs and supports interoperability across tools and evaluations.</td></tr>
+          <tr><td>mmv:hasPlannedQualityMetric</td><td>Precision, Recall, F-measure, Recall+, plus coherence checking</td></tr>
+
+          <tr class="section-row"><td colspan="2">Development phase</td></tr>
+          <tr><td>mqv:hasMappingType</td><td>Ontology alignment</td></tr>
+          <tr><td>mqv:hasMappingFormat</td><td>Alignment API / RDF</td></tr>
+          <tr><td>mqv:hasMappingMethod</td><td>Automatic ontology matching system execution (standard setting)</td></tr>
+          <tr><td>mmv:hasMappingAlgorithm</td><td><span class="np">Not provided</span></td></tr>
+          <tr><td>mmv:hasTool</td><td>LogMap (matcher); track evaluation used MELT for most systems</td></tr>
+
+          <tr class="section-row"><td colspan="2">Testing phase</td></tr>
+          <tr><td>mmv:hasTestingType</td><td>Benchmark evaluation (OAEI 2024 Anatomy track). Metrics computed; track report also describes filtering trivial and non-equivalence correspondences and coherence checking with Pellet.</td></tr>
+          <tr><td>mmv:hasTestingResult</td><td><strong>LogMap (OAEI 2024 Anatomy track):</strong> Runtime: 12s; Alignment size: 1402; Precision: 0.917; Recall: 0.848; F-measure: 0.881; Recall+: 0.602; Coherent alignment: +</td></tr>
+          <tr><td>mmv:hasQualityMeasurement</td><td>Precision, Recall, F-measure, Recall+, Coherence</td></tr>
+
+          <tr class="section-row"><td colspan="2">Maintenance phase</td></tr>
+          <tr><td>mmv:hasPublisherName</td><td>OAEI 2024 Anatomy track</td></tr>
+          <tr><td>mmv:hasPublisherSource</td><td>Results page referenced in scenario source: <span class="mono">http://oaei.ontologymatching.org/2024/results/anatomy/</span></td></tr>
+
+          <tr class="section-row"><td colspan="2">Stakeholders</td></tr>
+          <tr><td>mmv:hasStakeholder</td><td>Track organizers: Mina Abd Nikooie Pour; Huanyu Li; Ying Li; Patrick Lambrix</td></tr>
+          <tr><td>mmv:hasRole</td><td>Track organizers / evaluators</td></tr>
+          <tr><td>mmv:hasBackground</td><td><span class="np">Not provided</span></td></tr>
+        </table>
+      </details>
+
+      <h3 style="margin-top:18px;">Questions (Scenario 3)</h3>
+
+      <form method="POST" action="/submit-reuse-eval-s3">
+        <input type="hidden" name="scenario_id" value="S3_OAEI_ANATOMY_ALIGNMENT">
+        <input type="hidden" name="participant_id" value="{{ participant_id }}">
+
+        <div class="qblock">
+          <strong>1) Based on the metadata shown, would you consider this artefact reusable as a starting point in a new project?</strong>
+
+          <label>Representation A:
+            <input type="radio" name="reuse_a" value="yes" required> Yes
+            <input type="radio" name="reuse_a" value="reservations"> Possibly, but with reservations
+            <input type="radio" name="reuse_a" value="no"> No
+          </label>
+
+          <label>Representation B:
+            <input type="radio" name="reuse_b" value="yes" required> Yes
+            <input type="radio" name="reuse_b" value="reservations"> Possibly, but with reservations
+            <input type="radio" name="reuse_b" value="no"> No
+          </label>
+        </div>
+
+        <div class="qblock">
+          <strong>If you selected “Possibly, but with reservations”, please briefly explain your reservations (for either representation):</strong>
+          <textarea name="reservation_detail" placeholder="(Optional)"></textarea>
+        </div>
+        <div class="qblock">
+          <strong>2) Which representation better supported your reuse decision?</strong>
+          <label><input type="radio" name="better_option" value="A" required> Representation A</label>
+          <label><input type="radio" name="better_option" value="B"> Representation B</label>
+          <label><input type="radio" name="better_option" value="equal"> Both equally</label>
+          <label><input type="radio" name="better_option" value="neither"> Neither</label>
+        </div>
+
+        <div class="qblock">
+          <strong>3) Which representation was easier to understand?</strong>
+          <label><input type="radio" name="easier_option" value="A" required> Representation A</label>
+          <label><input type="radio" name="easier_option" value="B"> Representation B</label>
+          <label><input type="radio" name="easier_option" value="equal"> Both equally</label>
+          <label><input type="radio" name="easier_option" value="neither"> Neither</label>
+        </div>
+
+        <div class="qblock">
+          <strong>4) Which representation gave you more confidence in your decision?</strong>
+          <label><input type="radio" name="confidence_option" value="A" required> Representation A</label>
+          <label><input type="radio" name="confidence_option" value="B"> Representation B</label>
+          <label><input type="radio" name="confidence_option" value="equal"> Both equally</label>
+          <label><input type="radio" name="confidence_option" value="neither"> Neither</label>
+        </div>
+
+        <div class="qblock">
+          <strong>5) Do you think the two metadata models complement each other?</strong>
+          <label><input type="radio" name="complementary" value="yes_clearly" required> Yes, clearly</label>
+          <label><input type="radio" name="complementary" value="somewhat"> Somewhat</label>
+          <label><input type="radio" name="complementary" value="no_overlap"> No, they mostly overlap</label>
+          <label><input type="radio" name="complementary" value="no_incompatible"> No, they are not compatible</label>
+          <label><input type="radio" name="complementary" value="not_sure"> Not sure</label>
+        </div>
+
+        <div class="qblock">
+          <strong>6) What information was most useful for making your reuse decision?</strong>
+          <textarea name="useful_detail" placeholder="(Optional)"></textarea>
+        </div>
+
+        <div class="qblock">
+          <strong>7) What important information was missing?</strong>
+          <textarea name="missing_detail" placeholder="(Optional)"></textarea>
+        </div>
+
+        <div class="qblock">
+          <strong>8) Any additional comments?</strong>
+          <textarea name="comments" placeholder="(Optional)"></textarea>
+        </div>
+
+        <div class="btn-row">
+          <button type="submit" class="bn49">Submit Scenario 3</button>
+        </div>
+
+        <p class="muted" style="margin-top:6px;">
+          After submitting, you will see a final “thank you” page.
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <div id="con2">
+    <div id="footer">
+      <p>Copyright 2026, Sarah Alzahrani salzahra@tcd.ie</p>
+    </div>
+    <img id="bottom" src="/static/bottom.png" height="100" width="750" alt="footer">
+  </div>
+</body>
+</html>

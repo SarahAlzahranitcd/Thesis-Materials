@@ -1,0 +1,32 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix fcc: <http://www.example.org/ont#> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix geo2: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<ResearchData>
+    a rr:TriplesMap ;
+    rml:logicalSource [ rml:source "researchdata.csv"; rml:referenceFormulation ql:CSV] ;
+    rr:subjectMap [
+        rr:template "http://data.example.org/research/{ID}" ;
+        rr:class fcc:ResearchData ;
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate fcc:hasTitle ;
+        rr:objectMap [ rml:reference "Title" ] ;
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate fcc:hasAuthor ;
+        rr:objectMap [ rml:reference "Author" ] ;
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate fcc:hasPublicationDate ;
+        rr:objectMap [ rml:reference "Publication_Date"; rr:datatype xsd:date ] ;
+    ] ;
+    rr:predicateObjectMap [
+        rr:predicate fcc:hasAbstract ;
+        rr:objectMap [ rml:reference "Abstract" ] ;
+    ] .

@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reuse Evaluation – Scenario 2 (RML Mapping)</title>
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      letter-spacing: normal !important;
+      word-spacing: normal !important;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    }
+
+    #con { max-width: 1050px; margin: 0 auto; }
+    #con2 { max-width: 1050px; margin: 0 auto; }
+    h2 { padding-top: 30px; letter-spacing: normal; word-spacing: normal; }
+    #par { text-align: left; font-size: 18px; line-height: 1.7; letter-spacing: normal; word-spacing: normal; }
+    #footer { text-align: center; }
+
+    h1, h2, h3, h4, p, label, summary, th, td, button, a {
+      letter-spacing: normal !important;
+      word-spacing: normal !important;
+      text-align: left;
+    }
+
+    .bn49 {
+      border: 0;
+      text-align: center;
+      display: inline-block;
+      padding: 14px;
+      width: 30%;
+      margin: 10px;
+      color: #000000;
+      background-color: #87CEEB;
+      border-radius: 10px;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      font-weight: 600;
+      text-decoration: none;
+      transition: box-shadow 200ms ease-out;
+      cursor: pointer;
+    }
+    .bn49:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.15); }
+
+    table { border-collapse: collapse; width: 100%; border: 1px solid #000; }
+    th, td {
+      text-align: left;
+      padding: 8px;
+      border: 1px solid #000;
+      vertical-align: top;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+      white-space: normal;
+    }
+
+    .note {
+      background: #fff7e6;
+      border: 1px solid #ffd591;
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 10px;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    .muted { color: #555; font-size: 15px; }
+
+    details {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 10px;
+      margin-top: 12px;
+      background: #fff;
+    }
+    summary { cursor: pointer; font-weight: 700; }
+
+    pre {
+      background: #0b1020;
+      color: #e8e8e8;
+      padding: 12px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 12px;
+      line-height: 1.4;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      white-space: pre;
+      margin-top: 10px;
+    }
+
+    .qblock { margin-top: 10px; }
+    label { display: block; margin: 6px 0; }
+    textarea {
+      width: 98%;
+      resize: vertical;
+      border-radius: 6px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      min-height: 70px;
+      font-family: inherit;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      white-space: normal;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+    }
+
+    .meta-compare details {
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 12px;
+      margin-top: 12px;
+      background: #fff;
+    }
+    .meta-compare summary {
+      cursor: pointer;
+      font-weight: 800;
+      font-size: 16px;
+      list-style: none;
+    }
+    .meta-compare summary::-webkit-details-marker { display: none; }
+
+    .meta-compare .hint {
+      margin-top: 6px;
+      color: #555;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .np { color: #666; font-style: italic; }
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      white-space: normal;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+    }
+
+    .section-row td {
+      background: #f7f7f7;
+      font-weight: 900;
+    }
+    .lvl {
+      font-size: 12px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid #d0d0d0;
+      background: #fff;
+      display: inline-block;
+      font-weight: 800;
+      margin-left: 8px;
+    }
+
+    .btn-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+    .btn-row .bn49 { width: auto; }
+  </style>
+</head>
+
+<body>
+  <div id="con">
+    <img id="banner" src="/static/banner.jpg" height="200" width="750" alt="MetaSEMAP banner" />
+
+    <h2>Scenario 2: Reusing an RML Mapping</h2>
+    <p class="muted" style="margin-top:0;">
+      Artefact: <strong>A YARRRML/RML mapping</strong> used to generate an RDF knowledge graph.
+    </p>
+
+    <div class="note">
+      <strong>Scenario:</strong><br/>
+      Imagine that you are building a knowledge graph for a new railway data integration project.
+      You find an existing mapping from the European Union Agency for Railways (ERA), where
+      YARRRML rules are converted to RML and executed with RMLMapper to transform source data into RDF.
+    </div>
+
+    <div class="note">
+      <strong>Your task:</strong><br/>
+      Review the artefact and the two metadata representations shown below. Then decide whether,
+      based on the metadata alone, you would consider this mapping reusable as a starting point
+      for a similar mapping task in a new setting.
+    </div>
+
+    <div class="note">
+      <strong>What you are evaluating:</strong><br/>
+      You are not being asked to judge the full technical correctness of the mapping itself.
+      You are being asked whether the metadata description gives you enough information to make
+      an informed reuse decision.
+    </div>
+
+    <div class="note" style="margin-top:10px;">
+      <strong>Please note:</strong><br/>
+      You do not need to inspect every mapping rule in detail. Please base your decision only on the
+      metadata shown on this page and assume that detailed technical inspection is not available at this stage.
+    </div>
+
+    <div id="par">
+      <details open>
+        <summary>Mapping file (excerpt)</summary>
+        <pre><code>prefixes:
+  grel: "http://users.ugent.be/~bjdmeest/function/grel.ttl#"
+  eu-country: "http://publications.europa.eu/resource/authority/country/"
+  rdfs: "http://www.w3.org/2000/01/rdf-schema#"
+  era: "http://data.europa.eu/949/"
+  xsd: "http://www.w3.org/2001/XMLSchema#"
+
+variables:
+  connection:
+    access: &host ${RINF_HOST}
+    type: &typeMSSQL mssql
+    credentials: &credentials
+      username: ${RINF_USER}
+      password: ${RINF_PWD}
+    queryFormulation: &queryFormulation sql2008
+
+mappings:
+  line-national-ids:
+    sources:
+      - access: *host
+        type: *typeMSSQL
+        credentials: *credentials
+        queryFormulation: *queryFormulation
+        query: SELECT DISTINCT UICLines.UICCode, MemberStates.Code FROM ...
+    s: http://data.europa.eu/949/functionalInfrastructure/nationalLines/$(UICCode)
+    po:
+      - [a, era:NationalRailwayLine]
+      - [rdfs:label, $(UICCode)]
+      - p: era:inCountry
+        o:
+          - mapping: eu-country
+            condition:
+              function: equal
+              parameters:
+                - [str1, $(Code)]
+                - [str2, $(code)]
+    graph: ${NAMED_GRAPH}
+
+  eu-country:
+    sources:
+      - ["data/countries.csv~csv"]
+    s: $(eu)</code></pre>
+        <p class="muted">
+          (Please use only the information provided on this page for your decision.)
+        </p>
+      </details>
+
+      <div class="meta-compare">
+        <details>
+          <summary>Show metadata (Representation A: FAIR-IMPACT metadata model)</summary>
+
+          <div class="hint">
+            Values marked <span class="np">Not provided</span> were not available from the scenario sources.
+            This representation focuses on concise artefact-level metadata.
+          </div>
+
+          <table>
+            <tr><th>Metadata element</th><th>Scenario 2 value</th></tr>
+
+            <tr class="section-row">
+              <td colspan="2">Mapping-set (crosswalk) level <span class="lvl">Mapping-level</span></td>
+            </tr>
+
+            <tr>
+              <td>mapping_set_id</td>
+              <td><span class="np">Not provided</span></td>
+            </tr>
+
+            <tr>
+              <td>source &amp; target semantic artefact IDs</td>
+              <td>
+                Source: ERA base registry data sources (databases, CSV files, XML files, etc.)<br/>
+                Target: ERA Knowledge Graph (generated RDF knowledge graph)
+              </td>
+            </tr>
+
+            <tr>
+              <td>source &amp; target semantic artefact names</td>
+              <td>
+                Source: Railway registry datasets used by ERA (e.g., base registry databases and lookup files)<br/>
+                Target: ERA Knowledge Graph (uses ERA vocabulary namespace, e.g., <span class="mono">http://data.europa.eu/949/</span>)
+              </td>
+            </tr>
+
+            <tr>
+              <td>version of the semantic artefacts</td>
+              <td><span class="np">Not provided</span></td>
+            </tr>
+
+            <tr>
+              <td>specific types of semantic artefacts mapped</td>
+              <td>
+                Railway registry sources → RDF knowledge graph (ERA vocabulary namespace visible in excerpt:
+                <span class="mono">http://data.europa.eu/949/</span>)
+              </td>
+            </tr>
+
+            <tr>
+              <td>mapping context</td>
+              <td>
+                ERA use case: generates a knowledge graph to foster interoperability across base registry databases
+                populated by EU member states and different actors from the railway domain.
+              </td>
+            </tr>
+
+            <tr>
+              <td>version (mapping set)</td>
+              <td><span class="np">Not provided</span></td>
+            </tr>
+
+            <tr>
+              <td>date of creation of this version</td>
+              <td><span class="np">Not provided</span></td>
+            </tr>
+
+            <tr>
+              <td>license</td>
+              <td><span class="np">Not provided</span></td>
+            </tr>
+
+            <tr>
+              <td>author</td>
+              <td><span class="np">Not provided</span></td>
+            </tr>
+
+            <tr>
+              <td>creator</td>
+              <td>
+                Mapping rules defined in <strong>YARRRML</strong> (automatically converted to <strong>RML</strong>), as stated in the use case.
+              </td>
+            </tr>
+
+            <tr>
+              <td>reviewer</td>
+              <td><span class="np">Not provided</span></td>
+            </tr>
+
+            <tr>
+              <td>software used to create the mapping</td>
+              <td>
+                Use case states: <strong>YARRRML</strong> rules (converted to <strong>RML</strong>) executed with <strong>RMLMapper</strong>.
+              </td>
+            </tr>
+
+            <tr>
+              <td>validation / evaluation (mapping-level summary)</td>
+              <td><span class="np">Not provided</span></td>
+            </tr>
+          </table>
+        </details>
+
+        <details>
+          <summary>Show metadata (Representation B: MMV lifecycle-based metadata model)</summary>
+
+          <div class="hint">
+            Values marked <span class="np">Not provided</span> were not available from the scenario sources.
+            This representation provides lifecycle-oriented metadata, including purpose, assumptions,
+            design, technical requirements, testing, and risks.
+          </div>
+
+          <table>
+            <tr><th>MMV field (phase-based)</th><th>Scenario 2 value</th></tr>
+
+            <tr class="section-row"><td colspan="2">Project &amp; Artefact</td></tr>
+            <tr><td>mmv:MappingProject</td><td><span class="mono">ex:ERA_RML_UseCase_Project</span></td></tr>
+            <tr><td>mmv:MappingArtifact</td><td>YARRRML mappings (converted to RML) used to generate the ERA Knowledge Graph</td></tr>
+            <tr><td>mmv:hasIdentifier</td><td><span class="np">Not provided</span></td></tr>
+            <tr><td>mmv:hasDescription</td><td>ERA use case: YARRRML (converted to RML) defines KG generation from different sources (databases, CSV, XML, etc.); RMLMapper executes the rules to generate the knowledge graph.</td></tr>
+            <tr><td>mmv:version</td><td><span class="np">Not provided</span></td></tr>
+            <tr><td>mmv:hasVersionDateTime</td><td><span class="np">Not provided</span></td></tr>
+
+            <tr class="section-row"><td colspan="2">Analysis phase</td></tr>
+            <tr><td>mmv:hasPurpose</td><td>Generate a knowledge graph to foster interoperability across railway registry databases.</td></tr>
+            <tr><td>mmv:hasMappingDomain</td><td>Railway domain interoperability</td></tr>
+            <tr><td>mmv:hasAssumption</td><td>Mappings rely on identifiers and codes across sources (e.g., the excerpt shows UIC codes, member state codes, and a country lookup mapping).</td></tr>
+            <tr><td>mmv:hasDomainAssumption</td><td><span class="np">Not provided</span></td></tr>
+            <tr><td>mmv:hasRequirement</td><td>Configure data access for required sources and execute mappings to generate RDF output.</td></tr>
+            <tr><td>mmv:hasTechnicalRequirement</td><td>Execution environment: either Docker-based run or, without Docker, Node.js (≥ v12) and Java JRE (≥ v11), plus environment variables and connection parameters.</td></tr>
+            <tr><td>mmv:hasRiskOrIssue</td><td>Reuse for a new country may require adapting source schemas, joins, code lists, and connection settings such as host, username, password, and named graph configuration.</td></tr>
+            <tr><td>mmv:hasInputName</td><td>Railway registry databases; CSV lookup files; the use case also mentions XML files</td></tr>
+            <tr><td>mmv:hasInputDescription</td><td><span class="np">Not provided</span></td></tr>
+            <tr><td>mmv:hasInputFormat</td><td>Databases; CSV files; XML files</td></tr>
+            <tr><td>mmv:hasInputType</td><td>Registry datasets</td></tr>
+            <tr><td>mmv:hasInputSource</td><td>ERA use case documentation and mappings repository (as referenced in the scenario sources)</td></tr>
+            <tr><td>mmv:hasInputCreator</td><td><span class="np">Not provided</span></td></tr>
+
+            <tr class="section-row"><td colspan="2">Design phase</td></tr>
+            <tr><td>mmv:hasDesignDecision</td><td>Use YARRRML/YAML converted to RML. Map outputs to the ERA vocabulary (namespace visible in the excerpt: <span class="mono">http://data.europa.eu/949/</span>). Use lookup resources such as EU country authority data.</td></tr>
+            <tr><td>mmv:hasJustification</td><td>Use case indicates YARRRML is used to define knowledge graph generation rules and is automatically converted to RML for execution.</td></tr>
+            <tr><td>mmv:hasPlannedQualityMetric</td><td><span class="np">Not provided</span></td></tr>
+
+            <tr class="section-row"><td colspan="2">Development phase</td></tr>
+            <tr><td>mqv:hasMappingType</td><td>RML mapping (semantic uplift)</td></tr>
+            <tr><td>mqv:hasMappingFormat</td><td>YARRRML/YAML (converted to RML)</td></tr>
+            <tr><td>mqv:hasMappingMethod</td><td>Declarative mapping rules</td></tr>
+            <tr><td>mmv:hasMappingAlgorithm</td><td><span class="np">Not provided</span></td></tr>
+            <tr><td>mmv:hasTool</td><td>RMLMapper (as stated in the use case)</td></tr>
+
+            <tr class="section-row"><td colspan="2">Testing phase</td></tr>
+            <tr><td>mmv:hasTestingType</td><td><span class="np">Not provided</span></td></tr>
+            <tr><td>mmv:hasTestingResult</td><td><span class="np">Not provided</span></td></tr>
+            <tr><td>mmv:hasQualityMeasurement</td><td><span class="np">Not provided</span></td></tr>
+
+            <tr class="section-row"><td colspan="2">Maintenance phase</td></tr>
+            <tr><td>mmv:hasPublisherName</td><td>European Union Agency for Railways (since 2020) — RML.io use case</td></tr>
+            <tr><td>mmv:hasPublisherSource</td><td><span class="mono">https://rml.io/usage/</span></td></tr>
+
+            <tr class="section-row"><td colspan="2">Stakeholders</td></tr>
+            <tr><td>mmv:hasStakeholder</td><td><span class="np">Not provided</span></td></tr>
+            <tr><td>mmv:hasRole</td><td><span class="np">Not provided</span></td></tr>
+            <tr><td>mmv:hasBackground</td><td><span class="np">Not provided</span></td></tr>
+          </table>
+        </details>
+      </div>
+
+      <h3 style="margin-top:18px;">Questions (Scenario 2)</h3>
+
+      <form method="POST" action="/submit-reuse-eval-s2">
+        <input type="hidden" name="scenario_id" value="S2_RML_ERA_MAPPING">
+        <input type="hidden" name="participant_id" value="{{ participant_id }}">
+
+        <div class="qblock">
+          <strong>1) Based on the metadata shown, would you consider this artefact reusable as a starting point in a new project?</strong>
+
+          <label>Representation A:
+            <input type="radio" name="reuse_a" value="yes" required> Yes
+            <input type="radio" name="reuse_a" value="reservations"> Possibly, but with reservations
+            <input type="radio" name="reuse_a" value="no"> No
+          </label>
+
+          <label>Representation B:
+            <input type="radio" name="reuse_b" value="yes" required> Yes
+            <input type="radio" name="reuse_b" value="reservations"> Possibly, but with reservations
+            <input type="radio" name="reuse_b" value="no"> No
+          </label>
+        </div>
+        <div class="qblock">
+          <strong>If you selected “Possibly, but with reservations”, please briefly explain your reservations (for either representation):</strong>
+          <textarea name="reservation_detail" placeholder="(Optional)"></textarea>
+        </div>
+
+        <div class="qblock">
+          <strong>2) Which representation better supported your reuse decision?</strong>
+          <label><input type="radio" name="better_option" value="A" required> Representation A</label>
+          <label><input type="radio" name="better_option" value="B"> Representation B</label>
+          <label><input type="radio" name="better_option" value="equal"> Both equally</label>
+          <label><input type="radio" name="better_option" value="neither"> Neither</label>
+        </div>
+
+        <div class="qblock">
+          <strong>3) Which representation was easier to understand?</strong>
+          <label><input type="radio" name="easier_option" value="A" required> Representation A</label>
+          <label><input type="radio" name="easier_option" value="B"> Representation B</label>
+          <label><input type="radio" name="easier_option" value="equal"> Both equally</label>
+          <label><input type="radio" name="easier_option" value="neither"> Neither</label>
+        </div>
+
+        <div class="qblock">
+          <strong>4) Which representation gave you more confidence in your decision?</strong>
+          <label><input type="radio" name="confidence_option" value="A" required> Representation A</label>
+          <label><input type="radio" name="confidence_option" value="B"> Representation B</label>
+          <label><input type="radio" name="confidence_option" value="equal"> Both equally</label>
+          <label><input type="radio" name="confidence_option" value="neither"> Neither</label>
+        </div>
+
+        <div class="qblock">
+          <strong>5) Do you think the two metadata models complement each other?</strong>
+          <label><input type="radio" name="complementary" value="yes_clearly" required> Yes, clearly</label>
+          <label><input type="radio" name="complementary" value="somewhat"> Somewhat</label>
+          <label><input type="radio" name="complementary" value="no_overlap"> No, they mostly overlap</label>
+          <label><input type="radio" name="complementary" value="no_incompatible"> No, they are not compatible</label>
+          <label><input type="radio" name="complementary" value="not_sure"> Not sure</label>
+        </div>
+
+        <div class="qblock">
+          <strong>6) What information was most useful for making your reuse decision?</strong>
+          <textarea name="useful_detail" placeholder="(Optional)"></textarea>
+        </div>
+
+        <div class="qblock">
+          <strong>7) What important information was missing?</strong>
+          <textarea name="missing_detail" placeholder="(Optional)"></textarea>
+        </div>
+
+        <div class="qblock">
+          <strong>8) Any additional comments?</strong>
+          <textarea name="comments" placeholder="(Optional)"></textarea>
+        </div>
+
+        <div class="btn-row">
+          <button type="submit" class="bn49">Submit and continue to Scenario 3 →</button>
+        </div>
+
+        <p class="muted" style="margin-top:6px;">
+          After submitting, you will be taken directly to Scenario 3.
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <div id="con2">
+    <div id="footer">
+      <p>Copyright 2026, Sarah Alzahrani salzahra@tcd.ie</p>
+    </div>
+    <img id="bottom" src="/static/bottom.png" height="100" width="750" alt="footer">
+  </div>
+</body>
+</html>

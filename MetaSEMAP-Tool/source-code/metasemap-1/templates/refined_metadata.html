@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MetaSEMAP — Refined Annotation (MMV v0.2)</title>
+<style>
+  body { font-family: "proxima-nova-soft", Arial, sans-serif; }
+  #con { max-width: 820px; margin: 0 auto; }
+  #con2 { max-width: 820px; margin: 0 auto; }
+  h2 { padding-top: 30px; }
+  #footer { text-align: center; }
+  #footer a { color: inherit; }
+
+  .v2-banner {
+    background: #eef7ff; border: 1px solid #b3d8ee; border-radius: 6px;
+    padding: 12px 14px; margin: 14px 0 22px 0; font-size: 14px; line-height: 1.45;
+  }
+  .v2-banner strong { color: #14507a; }
+
+  .metadata-section {
+    border: 1px solid #ddd; border-radius: 6px; padding: 12px 14px;
+    margin-bottom: 18px; background: #fafafa;
+  }
+  .metadata-section h4 { margin: 0 0 10px 0; color: #14507a; }
+
+  table { width: 100%; border-collapse: collapse; }
+  th, td { border: 1px solid #e0e0e0; padding: 8px; vertical-align: top; }
+  td.label-cell { width: 38%; background: #f4f4f4; }
+  td input[type="text"], td input[type="url"], td input[type="date"], td input[type="datetime-local"],
+  td select, td textarea {
+    width: 100%; box-sizing: border-box; padding: 6px; font-size: 14px;
+  }
+  td textarea { min-height: 56px; resize: vertical; }
+
+  .required-field::after { content: " *"; color: #c00; font-weight: bold; }
+
+  .ttwrap { position: relative; display: inline-block; margin-left: 6px; }
+  .ttwrap .ttbtn {
+    display: inline-block; width: 16px; height: 16px; line-height: 16px;
+    background: #14507a; color: #fff; border-radius: 50%;
+    text-align: center; font-size: 11px; font-weight: bold; cursor: help;
+  }
+  .ttwrap .tttext {
+    visibility: hidden; opacity: 0; transition: opacity 0.2s;
+    position: absolute; z-index: 50; left: 22px; top: -4px;
+    background: #333; color: #fff; padding: 8px 10px; border-radius: 4px;
+    font-size: 13px; font-weight: normal; line-height: 1.35; width: 280px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  }
+  .ttwrap:hover .tttext { visibility: visible; opacity: 1; }
+
+  .examples-toggle {
+    display: inline-block; margin-top: 4px; font-size: 12px;
+    color: #14507a; text-decoration: underline; cursor: pointer;
+    background: none; border: 0; padding: 0;
+  }
+  .examples-panel {
+    display: none; margin-top: 6px; padding: 8px 10px;
+    background: #fff8dc; border: 1px solid #e6d27a; border-radius: 4px;
+    font-size: 13px; line-height: 1.4;
+  }
+  .examples-panel ul { margin: 4px 0 0 18px; padding: 0; }
+  .examples-panel li { margin-bottom: 3px; }
+
+  .draft-badge {
+    display: inline-block; padding: 2px 8px; background: #fce5b6;
+    color: #6b4400; border-radius: 3px; font-size: 12px; font-weight: 600;
+    vertical-align: middle; margin-left: 8px;
+  }
+
+  /* Output format picker */
+  .format-picker {
+    background: #f4f9ff; border: 1px solid #b3d8ee; border-radius: 6px;
+    padding: 14px 16px; margin: 18px 0;
+  }
+  .format-picker h4 { margin: 0 0 10px 0; color: #14507a; }
+  .format-option {
+    display: block; margin: 8px 0; padding: 10px 12px;
+    border: 1px solid #cfd8e3; border-radius: 4px;
+    background: #fff; cursor: pointer;
+  }
+  .format-option:hover { background: #f0f6fb; }
+  .format-option input[type="radio"] { margin-right: 10px; }
+  .format-option .format-title { font-weight: 600; color: #14507a; }
+  .format-option .format-desc { font-size: 13px; color: #555; margin-top: 4px; line-height: 1.4; }
+
+  .bn49 {
+    border: 0; text-align: center; display: inline-block;
+    padding: 14px 28px; margin: 18px 0; color: #000;
+    background-color: #87CEEB; border-radius: 10px;
+    font-weight: 600; cursor: pointer;
+  }
+  .bn49:hover { background-color: #6db8db; }
+</style>
+<script>
+  function toggleExamples(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.style.display = (el.style.display === "block") ? "none" : "block";
+  }
+</script>
+</head>
+<body>
+<div id="con">
+  <img id="banner" src="/static/banner.jpg" height="200" width="750" alt="MetaSEMAP banner">
+  <h2>Refined Metadata Annotation <span class="draft-badge">v0.2 — Work in progress</span></h2>
+
+  <div class="v2-banner">
+    <strong>Refined version (MMV v0.2).</strong> This workflow allows lifecycle metadata to be created
+    for any mapping type without requiring a mapping file to be uploaded first. Output uses the
+    <a href="https://sarahalzahranitcd.github.io/MMV-V02/" target="_blank" rel="noopener">MMV v0.2 ontology</a>.
+    Required fields are marked with <span style="color:#c00;font-weight:bold;">*</span>.
+    Hover the <span class="ttwrap"><span class="ttbtn">?</span></span> icons for guidance on each field.
+  </div>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div style="padding:10px;background:#fff0f0;border:1px solid #f5b5b5;border-radius:4px;margin-bottom:16px;">
+        {% for category, message in messages %}
+          <div>{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <form action="/submit_v2_metadata" method="post" id="metadataForm">
+
+    <!-- ============== Mapping Project ============== -->
+    <div class="metadata-section">
+      <h4>Mapping Project</h4>
+      <table>
+        <tr>
+          <td class="label-cell">
+            <label class="required-field" for="projectId">Project Identifier</label>
+            <span class="ttwrap"><span class="ttbtn">?</span><span class="tttext">A short identifier used to mint IRIs for this mapping project (no spaces). Example: <em>era_uplift_2026</em>.</span></span>
+          </td>
+          <td><input type="text" id="projectId" name="projectId" required pattern="[A-Za-z0-9_\-]+" placeholder="e.g., era_uplift_2026"></td>
+        </tr>
+        <tr>
+          <td class="label-cell">
+            <label class="required-field" for="projectTitle">Project Title</label>
+            <span class="ttwrap"><span class="ttbtn">?</span><span class="tttext">A human-readable title for the mapping project.</span></span>
+          </td>
+          <td><input type="text" id="projectTitle" name="projectTitle" required placeholder="e.g., European Railway Infrastructure Uplift Mapping"></td>
+        </tr>
+        <tr>
+          <td class="label-cell">
+            <label class="required-field" for="mappingType">Type of Mapping</label>
+            <span class="ttwrap"><span class="ttbtn">?</span><span class="tttext">The category of mapping being documented. Reuses <em>mqv:hasMappingType</em>.</span></span>
+          </td>
+          <td>
+            <select id="mappingType" name="mappingType" required>
+              <option value="">-- Select --</option>
+              <option value="Uplift Mapping">Uplift Mapping</option>
+              <option value="Ontology Alignment">Ontology Alignment</option>
+              <option value="Interlinking">Interlinking</option>
+            </select>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- ============== Stakeholder ============== -->
+    <div class="metadata-section">
+      <h4>Stakeholder</h4>
+      <table>
+        <tr>
+          <td class="label-cell">
+            <label for="fname">First Name</label>
+            <span class="ttwrap"><span class="ttbtn">?</span><span class="tttext">Given name of the stakeholder. Mapped to <em>foaf:givenName</em>.</span></span>
+          </td>
+          <td><input type="text" id="fname" name="fname" placeholder="e.g., Sarah"></td>
+        </tr>
+        <tr>
+          <td class="label-cell">
+            <label for="lname">Last Name</label>
+            <span class="ttwrap"><span class="ttbtn">?</span><span class="tttext">Family name of the stakeholder. Mapped to <em>foaf:familyName</em>.</span></span>
+          </td>
+          <td><input type="text" id="lname" name="lname" placeholder="e.g., Alzahrani"></td>
+        </tr>
+        <tr>
+          <td class="label-cell">
+            <label for="role">Role</label>
+            <span class="ttwrap"><span class="ttbtn">?</span><span class="tttext">The stakeholder's role in the project. Mapped to <em>mmv:hasRole</em>.</span></span>
+          </td>
+          <td>
+            <select id="role" name="role">
+              <option value="">-- Select --</option>
+              <option value="Mapping Developer">Mapping Developer</option>
+              <option value="Domain Expert">Domain Expert</option>
+              <option value="Reviewer">Reviewer</option>
+              <option value="Maintainer">Maintainer</option>
+              <option value="Other">Other</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td class="label-cell">
+            <label for="background">Background</label>
+            <span class="ttwrap"><span class="ttbtn">?</span><span class="tttext">Relevant expertise or experience. Mapped to <em>mmv:hasBackground</em>.</span></span>
+          </td>
+          <td><input type="text" id="background" name="background" placeholder="e.g., Knowledge engineer with 5 years RML experience"></td>
+        </tr>
+        <tr>
+          <td class="label-cell">
+            <label for="organization">Organisation</label>
+            <span class="ttwrap"><span class="ttbtn">?</span><span class="tttext">The organisation the stakeholder belongs to. New in v0.2: mapped to <em>foaf:organization</em>.</span></span>
+          </td>
+          <td><input type="text" id="organization" name="organization" placeholder="e.g., Trinity College Dublin"></td>
+        </tr>
+        <tr>
+          <td class="label-cell">
+            <label for="homepage">Homepage</label>
+            <span class="ttwrap"><span class="ttbtn">?</span><span class="tttext">URL of the stakeholder's professional or personal homepage. New in v0.2: mapped to <em>foaf:homepage</em>.</span></span>
+          </td>
+          <td><input type="url" id="homepage" name="homepage" placeholder="https://example.org/people/your-name"></td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- ============== Analysis ============== -->
+    <div class="metadata-section">
+      <h4>Analysis Phase</h4>
+      <table>
+        <tr>
+          <td class="label-cell">
+            <label class="required-field" for="purpose">Mapping Purpose</label>
+            <span class="ttwrap"><span class="ttbtn">?</span><span class="tttext">The intended purpose or goal of the mapping project. Mapped to <em>mmv:hasPurpose</em>.</span></span>
+            <br>
+            <button type="button" class="examples-toggle" onclick="toggleExamples('purpose-examples')">Show examples</button>
+            <div id="purpose-examples" class="examples-panel">
+              <strong>Example purposes:</strong>
+              <ul>
+                <li>Transform CSV electoral division data into RDF for publication as Linked Data.</li>
+                <li>Align the FIBO and SCOR ontologies to support cross-domain financial supply-chain queries.</li>
+                <li>Interlink OSi Irish Places with Wikidata entities for a heritage knowledge graph.</li>
+              </ul>
+            </div>
+          </td>
+          <td><textarea id="purpose" name="purpose" required placeholder="Describe the intended purpose of this mapping in 1–3 sentences."></textarea></td>
+        </tr>
+        <tr>
+          <td class="label-cell">
+            <label class="required-field" for="mappingDomain">Mapping Domain</label>
+            <span class="ttwrap"><span class="ttbtn">?</span><span class="tttext">The subject area of the mapping (e.g., medical, geospatial, cultural heritage). Mapped to <em>mmv:hasMappingDomain</em>.</span></span>
+          </td>
+          <td><input type="text" id="mappingDomain" name="mappingDomain" required placeholder="e.g., Geospatial / Irish Historical Geography"></td>
+        </tr>
+        <tr>
+          <td class="label-cell">
+            <label for="requirementDetails">Requirement</label>
+            <span class="ttwrap"><span class="ttbtn">?</span><span class="tttext">A specific requirement the mapping must meet. Mapped to <em>mmv:hasRequirement</em>.</span></span>
+          </td>
+          <td><input type="text" id="requirementDetails" name="requirementDetails" placeholder="e.g., All divisions must receive persistent URIs."></td>
+        </tr>
+        <tr>
+          <td class="label-cell">
+            <label for="mappingAssumptions">Assumption</label>
+            <span class="ttwrap"><span class="ttbtn">?</span><span class="tttext">An assumption about the source data, target model, or transformation logic. Mapped to <em>mmv:hasAssumption</em>.</span></span>
+          </td>
+          <td><input type="text" id="mappingAssumptions" name="mappingAssumptions" placeholder="e.g., Source CSV uses UTF-8 encoding."></td>
+        </tr>
+        <tr>
+          <td class="label-cell">
+            <label for="domainAssumption">Domain Assumption</label>
+            <span class="ttwrap"><span class="ttbtn">?</span><span class="tttext">An assumption about domain semantics that affects mapping interpretation. Mapped to <em>mmv:hasDomainAssumption</em>.</span></span>
+          </td>
+          <td><input type="text" id="domainAssumption" name="domainAssumption" placeholder="e.g., Each electoral division has a unique code."></td>
+        </tr>
+        <tr>
+          <td class="label-cell">
+            <label for="technicalRequirement">Technical Requirement</label>
+            <span class="ttwrap"><span class="ttbtn">?</span><span class="tttext">A technical constraint that influences implementation. Mapped to <em>mmv:hasTechnicalRequirement</em>.</span></span>
+          </td>
+          <td><input type="text" id="technicalRequirement" name="technicalRequirement" placeholder="e.g., Mapping tool must support RDF-star."></td>
+        </tr>
+        <tr>
+          <td class="label-cell">
+            <label for="risksIssues">Risk or Issue</label>
+            <span class="ttwrap"><span class="ttbtn">?</span><span class="tttext">A known risk or issue. Mapped to <em>mmv:hasRiskOrIssue</em>.</span></span>
+          </td>
+          <td><input type="text" id="risksIssues" name="risksIssues" placeholder="e.g., Source schema may change between releases."></td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- ============== Input Dataset ============== -->
+    <div class="metadata-section">
+      <h4>Input Dataset (linked from Analysis)</h4>
+      <table>
+        <tr>
+          <td class="label-cell">
+            <label for="inputName">Input Name</label>
+            <span class="ttwrap"><span class="ttbtn">?</span><span class="tttext">Human-readable name of the input file or dataset. Mapped to <em>mmv:hasInputName</em>.</span></span>
+          </td>
+          <td><input type="text" id="inputName" name="inputName" placeholder="e.g., electoral_divisions_2022.csv"></td>
+        </tr>
+        <tr>
+          <td class="label-cell">
+            <label for="inputDescription">Input Description</label>
+            <span class="ttwrap"><span class="ttbtn">?</span><span class="tttext">Concise description of the input content. Mapped to <em>mmv:hasInputDescription</em>.</span></span>
+          </td>
+          <td><textarea id="inputDescription" name="inputDescription" placeholder="e.g., CSV dataset containing electoral division boundaries and codes."></textarea></td>
+        </tr>
+        <tr>
+          <td class="label-cell">
+            <label for="inputSource">Input Source</label>
+            <span class="ttwrap"><span class="ttbtn">?</span><span class="tttext">Where the input dataset is hosted or originates. Mapped to <em>mmv:hasInputSource</em>.</span></span>
+          </td>
+          <td><input type="text" id="inputSource" name="inputSource" placeholder="e.g., https://data.gov.ie/dataset/electoral-divisions"></td>
+        </tr>
+        <tr>
+          <td class="label-cell">
+            <label for="inputCreator">Input Creator</label>
+            <span class="ttwrap"><span class="ttbtn">?</span><span class="tttext">Who created the input dataset. Mapped to <em>mmv:hasInputCreator</em>.</span></span>
+          </td>
+          <td><input type="text" id="inputCreator" name="inputCreator" placeholder="e.g., Central Statistics Office Ireland"></td>
+        </tr>
+        <tr>
+          <td class="label-cell">
+            <label for="inputType">Input Type</label>
+            <span class="ttwrap"><span class="ttbtn">?</span><span class="tttext">Type of input data. Mapped to <em>mmv:hasInputType</em>.</span></span>
+          </td>
+          <td>
+            <select id="inputType" name="inputType">
+              <option value="">-- Select --</option>
+              <option value="CSV">CSV</option>
+              <option value="JSON">JSON</option>
+              <option value="XML">XML</option>
+              <option value="RDF">RDF</option>
+              <option value="Ontology">Ontology</option>
+              <option value="Relational Database">Relational Database</option>
+              <option value="Other">Other</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td class="label-cell">
+            <label for="inputFormat">Input Format (media type)</label>
+            <span class="ttwrap"><span class="ttbtn">?</span><span class="tttext">File format or media type. Mapped to <em>mmv:hasInputFormat</em>.</span></span>
+          </td>
+          <td><input type="text" id="inputFormat" name="inputFormat" placeholder="e.g., text/csv"></td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- ============== Design ============== -->
+    <div class="metadata-section">
+      <h4>Design Phase</h4>
+      <table>
+        <tr>
+          <td class="label-cell">
+            <label class="required-field" for="finalDesignDecisions">Design Decision</label>
+            <span class="ttwrap"><span class="ttbtn">?</span><span class="tttext">A modelling or reuse decision taken during design. Mapped to <em>mmv:hasDesignDecision</em>.</span></span>
+          </td>
+          <td><textarea id="finalDesignDecisions" name="finalDesignDecisions" required placeholder="e.g., Reuse GeoSPARQL vocabulary for geometry modelling."></textarea></td>
+        </tr>
+        <tr>
+          <td class="label-cell">
+            <label for="designDecisionJustification">Justification</label>
+            <span class="ttwrap"><span class="ttbtn">?</span><span class="tttext">The rationale for the design decision. Mapped to <em>mmv:hasJustification</em>.</span></span>
+          </td>
+          <td><textarea id="designDecisionJustification" name="designDecisionJustification" placeholder="e.g., Ensures interoperability with geospatial Linked Data systems."></textarea></td>
+        </tr>
+        <tr>
+          <td class="label-cell">
+            <label for="qualityMetrics">Planned Quality Metric</label>
+            <span class="ttwrap"><span class="ttbtn">?</span><span class="tttext">A quality metric to be applied during testing. The label is recorded; the metric is linked via <em>mmv:hasPlannedQualityMetric</em> to a <em>dqv:Metric</em> instance.</span></span>
+          </td>
+          <td><input type="text" id="qualityMetrics" name="qualityMetrics" placeholder="e.g., Completeness — every source row produces at least one RDF subject"></td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- ============== Development ============== -->
+    <div class="metadata-section">
+      <h4>Development Phase</h4>
+      <table>
+        <tr>
+          <td class="label-cell">
+            <label for="StartDate">Start Date</label>
+            <span class="ttwrap"><span class="ttbtn">?</span><span class="tttext">When development began. Mapped to <em>prov:startedAtTime</em>.</span></span>
+          </td>
+          <td><input type="date" id="StartDate" name="StartDate"></td>
+        </tr>
+        <tr>
+          <td class="label-cell">
+            <label for="EndDate">End Date</label>
+            <span class="ttwrap"><span class="ttbtn">?</span><span class="tttext">When development concluded. Mapped to <em>prov:endedAtTime</em>.</span></span>
+          </td>
+          <td><input type="date" id="EndDate" name="EndDate"></td>
+        </tr>
+        <tr>
+          <td class="label-cell">
+            <label for="Tool">Tool Used</label>
+            <span class="ttwrap"><span class="ttbtn">?</span><span class="tttext">Software tools or platforms used. Mapped to <em>mmv:hasTool</em>.</span></span>
+          </td>
+          <td><input type="text" id="Tool" name="Tool" placeholder="e.g., RMLEditor, Protégé"></td>
+        </tr>
+        <tr>
+          <td class="label-cell">
+            <label class="required-field" for="MappingMethod">Mapping Method</label>
+            <span class="ttwrap"><span class="ttbtn">?</span><span class="tttext">How the mapping was produced. Reuses <em>mqv:hasMappingMethod</em>. Choose the option that best reflects the level of human involvement.</span></span>
+          </td>
+          <td>
+            <select id="MappingMethod" name="MappingMethod" required>
+              <option value="">-- Select --</option>
+              <option value="Manual">Manual (created by hand, no tooling support)</option>
+              <option value="Semi-automatic">Semi-automatic (tool-assisted, with manual edits)</option>
+              <option value="Automatic">Automatic (fully tool-generated, no manual edits)</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td class="label-cell">
+            <label for="mappingFormat">Mapping Format</label>
+            <span class="ttwrap"><span class="ttbtn">?</span><span class="tttext">Concrete syntax of the mapping. Reuses <em>mqv:hasMappingFormat</em>.</span></span>
+          </td>
+          <td>
+            <select id="mappingFormat" name="mappingFormat">
+              <option value="">-- Select --</option>
+              <option value="RML">RML</option>
+              <option value="R2RML">R2RML</option>
+              <option value="SPARQL">SPARQL CONSTRUCT / INSERT</option>
+              <option value="SSSOM">SSSOM</option>
+              <option value="Alignment Format">Alignment Format (Alignment API)</option>
+              <option value="Other">Other</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td class="label-cell">
+            <label for="mappingAlgorithm">Mapping Algorithm</label>
+            <span class="ttwrap"><span class="ttbtn">?</span><span class="tttext">Any algorithmic approach used to generate or validate the mapping. Mapped to <em>mmv:hasMappingAlgorithm</em>.</span></span>
+          </td>
+          <td><input type="text" id="mappingAlgorithm" name="mappingAlgorithm" placeholder="e.g., Multi-signal matching: lcase() + coordinate tolerance 0.05"></td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- ============== Mapping Artefact ============== -->
+    <div class="metadata-section">
+      <h4>Mapping Artefact</h4>
+      <table>
+        <tr>
+          <td class="label-cell">
+            <label for="mappingURI">Mapping IRI</label>
+            <span class="ttwrap"><span class="ttbtn">?</span><span class="tttext">A persistent identifier for the resulting mapping artefact. Mapped to <em>mmv:hasIdentifier</em>.</span></span>
+          </td>
+          <td><input type="url" id="mappingURI" name="mappingURI" placeholder="https://example.org/mappings/era_uplift_v1"></td>
+        </tr>
+        <tr>
+          <td class="label-cell">
+            <label for="mappingName">Mapping Name</label>
+            <span class="ttwrap"><span class="ttbtn">?</span><span class="tttext">A human-readable title for the mapping artefact. Mapped to <em>dcterms:title</em>.</span></span>
+          </td>
+          <td><input type="text" id="mappingName" name="mappingName" placeholder="e.g., ERA Uplift Mapping v1.0"></td>
+        </tr>
+        <tr>
+          <td class="label-cell">
+            <label for="mappingDescription">Mapping Description</label>
+            <span class="ttwrap"><span class="ttbtn">?</span><span class="tttext">A short description of the mapping artefact. Mapped to <em>mmv:hasDescription</em>.</span></span>
+          </td>
+          <td><textarea id="mappingDescription" name="mappingDescription" placeholder="e.g., Transforms ERA railway CSV data into RDF using RML."></textarea></td>
+        </tr>
+        <tr>
+          <td class="label-cell">
+            <label for="previousVersionURI">Previous Version IRI</label>
+            <span class="ttwrap"><span class="ttbtn">?</span><span class="tttext">If this mapping is a revision of an earlier version, the IRI of the previous version. New in v0.2: mapped to <em>prov:wasRevisionOf</em>.</span></span>
+          </td>
+          <td><input type="url" id="previousVersionURI" name="previousVersionURI" placeholder="(optional) https://example.org/mappings/era_uplift_v0_9"></td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- ============== Testing ============== -->
+    <div class="metadata-section">
+      <h4>Testing Phase</h4>
+      <table>
+        <tr>
+          <td class="label-cell">
+            <label class="required-field" for="testingType">Testing Type</label>
+            <span class="ttwrap"><span class="ttbtn">?</span><span class="tttext">Type of testing or validation performed. Mapped to <em>mmv:hasTestingType</em>.</span></span>
+          </td>
+          <td>
+            <select id="testingType" name="testingType" required>
+              <option value="">-- Select --</option>
+              <option value="SHACL Validation">SHACL Validation</option>
+              <option value="Unit Testing">Unit Testing</option>
+              <option value="Manual Review">Manual Review</option>
+              <option value="Quality Assessment">Quality Assessment</option>
+              <option value="Other">Other</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td class="label-cell">
+            <label for="testingDate">Testing Date</label>
+            <span class="ttwrap"><span class="ttbtn">?</span><span class="tttext">When the testing activity was performed. Mapped to <em>prov:generatedAtTime</em>.</span></span>
+          </td>
+          <td><input type="date" id="testingDate" name="testingDate"></td>
+        </tr>
+        <tr>
+          <td class="label-cell">
+            <label for="testingResult">Testing Result</label>
+            <span class="ttwrap"><span class="ttbtn">?</span><span class="tttext">Outcome of the testing activity. Mapped to <em>mmv:hasTestingResult</em>.</span></span>
+          </td>
+          <td><input type="text" id="testingResult" name="testingResult" placeholder="e.g., All SHACL constraints passed."></td>
+        </tr>
+        <tr>
+          <td class="label-cell">
+            <label for="validationReportURL">Validation Report URL</label>
+            <span class="ttwrap"><span class="ttbtn">?</span><span class="tttext">A link to a SHACL validation report or equivalent constraint-checking output. New in v0.2: linked via <em>mmv:hasValidationReport</em> to an <em>mmv:ValidationReport</em> instance.</span></span>
+          </td>
+          <td><input type="url" id="validationReportURL" name="validationReportURL" placeholder="(optional) https://example.org/reports/shacl-2025-06-07.ttl"></td>
+        </tr>
+        <tr>
+          <td class="label-cell">
+            <label for="validationReportDescription">Validation Report Description</label>
+            <span class="ttwrap"><span class="ttbtn">?</span><span class="tttext">A short description of what the validation report covers.</span></span>
+          </td>
+          <td><input type="text" id="validationReportDescription" name="validationReportDescription" placeholder="(optional) e.g., SHACL report covering structural and value constraints."></td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- ============== Maintenance ============== -->
+    <div class="metadata-section">
+      <h4>Maintenance Phase</h4>
+      <table>
+        <tr>
+          <td class="label-cell">
+            <label class="required-field" for="publisherName">Publisher Name</label>
+            <span class="ttwrap"><span class="ttbtn">?</span><span class="tttext">Person or organisation responsible for publishing the mapping artefact. Mapped to <em>mmv:hasPublisherName</em>.</span></span>
+          </td>
+          <td><input type="text" id="publisherName" name="publisherName" required placeholder="e.g., Trinity College Dublin"></td>
+        </tr>
+        <tr>
+          <td class="label-cell">
+            <label for="publisherSource">Publisher URL</label>
+            <span class="ttwrap"><span class="ttbtn">?</span><span class="tttext">Where the published mapping artefact is hosted. Mapped to <em>mmv:hasPublisherSource</em>.</span></span>
+          </td>
+          <td><input type="url" id="publisherSource" name="publisherSource" placeholder="(optional) https://github.com/your-org/your-mapping"></td>
+        </tr>
+        <tr>
+          <td class="label-cell">
+            <label class="required-field" for="versionNumber">Version Number</label>
+            <span class="ttwrap"><span class="ttbtn">?</span><span class="tttext">Version identifier for the mapping artefact. Mapped to <em>mmv:version</em>.</span></span>
+          </td>
+          <td><input type="text" id="versionNumber" name="versionNumber" required placeholder="e.g., 1.0"></td>
+        </tr>
+        <tr>
+          <td class="label-cell">
+            <label for="versionDateTime">Version Date</label>
+            <span class="ttwrap"><span class="ttbtn">?</span><span class="tttext">When this version of the mapping artefact was created or released. Mapped to <em>mmv:hasVersionDateTime</em>.</span></span>
+          </td>
+          <td><input type="datetime-local" id="versionDateTime" name="versionDateTime"></td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- ============== Output Format Picker ============== -->
+    <div class="format-picker">
+      <h4>Choose output format</h4>
+      <p style="font-size:13px; color:#555; margin:0 0 8px 0;">
+        Both formats encode the same MMV v0.2 metadata. Choose the representation that fits your downstream tooling.
+      </p>
+      <label class="format-option">
+        <input type="radio" name="outputFormat" value="trig" checked>
+        <span class="format-title">Named Graph (TriG, .trig)</span>
+        <div class="format-desc">
+          Wraps the metadata in a named graph keyed off the project IRI. Use this when you need to keep mapping metadata addressable as a separate graph (e.g., for graph-level updates, provenance, or storage in a quad store).
+        </div>
+      </label>
+      <label class="format-option">
+        <input type="radio" name="outputFormat" value="turtle">
+        <span class="format-title">Single-graph Turtle (.ttl)</span>
+        <div class="format-desc">
+          Plain Turtle in the default graph. Use this when you want a flat, widely-supported serialisation without graph wrapping.
+        </div>
+      </label>
+    </div>
+
+    <input class="bn49" type="submit" value="Generate MMV v0.2 Metadata">
+  </form>
+</div>
+
+<div id="con2">
+  <div id="footer">
+    <p>
+      Copyright 2024–2026, Sarah Alzahrani &middot;
+      <a href="mailto:salzahra@tcd.ie">salzahra@tcd.ie</a> &middot;
+      <a href="https://sarahalzahranitcd.github.io/MMV-V02/" target="_blank" rel="noopener">MMV v0.2 documentation</a>
+    </p>
+  </div>
+  <img id="bottom" src="/static/bottom.png" height="100" width="750" alt="">
+</div>
+</body>
+</html>

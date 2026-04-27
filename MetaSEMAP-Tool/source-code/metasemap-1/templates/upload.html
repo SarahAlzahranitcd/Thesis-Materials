@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+  #con {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+    #con2 {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+    h2 {padding-top: 30px;}
+  
+    #logo {
+       float: right;
+      margin:5px;
+    }
+      #par {
+      text-align: justify;
+      font-size: 20px;
+        font: 
+    }
+    #footer{
+      text-align:center
+      
+    }
+    .bn49 {
+      border: 0;
+      text-align: center;
+      display: inline-block;
+      padding: 14px;
+      width: 15%;
+      margin: 10px;
+      color: #000000;
+      background-color: #87CEEB;
+      border-radius: 10px;
+      font-family: "proxima-nova-soft", sans-serif;
+      font-weight: 600;
+      text-decoration: none;
+      transition: box-shadow 200ms ease-out;
+    }
+</style>
+<title>MetaMap</title>
+
+</head>
+
+  <body>
+    <div id="con">
+    <img id="bannner" src="/static/banner.jpg" height="200" width="750" >
+    <h2>Annotate Mapping </h2>
+  
+         </br>
+      <h4>Please upload your mapping file </h4>
+        <div class="square">
+  <form action ='/upload' method = 'POST' enctype="multipart/form-data">     <div>
+    <label>Choose file to upload</label> 
+    <input
+      name = "file"
+      type="file"
+      id="filename"
+     />
+  </div>
+  </br>
+  <div>
+    <input class=bn49 type = "submit" value="Upload">   
+  </div>
+
+</form>
+          </div>
+     </br>
+      </br>
+      </br>
+      
+    <div id=con2>
+             <div id=footer>
+        <p> Copyrights 2024 , Sarah Alzahrani salzahra@tcd.ie</p>
+        </div>
+    
+       <img id="bottom" src="/static/bottom.png" height="100" width="750" >
+      </div>
+  </body>
+
+  
+  
+</html>

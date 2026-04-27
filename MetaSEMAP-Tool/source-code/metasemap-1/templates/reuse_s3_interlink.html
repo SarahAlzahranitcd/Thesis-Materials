@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reuse Evaluation – Scenario 1 (Interlinking / Silk)</title>
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      letter-spacing: normal !important;
+      word-spacing: normal !important;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    }
+
+    #con { max-width: 1050px; margin: 0 auto; }
+    #con2 { max-width: 1050px; margin: 0 auto; }
+    #footer { text-align: center; }
+
+    h2 { padding-top: 30px; letter-spacing: normal; word-spacing: normal; }
+    #par { text-align: left; font-size: 18px; line-height: 1.7; letter-spacing: normal; word-spacing: normal; }
+
+    h1, h2, h3, h4, p, label, summary, th, td, button, a {
+      letter-spacing: normal !important;
+      word-spacing: normal !important;
+      text-align: left;
+    }
+
+    #banner, #bottom { width: 100%; height: auto; display: block; }
+
+    .bn49 {
+      border: 0;
+      text-align: center;
+      display: inline-block;
+      padding: 14px;
+      width: 30%;
+      margin: 10px;
+      color: #000000;
+      background-color: #87CEEB;
+      border-radius: 10px;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      font-weight: 600;
+      text-decoration: none;
+      transition: box-shadow 200ms ease-out;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .bn49:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.15); }
+
+    table { border-collapse: collapse; width: 100%; border: 1px solid #000; }
+    th, td {
+      text-align: left;
+      padding: 8px;
+      border: 1px solid #000;
+      vertical-align: top;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+      white-space: normal;
+    }
+
+    .note {
+      background: #fff7e6;
+      border: 1px solid #ffd591;
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 10px;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    .muted { color: #555; font-size: 15px; }
+
+    details {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 10px;
+      margin-top: 12px;
+      background: #fff;
+    }
+    summary { cursor: pointer; font-weight: 700; }
+
+    pre {
+      background: #0b1020;
+      color: #e8e8e8;
+      padding: 12px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 12px;
+      line-height: 1.4;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      white-space: pre;
+      margin-top: 10px;
+    }
+
+    .qblock { margin-top: 10px; }
+    label { display: block; margin: 6px 0; }
+    textarea {
+      width: 98%;
+      resize: vertical;
+      border-radius: 6px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      min-height: 70px;
+      font-family: inherit;
+    }
+
+    code, .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      white-space: normal;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+    }
+
+    .meta-compare details {
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 12px;
+      margin-top: 12px;
+      background: #fff;
+    }
+    .meta-compare summary {
+      cursor: pointer;
+      font-weight: 800;
+      font-size: 16px;
+      list-style: none;
+    }
+    .meta-compare summary::-webkit-details-marker { display: none; }
+
+    .meta-compare .hint {
+      margin-top: 6px;
+      color: #555;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .compare-card {
+      border: 1px solid #e6e6e6;
+      border-radius: 12px;
+      padding: 12px;
+      background: #fafafa;
+      min-width: 0;
+      overflow: hidden;
+      margin-top: 12px;
+    }
+
+    .compare-card h4 {
+      margin: 6px 0 10px;
+      font-size: 15px;
+      line-height: 1.35;
+    }
+
+    .compare-card .tag {
+      display: inline-block;
+      font-size: 12px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid #d0d0d0;
+      background: #fff;
+      margin-left: 8px;
+      font-weight: 600;
+      vertical-align: middle;
+    }
+
+    .compare-card table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      table-layout: fixed;
+    }
+
+    .compare-card th, .compare-card td {
+      border: 1px solid #000;
+      padding: 10px 10px;
+      vertical-align: top;
+      font-size: 13.5px;
+      line-height: 1.45;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+      white-space: normal;
+    }
+
+    .compare-card th:first-child,
+    .compare-card td:first-child { width: 34%; }
+    .compare-card th:last-child,
+    .compare-card td:last-child { width: 66%; }
+
+    .compare-card th {
+      background: #f3f3f3;
+      font-weight: 800;
+    }
+
+    .section-row td {
+      background: #f7f7f7;
+      font-weight: 900;
+    }
+    .lvl {
+      font-size: 12px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid #d0d0d0;
+      background: #fff;
+      display: inline-block;
+      font-weight: 800;
+      margin-left: 8px;
+    }
+
+    .np { color: #666; font-style: italic; }
+
+    .btn-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+    .btn-row .bn49 { width: auto; }
+
+    @media (max-width: 760px) {
+      #con, #con2 { max-width: 720px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="con">
+    <img id="banner" src="/static/banner.jpg" alt="MetaSEMAP banner" />
+
+    <h2>Scenario 1: Reusing an Interlinking Rule</h2>
+    <p class="muted" style="margin-top:0;">
+      Artefact: <strong>A Silk link specification</strong> that generates <strong>owl:sameAs</strong> links between two datasets.
+    </p>
+
+    <div class="note">
+      <strong>Scenario:</strong><br/>
+      Imagine that you are working on a knowledge graph project and need to connect place entities
+      in your dataset to entities in a well-known external source. You find an existing Silk interlinking
+      rule that links cities in DBpedia and GeoNames.
+    </div>
+
+    <div class="note">
+      <strong>Your task:</strong><br/>
+      Review the artefact and the two metadata representations shown below. Then decide whether,
+      based on the metadata alone, you would consider this artefact reusable as a starting point
+      for a similar interlinking task in a new project.
+    </div>
+
+    <div class="note">
+      <strong>What you are evaluating:</strong><br/>
+      You are not being asked to judge the full technical correctness of the interlinking rule.
+      You are being asked whether the metadata description gives you enough information to make
+      an informed reuse decision.
+    </div>
+
+    <div class="note" style="margin-top:10px;">
+      <strong>Please note:</strong><br/>
+      You do not need to inspect every line of the rule in detail. Please base your decision only on the
+      metadata shown on this page and assume that detailed technical inspection is not available at this stage.
+    </div>
+
+    <div id="par">
+      <details open>
+        <summary>Silk link specification (excerpt)</summary>
+        <pre><code>&lt;Silk&gt;
+  &lt;Prefixes&gt;
+    &lt;Prefix id="dbpedia" namespace="http://dbpedia.org/resource/" /&gt;
+    &lt;Prefix id="geonames" namespace="http://sws.geonames.org/" /&gt;
+    &lt;Prefix id="owl" namespace="http://www.w3.org/2002/07/owl#" /&gt;
+    &lt;Prefix id="rdfs" namespace="http://www.w3.org/2000/01/rdf-schema#" /&gt;
+    &lt;Prefix id="wgs84_pos" namespace="http://www.w3.org/2003/01/geo/wgs84_pos#" /&gt;
+  &lt;/Prefixes&gt;
+
+  &lt;DataSources&gt;
+    &lt;DataSource id="dbpedia"&gt;
+      &lt;EndpointURI&gt;http://dbpedia.org/sparql&lt;/EndpointURI&gt;
+    &lt;/DataSource&gt;
+    &lt;DataSource id="geonames"&gt;
+      &lt;EndpointURI&gt;http://sws.geonames.org/sparql&lt;/EndpointURI&gt;
+    &lt;/DataSource&gt;
+  &lt;/DataSources&gt;
+
+  &lt;Interlinks&gt;
+    &lt;Interlink id="cities"&gt;
+      &lt;LinkType&gt;owl:sameAs&lt;/LinkType&gt;
+      &lt;SourceDataset dataSource="dbpedia" var="a"&gt;
+        &lt;RestrictTo&gt;?a rdf:type dbpedia:City&lt;/RestrictTo&gt;
+      &lt;/SourceDataset&gt;
+      &lt;TargetDataset dataSource="geonames" var="b"&gt;
+        &lt;RestrictTo&gt;?b rdf:type geonames:Feature&lt;/RestrictTo&gt;
+      &lt;/TargetDataset&gt;
+
+      &lt;LinkCondition&gt;
+        &lt;AVG&gt;
+          &lt;Compare metric="jaro" weight="0.6"&gt;
+            &lt;Param name="str1" path="?a/rdfs:label" /&gt;
+            &lt;Param name="str2" path="?b/gn:name" /&gt;
+          &lt;/Compare&gt;
+          &lt;Compare metric="numSimilarity" optional="1" weight="0.7"&gt;
+            &lt;Param name="num1" path="?a/dbpedia:populationTotal" /&gt;
+            &lt;Param name="num2" path="?b/gn:population" /&gt;
+          &lt;/Compare&gt;
+          &lt;Compare metric="numSimilarity" optional="1" weight="0.7"&gt;
+            &lt;Param name="num1" path="?a/wgs84_pos:lat" /&gt;
+            &lt;Param name="num2" path="?b/wgs84_pos:lat" /&gt;
+          &lt;/Compare&gt;
+          &lt;Compare metric="numSimilarity" optional="1" weight="0.7"&gt;
+            &lt;Param name="num1" path="?a/wgs84_pos:long" /&gt;
+            &lt;Param name="num2" path="?b/wgs84_pos:long" /&gt;
+          &lt;/Compare&gt;
+        &lt;/AVG&gt;
+      &lt;/LinkCondition&gt;
+
+      &lt;Thresholds accept="0.9" verify="0.7" /&gt;
+      &lt;Limit max="1" method="metric_value" /&gt;
+      &lt;Output acceptedLinks="accepted_links.n3"
+              verifyLinks="verify_links.n3"
+              mode="truncate" /&gt;
+    &lt;/Interlink&gt;
+  &lt;/Interlinks&gt;
+&lt;/Silk&gt;</code></pre>
+        <p class="muted">(For this study, please use only the information provided on this page.)</p>
+      </details>
+
+      <div class="meta-compare">
+        <details>
+          <summary>Show metadata (Representation A: FAIR-IMPACT metadata model)</summary>
+
+          <div class="hint">
+            Values marked <span class="np">Not provided</span> were not available from the scenario sources.
+            This representation focuses on concise artefact-level metadata.
+          </div>
+
+          <div class="compare-card">
+            <h4>
+              Representation A: FAIR-IMPACT metadata model
+              <span class="tag">Scenario 1</span>
+            </h4>
+
+            <table>
+              <tr><th>Metadata element</th><th>Scenario 1 value</th></tr>
+
+              <tr class="section-row">
+                <td colspan="2">Mapping-set (crosswalk) level <span class="lvl">Mapping-level</span></td>
+              </tr>
+
+              <tr>
+                <td>mapping_set_id</td>
+                <td><span class="mono">http://example.org/silk/interlink/cities/dbpedia-geonames</span></td>
+              </tr>
+
+              <tr>
+                <td>source &amp; target semantic artefact IDs</td>
+                <td>
+                  Source endpoint: <span class="mono">http://dbpedia.org/sparql</span><br/>
+                  Target endpoint: <span class="mono">http://sws.geonames.org/sparql</span>
+                </td>
+              </tr>
+
+              <tr>
+                <td>source &amp; target semantic artefact names</td>
+                <td>
+                  Source: DBpedia (cities)<br/>
+                  Target: GeoNames (features / places)
+                </td>
+              </tr>
+
+              <tr>
+                <td>version of the semantic artefacts</td>
+                <td><span class="np">Not provided</span></td>
+              </tr>
+
+              <tr>
+                <td>specific types of semantic artefacts mapped</td>
+                <td>Place entities (cities / populated places) across two public linked datasets</td>
+              </tr>
+
+              <tr>
+                <td>mapping context</td>
+                <td>
+                  Entity interlinking for place records: the rule computes similarity using labels and optional numeric comparisons
+                  (population, latitude, longitude) and produces <span class="mono">owl:sameAs</span> links.
+                </td>
+              </tr>
+
+              <tr>
+                <td>version (mapping set)</td>
+                <td><span class="np">Not provided</span></td>
+              </tr>
+
+              <tr>
+                <td>date of creation of this version</td>
+                <td><span class="np">Not provided</span></td>
+              </tr>
+
+              <tr>
+                <td>license</td>
+                <td><span class="np">Not provided</span></td>
+              </tr>
+
+              <tr>
+                <td>author</td>
+                <td><span class="np">Not provided</span></td>
+              </tr>
+
+              <tr>
+                <td>creator</td>
+                <td><span class="np">Not provided</span></td>
+              </tr>
+
+              <tr>
+                <td>reviewer</td>
+                <td><span class="np">Not provided</span></td>
+              </tr>
+
+              <tr>
+                <td>software used to create the mapping</td>
+                <td>
+                  <strong>Silk</strong> framework (link specification language with <span class="mono">&lt;Interlink&gt;</span> and <span class="mono">&lt;LinkCondition&gt;</span>)
+                </td>
+              </tr>
+
+              <tr>
+                <td>validation / evaluation (mapping-level summary)</td>
+                <td>
+                  Thresholds: accept <span class="mono">0.9</span>, verify <span class="mono">0.7</span>; limit max <span class="mono">1</span> using
+                  <span class="mono">metric_value</span>; outputs: <span class="mono">accepted_links.n3</span> and <span class="mono">verify_links.n3</span> (mode truncate).
+                </td>
+              </tr>
+            </table>
+          </div>
+        </details>
+
+        <details>
+          <summary>Show metadata (Representation B: MMV lifecycle-based metadata model)</summary>
+
+          <div class="hint">
+            Values marked <span class="np">Not provided</span> were not available from the scenario sources.
+            This representation provides lifecycle-oriented metadata, including purpose, assumptions,
+            design, technical requirements, testing, and risks.
+          </div>
+
+          <div class="compare-card">
+            <h4>
+              Representation B: MMV lifecycle-based metadata model
+              <span class="tag">Scenario 1</span>
+            </h4>
+
+            <table>
+              <tr><th>MMV field (phase-based)</th><th>Scenario 1 value</th></tr>
+
+              <tr class="section-row"><td colspan="2">Project &amp; Artefact</td></tr>
+              <tr><td>mmv:MappingProject</td><td><span class="mono">ex:Silk_DBpedia_GeoNames_Cities_Project</span></td></tr>
+              <tr><td>mmv:MappingArtifact</td><td>Silk link specification that generates <span class="mono">owl:sameAs</span> links for cities between DBpedia and GeoNames</td></tr>
+              <tr><td>mmv:hasIdentifier</td><td><span class="mono">http://example.org/silk/interlink/cities/dbpedia-geonames</span></td></tr>
+              <tr><td>mmv:hasDescription</td><td>Interlink rule uses an <span class="mono">AVG</span> aggregation over similarity comparisons (label similarity with Jaro; optional numeric similarity for population and coordinates), with accept/verify thresholds and N3 output files.</td></tr>
+              <tr><td>mmv:version</td><td><span class="np">Not provided</span></td></tr>
+              <tr><td>mmv:hasVersionDateTime</td><td><span class="np">Not provided</span></td></tr>
+
+              <tr class="section-row"><td colspan="2">Analysis phase</td></tr>
+              <tr><td>mmv:hasPurpose</td><td>Interlink equivalent city/place entities across DBpedia and GeoNames by generating <span class="mono">owl:sameAs</span> links to support integration and enrichment.</td></tr>
+              <tr><td>mmv:hasMappingDomain</td><td>Geospatial / places (cities)</td></tr>
+              <tr><td>mmv:hasAssumption</td><td>City identity can be approximated using labels plus optional numeric evidence such as population and geo-coordinates; thresholds separate accepted links from links requiring verification.</td></tr>
+              <tr><td>mmv:hasDomainAssumption</td><td><span class="np">Not provided</span></td></tr>
+              <tr><td>mmv:hasRequirement</td><td>Generate candidate identity links between DBpedia City resources and GeoNames Feature resources.</td></tr>
+              <tr><td>mmv:hasTechnicalRequirement</td><td>SPARQL access to both endpoints (<span class="mono">dbpedia</span> and <span class="mono">geonames</span> data sources) and ability to output N3 link files.</td></tr>
+              <tr><td>mmv:hasRiskOrIssue</td><td>Ambiguous place names; incomplete population/coordinate fields; endpoint availability or rate limits; possible false positives when different cities share similar labels.</td></tr>
+              <tr><td>mmv:hasInputName</td><td>DBpedia cities; GeoNames place features</td></tr>
+              <tr><td>mmv:hasInputDescription</td><td><span class="np">Not provided</span></td></tr>
+              <tr><td>mmv:hasInputFormat</td><td>RDF accessed via SPARQL endpoints</td></tr>
+              <tr><td>mmv:hasInputType</td><td>Linked Data datasets (SPARQL)</td></tr>
+              <tr><td>mmv:hasInputSource</td><td><span class="mono">http://dbpedia.org/sparql</span> and <span class="mono">http://sws.geonames.org/sparql</span></td></tr>
+              <tr><td>mmv:hasInputCreator</td><td><span class="np">Not provided</span></td></tr>
+
+              <tr class="section-row"><td colspan="2">Design phase</td></tr>
+              <tr><td>mmv:hasDesignDecision</td><td>Use <span class="mono">owl:sameAs</span>; restrict datasets to DBpedia City and GeoNames Feature; compute similarity by averaging weighted comparisons over labels, population, latitude, and longitude.</td></tr>
+              <tr><td>mmv:hasJustification</td><td><span class="np">Not provided</span></td></tr>
+              <tr><td>mmv:hasPlannedQualityMetric</td><td>Accept/verify thresholds (accept 0.9; verify 0.7) and limit max 1 by metric value</td></tr>
+
+              <tr class="section-row"><td colspan="2">Development phase</td></tr>
+              <tr><td>mqv:hasMappingType</td><td>Interlinking rule / link specification</td></tr>
+              <tr><td>mqv:hasMappingFormat</td><td>Silk Link Specification (XML)</td></tr>
+              <tr><td>mqv:hasMappingMethod</td><td>Similarity-based entity matching with weighted aggregation</td></tr>
+              <tr><td>mmv:hasMappingAlgorithm</td><td>Jaro similarity; numeric similarity; weighted AVG aggregation</td></tr>
+              <tr><td>mmv:hasTool</td><td>Silk</td></tr>
+
+              <tr class="section-row"><td colspan="2">Testing phase</td></tr>
+              <tr><td>mmv:hasTestingType</td><td>Threshold-based acceptance and verification split</td></tr>
+              <tr><td>mmv:hasTestingResult</td><td>Outputs: <span class="mono">accepted_links.n3</span> and <span class="mono">verify_links.n3</span>; limit 1 link per source by metric value</td></tr>
+              <tr><td>mmv:hasQualityMeasurement</td><td><span class="np">Not provided</span></td></tr>
+
+              <tr class="section-row"><td colspan="2">Maintenance phase</td></tr>
+              <tr><td>mmv:hasPublisherName</td><td><span class="np">Not provided</span></td></tr>
+              <tr><td>mmv:hasPublisherSource</td><td><span class="np">Not provided</span></td></tr>
+
+              <tr class="section-row"><td colspan="2">Stakeholders</td></tr>
+              <tr><td>mmv:hasStakeholder</td><td><span class="np">Not provided</span></td></tr>
+              <tr><td>mmv:hasRole</td><td><span class="np">Not provided</span></td></tr>
+              <tr><td>mmv:hasBackground</td><td><span class="np">Not provided</span></td></tr>
+            </table>
+          </div>
+        </details>
+      </div>
+
+      <h3 style="margin-top:18px;">Questions (Scenario 1)</h3>
+
+      <form method="POST" action="/submit-reuse-eval-s1">
+        <input type="hidden" name="scenario_id" value="S1_SILK_INTERLINKING">
+        <input type="hidden" name="participant_id" value="{{ participant_id }}">
+
+        <div class="qblock">
+          <strong>1) Based on the metadata shown, would you consider this artefact reusable as a starting point in a new project?</strong>
+
+          <label>Representation A:
+            <input type="radio" name="reuse_a" value="yes" required> Yes
+            <input type="radio" name="reuse_a" value="reservations"> Possibly, but with reservations
+            <input type="radio" name="reuse_a" value="no"> No
+          </label>
+
+          <label>Representation B:
+            <input type="radio" name="reuse_b" value="yes" required> Yes
+            <input type="radio" name="reuse_b" value="reservations"> Possibly, but with reservations
+            <input type="radio" name="reuse_b" value="no"> No
+          </label>
+        </div>
+        <div class="qblock">
+          <strong>If you selected “Possibly, but with reservations”, please briefly explain your reservations (for either representation):</strong>
+          <textarea name="reservation_detail" placeholder="(Optional)"></textarea>
+        </div>
+        <div class="qblock">
+          <strong>2) Which representation better supported your reuse decision?</strong>
+          <label><input type="radio" name="better_option" value="A" required> Representation A</label>
+          <label><input type="radio" name="better_option" value="B"> Representation B</label>
+          <label><input type="radio" name="better_option" value="equal"> Both equally</label>
+          <label><input type="radio" name="better_option" value="neither"> Neither</label>
+        </div>
+
+        <div class="qblock">
+          <strong>3) Which representation was easier to understand?</strong>
+          <label><input type="radio" name="easier_option" value="A" required> Representation A</label>
+          <label><input type="radio" name="easier_option" value="B"> Representation B</label>
+          <label><input type="radio" name="easier_option" value="equal"> Both equally</label>
+          <label><input type="radio" name="easier_option" value="neither"> Neither</label>
+        </div>
+
+        <div class="qblock">
+          <strong>4) Which representation gave you more confidence in your decision?</strong>
+          <label><input type="radio" name="confidence_option" value="A" required> Representation A</label>
+          <label><input type="radio" name="confidence_option" value="B"> Representation B</label>
+          <label><input type="radio" name="confidence_option" value="equal"> Both equally</label>
+          <label><input type="radio" name="confidence_option" value="neither"> Neither</label>
+        </div>
+
+        <div class="qblock">
+          <strong>5) Do you think the two metadata models complement each other?</strong>
+          <label><input type="radio" name="complementary" value="yes_clearly" required> Yes, clearly</label>
+          <label><input type="radio" name="complementary" value="somewhat"> Somewhat</label>
+          <label><input type="radio" name="complementary" value="no_overlap"> No, they mostly overlap</label>
+          <label><input type="radio" name="complementary" value="no_incompatible"> No, they are not compatible</label>
+          <label><input type="radio" name="complementary" value="not_sure"> Not sure</label>
+        </div>
+
+        <div class="qblock">
+          <strong>6) What information was most useful for making your reuse decision?</strong>
+          <textarea name="useful_detail" placeholder="(Optional)"></textarea>
+        </div>
+
+        <div class="qblock">
+          <strong>7) What important information was missing?</strong>
+          <textarea name="missing_detail" placeholder="(Optional)"></textarea>
+        </div>
+
+        <div class="qblock">
+          <strong>8) Any additional comments?</strong>
+          <textarea name="comments" placeholder="(Optional)"></textarea>
+        </div>
+
+        <div class="btn-row">
+          <button type="submit" class="bn49">Submit and continue to Scenario 2 →</button>
+        </div>
+
+        <p class="muted" style="margin-top:6px;">
+          After submitting, you will be taken directly to Scenario 2.
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <div id="con2">
+    <div id="footer">
+      <p>Copyright 2026, Sarah Alzahrani salzahra@tcd.ie</p>
+    </div>
+    <img id="bottom" src="/static/bottom.png" alt="footer">
+  </div>
+</body>
+</html>

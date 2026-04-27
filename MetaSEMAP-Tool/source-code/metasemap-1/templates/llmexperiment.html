@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LLM Mapping Generator</title>
+</head>
+<body>
+    <h2>Generate Mapping with LLM</h2>
+    <form method="POST" action="/generate_mapping">
+        <label>Scenario ID</label><br>
+        <input type="text" name="scenario_id" value="S1A_ERA_RML"><br><br>
+
+        <label>Mapping Type</label><br>
+        <select name="mapping_type">
+            <option value="RML">RML (Uplift Mapping)</option>
+            <option value="OntologyAlignment">Ontology Alignment</option>
+            <option value="Interlinking">Interlinking</option>
+        </select><br><br>
+
+        <label>Run Number</label><br>
+        <input type="text" name="run_number" value="1"><br><br>
+
+        <label>Task description</label><br>
+        <textarea name="task_prompt" rows="8" cols="100"
+                  placeholder="Enter the task description here..."></textarea><br><br>
+
+        <label>Lifecycle metadata (guided condition only)</label><br>
+        <textarea name="metadata_prompt" rows="12" cols="100"
+                  placeholder="Enter metadata fields here..."></textarea><br><br>
+
+        <label>Condition</label><br>
+        <label>
+            <input type="radio" name="condition" value="without_metadata" checked>
+            Without metadata (baseline)
+        </label>
+        &nbsp;&nbsp;
+        <label>
+            <input type="radio" name="condition" value="with_metadata">
+            With metadata (guided)
+        </label>
+        <br><br>
+
+        <button type="submit">Generate Mapping</button>
+    </form>
+
+    <hr>
+
+    <h3>Generated Output</h3>
+    <pre style="background:#f4f4f4; padding:10px;">{{ generated_code }}</pre>
+
+    {% if full_prompt %}
+    <h3>Full Prompt Sent to Model</h3>
+    <pre style="background:#f9f9f9; padding:10px;">{{ full_prompt }}</pre>
+    {% endif %}
+
+    {% if validation_result %}
+    <h3>Validation Result</h3>
+    <p style="font-weight: bold;">{{ validation_result }}</p>
+    {% endif %}
+
+</body>
+</html>

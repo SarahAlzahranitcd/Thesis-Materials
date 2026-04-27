@@ -1,0 +1,5 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+<https://kb.virtualtreasury.ie/person/Betham_Alfred_C19_a>
+    owl:sameAs <http://www.wikidata.org/entity/Q16016808> .

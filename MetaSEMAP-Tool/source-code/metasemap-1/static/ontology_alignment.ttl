@@ -1,0 +1,15 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix align: <http://knowledgeweb.semanticweb.org/heterogeneity/alignment#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+
+<https://kb.virtualtreasury.ie/alignment>
+    a align:Alignment ;
+    align:onto1 <https://kb.virtualtreasury.ie/ontology> ;
+    align:onto2 <http://xmlns.com/foaf/0.1/> ;
+    align:map [
+        a align:Cell ;
+        align:entity1 <http://erlangen-crm.org/current/E21_Person> ;
+        align:entity2 <http://xmlns.com/foaf/0.1/Person> ;
+        align:relation "=" ;
+        align:measure "1.0"^^<http://www.w3.org/2001/XMLSchema#float>
+    ] .

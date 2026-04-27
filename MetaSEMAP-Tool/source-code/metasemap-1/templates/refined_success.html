@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MetaSEMAP — v0.2 Metadata Generated</title>
+<style>
+  body { font-family: "proxima-nova-soft", Arial, sans-serif; }
+  #con { max-width: 720px; margin: 0 auto; }
+  #con2 { max-width: 720px; margin: 0 auto; }
+  h2 { padding-top: 30px; }
+  #footer { text-align: center; }
+  #footer a { color: inherit; }
+  table {
+    border-collapse: separate; border-spacing: 10px;
+    background-color: #f0f0f0; margin: 20px auto; width: 80%;
+  }
+  th, td { border: 1px solid #dddddd; padding: 10px; text-align: left; }
+  .bn49 {
+    border: 0; text-align: center; display: inline-block;
+    padding: 12px 20px; margin: 8px; color: #000;
+    background-color: #87CEEB; border-radius: 8px;
+    font-weight: 600; text-decoration: none;
+  }
+  #unique-code-box {
+    padding: 18px; margin-top: 20px;
+    border: 1px solid #ddd; background: #f9f9f9; text-align: center;
+  }
+  #unique-code { font-weight: bold; color: #14507a; margin-bottom: 10px; }
+  .iri-box {
+    background: #fff8dc; border: 1px solid #e6d27a; border-radius: 4px;
+    padding: 8px 12px; margin: 12px 0; font-family: monospace;
+    font-size: 13px; word-break: break-all;
+  }
+</style>
+</head>
+<body>
+<div id="con">
+  <img id="banner" src="/static/banner.jpg" height="200" width="750" alt="MetaSEMAP banner">
+  <h2>Metadata Generated Successfully (MMV v0.2)</h2>
+  <p>Your lifecycle metadata has been generated as <strong>{{ display_format }}</strong>.</p>
+
+  {% if graph_iri %}
+  <p><strong>Named graph IRI:</strong></p>
+  <div class="iri-box">{{ graph_iri }}</div>
+  {% endif %}
+
+  <table>
+    <tr>
+      <th>Representation</th>
+      <th>View</th>
+      <th>Download</th>
+    </tr>
+    <tr>
+      <td>{{ display_format }}</td>
+      <td><a class="bn49" href="{{ url_for('view_metadata', rdf_data_path=rdf_data_path_named_graph) }}" target="_blank">View</a></td>
+      <td><a class="bn49" href="{{ url_for('download_metadata', rdf_data_path=rdf_data_path_named_graph) }}" target="_blank">Download .{{ file_extension }}</a></td>
+    </tr>
+  </table>
+
+
+
+  <p style="text-align:center; margin-top: 24px;">
+    <a class="bn49" href="/v2_annotate">Annotate another mapping</a>
+    <a class="bn49" href="/">Back to home</a>
+  </p>
+</div>
+
+<div id="con2">
+  <div id="footer">
+    <p>
+      Copyright 2024–2026, Sarah Alzahrani &middot;
+      <a href="mailto:salzahra@tcd.ie">salzahra@tcd.ie</a> &middot;
+      <a href="https://sarahalzahranitcd.github.io/MMV-V02/" target="_blank" rel="noopener">MMV v0.2 documentation</a>
+    </p>
+  </div>
+  <img id="bottom" src="/static/bottom.png" height="100" width="750" alt="">
+</div>
+</body>
+</html>

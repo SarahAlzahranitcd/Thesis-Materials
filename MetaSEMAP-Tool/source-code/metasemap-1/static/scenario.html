@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experiment Scenario</title>
+  <style>
+    #con {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    #con2 {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    h2 {
+      padding-top: 30px;
+    }
+    #logo {
+      float: right;
+      margin:5px;
+    }
+    #par {
+      text-align: justify;
+      font-size: 20px;
+    }
+    #footer {
+      text-align: center;
+    }
+    button {
+      border: 0;
+      text-align: center;
+      display: inline-block;
+      padding: 14px;
+      width: 10%;
+      margin: 10px;
+      color: #000000;
+      background-color: #87CEEB;
+      border-radius: 10px;
+      font-family: "proxima-nova-soft", sans-serif;
+      font-weight: 400;
+      text-decoration: none;
+      transition: box-shadow 200ms ease-out;
+    }
+  </style>
+</head>
+<body>
+  <div id="con">
+    <img id="banner" src="/static/banner.jpg" height="200" width="750">
+    <h3>Experiment Scenario</h3>
+    <p style="color: darkred; font-size: 16px; font-weight: bold;">
+        Note: The links provided in the scenario are not real and are intended for the purpose of this experiment.
+    </p>
+
+    <div class="square">
+      <div id="scenario-content">
+        <!-- Scenario content will be injected here -->
+      </div>
+    </div>
+
+    <div id="con2">
+      <div id="footer">
+        <p>Copyrights 2024, Sarah Alzahrani salzahra@tcd.ie</p>
+      </div>
+      <img id="bottom" src="/static/bottom.png" height="100" width="750">
+    </div>
+  </div>
+
+  <script>
+    const scenarios = [
+      {
+        title: "Scenario 1: Uplift Mapping for Irish Counties in the Virtual Record Treasury of Ireland",
+        content: `
+<p>
+    The Virtual Record Treasury of Ireland (VRTI) has initiated an uplift mapping project to convert county information from the historical domain, using the data file <strong>data_county.csv</strong>. This file, containing county IDs, names, and geographic information, is mapped from CSV to RDF triples to make it accessible in a structured, web-friendly format.
+</p>
+<p>
+    This transformation project, running from <strong>January 1 to February 28, 2024</strong>, used the RML tool to assign each county a unique URI and to automatically map other features. The project aimed to create a new, standalone mapping that enriches the VRTI Knowledge Graph, allowing researchers enhanced access to geospatial and semantic county records with quality checks in place throughout development, such as <strong>completeness</strong>, to ensure all relevant data attributes were successfully mapped.
+</p>
+<p>
+    The URI of the resulting mapping is: <span style="color: blue;">http://virtualrecordtreasury.ie/uplift_mapping_v1.0</span>.
+</p>
+<p>
+    Access the published mapping at:  <span style="color: blue;"> https://virtualtreasury.ie</span>. Published by the VRTI team, this mapping file versioned as 1.0, was released on February 28, 2024.
+</p>
+<p>
+    Testing on the mapping was conducted on <strong>February 28, 2024</strong>, included validation checks, and was successful.
+</p>
+
+        `
+      },
+      {
+        title: "Scenario 2: Ontology Alignment for Person Class in the Virtual Record Treasury of Ireland",
+        content: `
+          <p>
+    The Virtual Record Treasury of Ireland (VRTI) has undertaken an ontology alignment project to ensure compatibility between the VRTI Knowledge Graph and external datasets in the historical domain. This project, using the data file <strong>person_alignment.rdf</strong>, focuses on matching individuals—such as historical figures and citizens from archival records—across VRTI and external datasets.
+</p>
+<p>
+    The alignment project, active from <strong>March 1 to March 30, 2024</strong>, used automated tools to align entities and to map features such as relationships, affiliations, and roles within historical records. The project created a new, standalone mapping that enriches the VRTI Knowledge Graph, enabling integrated searches across datasets while performing quality checks such as <strong>accuracy</strong> and <strong>completeness</strong> to ensure all relevant data attributes were correctly aligned.
+</p>
+<p>
+    The URI of the resulting alignment file is: <span style="color: blue;">http://virtualrecordtreasury.ie/person_alignment_v1.0</span>.
+</p>
+<p>
+    Access the published alignment file at: <span style="color: blue;">http://virtualrecordtreasury.ie</span>. Published by the VRTI team, this alignment file, versioned as 1.0, was released on <strong>March 30, 2024</strong>.
+</p>
+<p>
+    Testing on the alignment was conducted on <strong>March 30, 2024</strong>, included validation checks, and was successful.
+</p>
+
+        `
+      },
+      {
+        title: "Scenario 3: Historical Figure Interlinking with Wikidata",
+        content: `
+          <p>
+    The Virtual Record Treasury of Ireland (VRTI) has undertaken an interlinking project to enhance its historical dataset by connecting records of Irish figures with corresponding Wikidata entries. This project, using the data file <strong>interlinking.rdf</strong>, enriches VRTI’s archival records with additional biographical and contextual information from Wikidata.
+</p>
+<p>
+    Conducted from <strong>April 1 to April 20, 2024</strong>, this interlinking project created new mappings. The project enriched the VRTI Knowledge Graph manually by establishing <code>owl:sameAs</code> relationships, enabling integrated access to cross-referenced profiles, and included quality checks such as <strong>completeness</strong> and <strong>accuracy</strong> to ensure all records were correctly linked.
+</p>
+<p>
+    The URI of the resulting interlinked dataset is: <span style="color: blue;">http://virtualrecordtreasury.ie/interlinking_v1.0</span>.
+</p>
+<p>
+    Access the published interlinked dataset at: <span style="color: blue;">http://virtualrecordtreasury.ie</span>. Published by the VRTI team, this dataset, versioned as 1.0, was released on <strong>April 20, 2024</strong>. Testing on the interlinking project was conducted on <strong>April 20, 2024</strong>, included validation checks, and was successful.
+</p>
+
+        `
+      }
+
+    ];
+
+    function getScenarioParam() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const scenarioIndex = parseInt(urlParams.get('scenario'), 10);
+      if (isNaN(scenarioIndex) || scenarioIndex < 0 || scenarioIndex >= scenarios.length) {
+        return null;
+      }
+      return scenarioIndex;
+    }
+
+    function displayScenario() {
+      const scenarioIndex = getScenarioParam();
+      const scenarioContent = scenarioIndex !== null ? scenarios[scenarioIndex] : null;
+
+      if (scenarioContent) {
+        document.getElementById('scenario-content').innerHTML = `
+          <h3>${scenarioContent.title}</h3>
+          ${scenarioContent.content}
+        `;
+      } else {
+        document.getElementById('scenario-content').innerHTML = "<p>Scenario not found. Please select a valid scenario.</p>";
+      }
+    }
+
+    window.onload = displayScenario;
+  </script>
+</body>
+</html>
