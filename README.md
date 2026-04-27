@@ -36,7 +36,7 @@ Each study folder includes:
 
 The **Mapping Metadata Vocabulary (MMV)** is available online:
 
-https://sarahalzahranitcd.github.io/MMV-Ontology2/
+https://sarahalzahranitcd.github.io/MMV-V02/
 
 The ontology captures lifecycle-based metadata for declarative mappings, supporting improved documentation, evaluation, and reuse.
 
@@ -75,3 +75,8 @@ All data included in this repository has been anonymised.
 Alzahrani, S. & O'Sullivan, D. (2026).
 *A Lifecycle-Based Metadata Model for Improving Documentation, Reuse, and Generation of Declarative Mappings.*
 PhD Thesis, Trinity College Dublin.
+
+---
+
+## Contact me 
+salzahra@tcd.ie
