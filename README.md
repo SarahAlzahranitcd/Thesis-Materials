@@ -27,8 +27,8 @@ This repository is organised according to the five studies presented in the thes
 Each study folder includes:
 
 * `questionnaire/` – Survey instruments (if applicable)
-* `raw-data/` – Anonymised participant data
-* `results/` – Processed results and analysis
+* `raw-data/` – Anonymised participant data (if applicable)
+* `results/` – Processed results and analysis (if applicable)
 
 ---
 
